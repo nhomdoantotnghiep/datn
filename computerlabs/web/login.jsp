@@ -97,7 +97,7 @@ background: url('img/login-pwd.png');
                             <input type="text" style="width:230px; height:22px;margin-top: 8px;-moz-border-radius: 13px;
 -webkit-border-radius: 13px; border:1px solid #d1d1d1;
 background: url('img/login-input.png');
-            padding-left: 24px;" name="username" value="<%=request.getParameter("username")==null?"nguyensontung" :  request.getParameter("username")%>" class="validate[required,minSize[6]] text-input" />
+            padding-left: 24px;" name="username" value="<%=request.getParameter("username")==null?"" :  request.getParameter("username")%>" class="validate[required,minSize[6]] text-input" />
                         </td>
                         <td class="lable-td">Username</td>
                     </tr>
@@ -106,7 +106,7 @@ background: url('img/login-input.png');
                             <input type="password" style="width:230px; height:22px;margin-top: 8px;-moz-border-radius: 13px;
 -webkit-border-radius: 13px; border:1px solid #d1d1d1;
 background: url('img/login-pwd.png');
-            padding-left: 24px;" name="pwd" value="tung1234" class="validate[required,minSize[6]] text-input" />
+            padding-left: 24px;" name="pwd" value="" class="validate[required,minSize[6]] text-input" />
                             <span style="color: red"><%=request.getAttribute("pwdnull")==null?"" :  request.getAttribute("pwdnull")%></span>
                             <span style="color: red"><%=request.getAttribute("loginfail")==null?"" :  request.getAttribute("loginfail")%></span>
                         </td>
