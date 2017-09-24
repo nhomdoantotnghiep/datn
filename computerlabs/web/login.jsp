@@ -1,14 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
-        <script src="js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-        <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script>jQuery(document).ready(function() {
-                // binds form submission and fields to the validation engine 
-                jQuery("#test").validationEngine();
-            });</script>
+        
 <style>
     .login{
         width: 368px;height: 255px;margin: 0px auto;padding: 0px;-moz-border-radius: 5px;

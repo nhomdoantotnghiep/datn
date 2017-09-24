@@ -21,7 +21,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Computer Lab Management System</title>
         <link rel="stylesheet" href="css/csspaging.css" />
         <link href="css/home.css" rel="stylesheet" type="text/css" />
         <link href="css/ddlevelsmenu-base.css" rel="stylesheet" type="text/css" />
@@ -29,10 +29,12 @@
         <link href="css/ddlevelsmenu-topbar.css" rel="stylesheet" type="text/css" />
         <script src="js/ddlevelsmenu.js" type="text/javascript"></script>
         <link rel="stylesheet" href="assets/css/styles.css" />
-        <link rel="stylesheet" href="assets/jquery.bubbleSlideshow/jquery.bubbleSlideshow.css" />
+        
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
-        <script src="js/jquery-1.9.js" type="text/javascript"></script>
-        <script src="js/general.js" type="text/javascript"></script>
+        <link href="css/jquery.bxslider.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
+        
     </head>
     <body>
 
@@ -58,7 +60,7 @@
                                     <li><a href="#" >Contacts</a></li>
                                     <li><a href="#" >News event</a></li>
                                     <li><a href="#" >Introduce</a></li>
-                                    <li><a href="#">Home Page</a></li>
+                                    <li><a href="/computerlabs">Home Page</a></li>
                                 </ul>
                             </div>
 
@@ -153,12 +155,10 @@
                 </div>
                 <div class="site-eml1-slideshow">
                     <div class="site-eml1-slideshow-top">
-                        <ul id="slideShow"></ul>
-                        <!-- JavaScript includes -->
-                        <script src="assets/ajaxslideshow.js"></script>
-                        <script src="assets/jquery.bubbleSlideshow/bgpos.js"></script>
-                        <script src="assets/jquery.bubbleSlideshow/jquery.bubbleSlideshow.js"></script>
-                        <script src="assets/js/script.js"></script>
+                        <ul class="bxslider">
+                            <li><img src="img/slide1.png" /></li>
+                            <li><img src="img/slide2.png" /></li>
+                        </ul>
                     </div>
                     <div class="site-eml1-slideshow-bottom">
                         <div style="width:996px; height:7px; padding:0px; margin:0px auto;"></div>
@@ -223,5 +223,15 @@
             <div class="site-elm3">
             </div>
         </div>
+        <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+        
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+        <script>jQuery(document).ready(function() {
+                // binds form submission and fields to the validation engine 
+                jQuery("#test").validationEngine();
+            });</script>
     </body>
 </html>

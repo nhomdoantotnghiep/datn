@@ -75,7 +75,7 @@ background: url(../img/bg-search.png);
 /*eml1 slide show*/
 .site-eml1-slideshow
 {
-     width:1352px; height:341px; padding:0px; margin:0px auto;background:url('./img/bg-slideshow1.png');
+     width:1352px; height:341px; padding:0px; margin:0px auto;background:url('../img/bg-slideshow.png');
 }
 .site-eml1-slideshow-top
 {
@@ -110,7 +110,7 @@ background: url(../img/bg-search.png);
 }
 .site-eml2-contentleftcontent
 {
-    width:900px; min-height:400px;color: #535a4d;
+    width:100%; min-height:400px;color: #535a4d;
 }
 .site-eml2-contentright
 {
