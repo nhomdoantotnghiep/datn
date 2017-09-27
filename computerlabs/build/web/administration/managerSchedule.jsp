@@ -18,16 +18,27 @@
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <title>Manager Schedule</title>  
-        <script src="../js/jquery-1.9.1.js"></script>
-        <script src="../js/jquery-ui.js"></script>
-        <link rel="stylesheet" href="../css/jquery-ui.css" />
         <link rel="stylesheet" href="css/contentcss.css" />
-        <script>
-            $(function() {
-                $("#txtDate").datepicker();
+        <link rel="stylesheet" href="../css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+        <script src="../js/jquery-1.8.3.min.js"></script>
+        <script src="../js/jquery-ui.min.js"></script>
+        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+       <script>
+           $(document).ready(function(){
+                $(function() {
+                    $("#txtDateFrom").datepicker({
+                        dateFormat: "yy/mm/dd"
+                      });
+                    $("#txtDateTo").datepicker({
+                        dateFormat: "yy/mm/dd"
+                      });  
+                });
+                $("#test").validationEngine();
+                
             });
-        </script>
-        <script>
             function BASIC_SelectItem()
             {
                 var c_value = "";
@@ -42,10 +53,6 @@
                 }
                 document.test.txtResultShift.value = c_value;
             }
-
-
-        </script>
-        <script type="text/javascript">
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -147,18 +154,8 @@
                     }
                 }
             }
-
-
         </script>
-        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script>jQuery(document).ready(function() {
-                // binds form submission and fields to the validation engine 
-                jQuery("#test").validationEngine();
-            });</script>
+        
     </head>  
     <body>  
 
