@@ -87,7 +87,7 @@
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="bg-title2">
-                                        <div class="text-title"><a href="?options=ManagerCategoryDevice" class="text-title">Manager Category</a></div>               
+                                        <div class="text-title"><a href="?options=ManagerCategoryDevice" class="text-title">Manager Category Device</a></div>               
                                     </div>
                                 </td>
                             </tr>
@@ -156,15 +156,15 @@
                                                 } else if (opt.equalsIgnoreCase("scheDetails")) {
                                                     title = "Schedule Details";
                                                 } else if (opt.equalsIgnoreCase("ManagerShift")) {
-                                                    title = "Manager Shoft Name";
+                                                    title = "Manager Shift Name";
                                                 } else if (opt.equalsIgnoreCase("ManagerCategoryDevice")) {
                                                     title = "Manager Category Device";
                                                 } else if (opt.equalsIgnoreCase("ManagerTypeAccessory")) {
                                                     title = "Manager Type Accessory";
                                                 } else if (opt.equalsIgnoreCase("ManagerClasses")) {
-                                                    title = "Manager Classes";
+                                                    title = "Manager Class";
                                                 } else if (opt.equalsIgnoreCase("ManagerLab")) {
-                                                    title = "Manager Computer Labs";
+                                                    title = "Manager Labs Room";
                                                 } else if (opt.equalsIgnoreCase("ManagerAccessory")) {
                                                     title = "Manager Accessory";
                                                 } else if (opt.equalsIgnoreCase("ManagerDevice")) {
