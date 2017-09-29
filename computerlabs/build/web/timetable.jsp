@@ -12,17 +12,14 @@
 <%@page import="java.util.List"%>  
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager Schedule</title>  
         <link rel="stylesheet" href="css/jquery-ui.css" />
         <link rel="stylesheet" href="css/contentcss.css" />
         <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
         
         <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js"></script>
         <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
         <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
@@ -158,9 +155,6 @@
 
 
         </script>
-
-    </head>  
-    <body>  
 
 
         <%!
@@ -624,5 +618,3 @@
 
                 return false;
             }); </script>
-    </body>  
-</html>  
