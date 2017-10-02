@@ -71,6 +71,13 @@
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
+                                    <div class="bg-title">
+                                        <div class="text-title-chil"> <a class="text-title-chil" href="?options=ManagerWorkingShift">Manager Working Shift</a></div>               
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="bg-title-td">
                                     <div class="bg-title2">
                                         <a href="?options=manageruser" class="text-title">Manager User</a>               
                                     </div>
@@ -177,6 +184,8 @@
                                                     title = "Manager Complaint";
                                                 } else if (opt.equalsIgnoreCase("complaintDetails")) {
                                                     title = "Complaint Infomation";
+                                                }else if (opt.equalsIgnoreCase("ManagerWorkingShift")) {
+                                                    title = "Manager Working Shift";
                                                 } else {
                                                     title = "Home Page";
                                                 }

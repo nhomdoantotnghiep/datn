@@ -45,6 +45,9 @@
             else if (opt.equalsIgnoreCase("complaintDetails")) {
             pagename = "complaintDetails.jsp";
         }
+            else if (opt.equalsIgnoreCase("ManagerWorkingShift")) {
+            pagename = "indexWorkingShift.jsp";
+        }
         else {
             pagename = "indexSchedule.jsp";
         }

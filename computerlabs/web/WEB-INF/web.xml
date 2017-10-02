@@ -204,6 +204,10 @@
         <servlet-name>CheckNameEditDevice</servlet-name>
         <servlet-class>device.CheckNameEditDevice</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showWorkingShift</servlet-name>
+        <servlet-class>processSchedule.showWorkingShift</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckUsername</servlet-name>
         <url-pattern>/CheckUsername</url-pattern>
@@ -403,6 +407,10 @@
     <servlet-mapping>
         <servlet-name>CheckNameEditDevice</servlet-name>
         <url-pattern>/CheckNameEditDevice</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showWorkingShift</servlet-name>
+        <url-pattern>/showWorkingShift</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,5 @@
 
+
 <%@page import="processSchedule.totalRequestByScheID"%>
 <%@page import="processSchedule.outPutRoomID"%>
 <%@page import="processSchedule.checkRequest"%>
@@ -12,19 +13,21 @@
 <%@page import="java.util.List"%>  
 
 
-        <link rel="stylesheet" href="css/jquery-ui.css" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+<html>  
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+        <title>Manager Working Shift</title>  
         <link rel="stylesheet" href="css/contentcss.css" />
-        <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
-        
-        <script src="js/jquery-1.8.3.min.js"></script>
-        <script src="js/jquery.bxslider.min.js"></script>
-        <script src="js/script.js" type="text/javascript"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script type="text/javascript">
-            $(document).ready(function(){
+        <link rel="stylesheet" href="../css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+        <script src="../js/jquery-1.8.3.min.js"></script>
+        <script src="../js/jquery-ui.min.js"></script>
+        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+       <script>
+           $(document).ready(function(){
                 $(function() {
                     $("#txtDateFrom").datepicker({
                         dateFormat: "yy/mm/dd"
@@ -36,10 +39,10 @@
                 $("#test").validationEngine();
                 
             });
-        
             function BASIC_SelectItem()
             {
-                var c_value = "";;
+                var c_value = "";
+                ;
                 for (var i = 0; i < document.test.chk.length; i++)
 
                 {
@@ -50,7 +53,6 @@
                 }
                 document.test.txtResultShift.value = c_value;
             }
-
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -73,7 +75,7 @@
                 new setXMLHttpRe();
                 var getText = pagenumber;  //Used to prevent caching during ajax call
                 var v_room = "";
-                 var v_dateTo = "";
+                var v_dateTo = "";
                 var v_dateFrom = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
 
@@ -87,7 +89,7 @@
                 v_dateFrom = document.test.txtDateFrom.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "showScheClient?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo+ "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -113,14 +115,14 @@
                 var getText = c_value;  //Used to prevent caching during ajax call
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "showScheClient?pageNumber=" + c_value+ "&roomid=" + v_room + "&inputdateTo=" + v_dateTo+ "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
             }
             function Search()
             {
-                 var v_room = "";
+                var v_room = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
@@ -137,7 +139,7 @@
                 var getText = v_room;  //Used to prevent caching during ajax call
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "showScheClient?roomid=" + getText + "&inputdateTo=" + v_dateTo+ "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -152,9 +154,10 @@
                     }
                 }
             }
-
-
         </script>
+        
+    </head>  
+    <body>  
 
 
         <%!
@@ -210,15 +213,17 @@
                         </select>
 
 
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo")==null?"":request.getAttribute("inputdateTo") %>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
-                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom")==null?"":request.getAttribute("inputdateFrom") %>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
-                        &nbsp;&nbsp;&nbsp;<input type="button" value="Search" class="button_example" onclick= "Search();" />
+                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="button" value="Search" class="button_example" onclick= "Search();" />
                     </td>
 
                 </tr> 
                 <tr> 
-
-                    <td colspan="8" align="right">  
+                    <td align="center" colspan="3">
+                        <a class="button_example" href="?options=CreateSchedule">Create Schedule</a>
+                    </td>
+                    <td colspan="6" align="right">  
                         <!--<form method="get" action="NewServlet">  -->
                         <table align="right">  
                             <tr> 
@@ -483,7 +488,7 @@
 
                                 <%--Previous--%>
                                 <td>
-                                    <input type="text" class="" name="go" id="go" size="3" value="" />&nbsp;&nbsp;&nbsp;<input type="button" class="button_example" style="height: 25px" value="Go" onclick= "goPage();" />
+                                    <input type="text" class="" name="go" id="go" size="3" value="" /><input type="button" class="button_example" style="height: 25px" value="Go" onclick= "goPage();" />
                                 </td>
                                 <td><span>Page: 
                                         <%=pageSelected%>/<%=pageNumbers.size()%>
@@ -495,7 +500,7 @@
                 </tr>  
 
                 <tr bgcolor="#78bbe3" >
-                    <td class="td-show" style="color: white;" width="100px" height="50px" align="center">Shift Name / Date</td>
+                    <td class="td-show" width="100px" height="50px" align="center">Shift Name / Date</td>
                     <%
                         Connection cnn2 = null;
                         Statement st2 = null;
@@ -507,7 +512,7 @@
                             rs2 = st2.executeQuery(sql2);
                             while (rs2.next()) {
                     %>
-                    <td class="td-show" style="color: white;" width="90px" align="center"><span title="<%=rs2.getTime("starttime").toString().substring(0, 5)%>-<%=rs2.getTime("endtime").toString().substring(0, 5)%>"><%=rs2.getString("shiftname")%></span></td>
+                    <td class="td-show" width="90px" align="center"><span title="<%=rs2.getTime("starttime").toString().substring(0, 5)%>-<%=rs2.getTime("endtime").toString().substring(0, 5)%>"><%=rs2.getString("shiftname")%></span></td>
                         <%
                                 }
                             } catch (Exception ex3) {
@@ -522,7 +527,9 @@
                                 }
                             }
                         %>
-                    <td class="td-show"  style="color: white;" width="170px" align="center">Date</td>
+                    <td class="td-show" width="170px" align="center">Date</td>
+                    <td class="td-show" width="140px" align="center">Action</td>
+
                 </tr>  
 
 
@@ -535,7 +542,7 @@
                 <%
                     classSchedule studentDetailsDTO = (classSchedule) list
                             .get(i);
-                    out.println("<td style='background: #dfefff;height:30px;color:black;' align=\"center\">" + studentDetailsDTO.getKeyword()
+                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getKeyword()
                             + "</td>");
                     String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
                     String[] strGetID = studentDetailsDTO.getId().split("/");
@@ -545,20 +552,26 @@
                             checkRequest check = new checkRequest();
 
                             if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 2) {
-                                out.println("<td style='background: #bbff84;height:30px' align=\"center\"><img src=\"img/available.png\" /></td>");
+                                out.println("<td style='background: #bbff84;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 0) {
-                                out.println("<td style='background: #fffdc1;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?option=sendRequest&sid=" + strGetID[j] + "\"><img src=\"img/available.png\" /></a></td>");
+                                out.println("<td style='background: #fffdc1;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else {
-                                out.println("<td style='background: #ececec;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?option=sendRequest&sid=" + strGetID[j] + "\"><img src=\"img/available.png\" /></a></td>");
+                                out.println("<td style='background: #ececec;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             }
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 0) {
-                            out.println("<td style='background: #ffe6e6;height:30px' align=\"center\"><img src=\"img/not-available.png\" /></td>");
+                            out.println("<td style='background: #ffe6e6;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 2) {
                             out.println("<td style='background: #efffc7;height:30px' align=\"center\"></td>");
                         }
                     }
-                    out.println("<td style='background: #dfefff;height:30px;color:black;' align=\"center\">" + studentDetailsDTO.getDateword()
+                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getDateword()
                             + "</td>");
+                    outPutRoomID output = new outPutRoomID();
+                    if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
+                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"><a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a></td>");
+                    } else {
+                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"></td>");
+                    }
                     out.println("</tr>");
                 %>  
 
@@ -566,21 +579,119 @@
                 <%                }
                     out.println("</tr>");
                 %>  
+
+
+            </table> <br/>
+            <table cellpadding="1px" cellspacing="1px" id="tb" width="950px" align="center"> 
+                <tr > 
+                    <td align="center">
+                        <%
+                            Connection cnn1 = null;
+                            Statement st1 = null;
+                            ResultSet rs1 = null;
+                            int dateID = 0;
+                            int roomID = 0;
+                            if (request.getParameter("dateID") != null) {
+                                try {
+                                    dateID = Integer.parseInt(request.getParameter("dateID"));
+                                } catch (Exception ex) {
+
+                                }
+                            }
+                            if (request.getParameter("roomID") != null) {
+                                try {
+                                    roomID = Integer.parseInt(request.getParameter("roomID"));
+                                } catch (Exception ex) {
+
+                                }
+                            }
+                            int cntsche = 0;
+                            SimpleDateFormat formart = new SimpleDateFormat("EE, MMM dd,yyyy");
+                            String sql1 = "select s.scheduleID as scheduleID,shift.shiftname as shiftname,shift.starttime as starttime,shift.endtime as endtime ,s.status "
+                                    + " as scheStatus ,d.dateword as dateword from tbl_schedule as s inner join tbl_shiftname as shift on s.shiftID=shift.shiftID inner join tbl_datework as d on s.dateworkID=d.datewordID where dateworkID=" + dateID + " and roomID=" + roomID;
+                            if (roomID > 0 && dateID > 0) {
+                                cnn1 = dbconnect.Connect();
+
+                                try {
+                                    st1 = cnn1.createStatement();
+                                    rs1 = st1.executeQuery(sql1);
+                                    while (rs1.next()) {
+                                        int scheduleID = rs1.getInt("scheduleID");
+                                        String shiftname = rs1.getString("shiftname");
+                                        String starttime = rs1.getTime("starttime").toString();
+                                        String endtime = rs1.getTime("endtime").toString();
+                                        int scheStatus = rs1.getInt("scheStatus");
+                                        String datework = formart.format(rs1.getDate("dateword"));
+                                        cntsche = cntsche + 1;
+                                        if (cntsche == 1) {
+                                            out.println(datework + "&nbsp;&nbsp;&nbsp;");
+                                        }
+                                        if (scheStatus == 0) {
+                        %>
+                        <input type="checkbox" id="chk" name="chk" value="<%=scheduleID%>" title="<%=starttime.substring(0, 5)%> - <%=endtime.substring(0, 5)%> " /> &nbsp;<%=shiftname%> &nbsp;&nbsp;&nbsp;
+                        <%
+                        } else {
+                        %>
+                        <input type="checkbox" id="chk" checked="checked" name="chk" value="<%=scheduleID%>" title="<%=starttime.substring(0, 5)%> - <%=endtime.substring(0, 5)%> " /> &nbsp;<%=shiftname%> &nbsp;&nbsp;&nbsp;
+                        <%
+                                        }
+                                    }
+                                } catch (Exception ex) {
+
+                                } finally {
+                                    try {
+                                        rs1.close();
+                                        st1.close();
+                                        cnn1.close();
+                                    } catch (Exception ex1) {
+
+                                    }
+                                }
+                            }
+                        %>
+                    </td>
+                </tr>
                 <tr>
-                    <td><br/>Note:</td>
+                    <td align="center">
+                        <%
+                            if (cntsche > 0) {
+                        %>
+                        <input type="submit" class="button_example" onclick="BASIC_SelectItem();" value="    Update    " />
+                        <%
+                            }
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9" align="center">
+                        <%
+                            if (cntsche > 0) {
+                        %>
+                        <div id='content' class="style-result"></div>
+                        <%
+                            }
+                        %>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="9"><input type="text" name="txtResultShift"  size="5" id="txtResultShift" style="visibility: hidden;"  /></td>
+                </tr>
+                <tr>
+                    <tr>
+                    <td>Note:</td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <img src="img/khonglamviec.png" />
+                        <img src="../img/khonglamviec.png" />
                     </td>
                     <td colspan="2">
-                    <img src="img/chuachon.png" />
+                    <img src="../img/chuachon.png" />
                     </td>   
                      <td colspan="2">
-                    <img src="img/dangcho.png" />
+                    <img src="../img/dangcho.png" />
                     </td>  
-                     <td colspan="2">
-                    <img src="img/daduyet.png" />
+                     <td colspan="3">
+                    <img src="../img/daduyet.png" />
                     </td>           
                 </tr>
                 <tr>
@@ -593,28 +704,33 @@
                      <td colspan="2">
                     Waiting approve
                     </td>  
-                     <td colspan="2">
+                     <td colspan="3">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
-            </table> 
+                </tr>
+            </table>
         </form>
-<script type="text/javascript">
+        <script type="text/javascript">
 
             var form = $('#test');
             $('#content').hide();//chu y
             form.submit(function() {
-                
+
                 $.ajax({
                     type: form.attr('method'),
                     url: form.attr('action'),
                     data: form.serialize(),
                     success: function(data) {
                         var result = data;
-                        
-                        $('#content').show().html(result).fadeOut(3000,function (){window.location.href="?options=ManagerSchedule";});
+
+                        $('#content').show().html(result).fadeOut(3000, function() {
+                            window.location.href = "?options=ManagerSchedule";
+                        });
                     }
                 });
 
                 return false;
             }); </script>
+    </body>  
+</html>  

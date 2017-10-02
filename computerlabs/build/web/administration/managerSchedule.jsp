@@ -705,7 +705,7 @@
                     Waiting approve
                     </td>  
                      <td colspan="3">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approvep
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
                 </tr>
