@@ -708,7 +708,7 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
-                </tr>
+                
             </table>
         </form>
         <script type="text/javascript">
