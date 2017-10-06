@@ -5,13 +5,22 @@
 --%>
 <%@include file="checkLogin.jsp" %>
 <%    //administrations logout
+    String op = "";
+    String ops = "";
     if (request.getParameter("option") != null) {
-        String op = request.getParameter("option");
+        op = request.getParameter("option");
         if (op.equalsIgnoreCase("logout")) {
             session.removeAttribute("useradmin");
             response.sendRedirect("/computerlabs/?option=login");
         }
     }
+    if(request.getParameter("options") != null){
+        ops = request.getParameter("options");
+    }
+    String bgNotSelect = "bg-title2";
+    String txtNotSelect = "text-title";
+    String bgSelected = "bg-title";
+    String txtSelected = "text-title-chil";
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -49,92 +58,86 @@
                         <table class="left-menu">
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title">
-                                        <div class="text-title-chil">Report Infomation</div>               
+                                    <div class="bg-title2 ">
+                                        <div class="text-title">Report Infomation</div>               
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails")? bgSelected : bgNotSelect %>">
+                                        <a class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails") ? txtSelected : txtNotSelect %>" href="?options=ManagerSchedule">Manager Schedule Work</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("manageruser") || ops.equalsIgnoreCase("CreateUser") || ops.equalsIgnoreCase("userDetails")? bgSelected : bgNotSelect %>">
+                                        <a href="?options=manageruser" class="<%=ops.equalsIgnoreCase("manageruser") || ops.equalsIgnoreCase("CreateUser") || ops.equalsIgnoreCase("userDetails")? txtSelected : txtNotSelect %>">Manager User</a>               
+                                    </div>
+                                </td>
+                            </tr>
+                            
+
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? bgSelected : bgNotSelect %>">
+                                        <a href="?options=ManagerCategoryDevice" class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? txtSelected : txtNotSelect %>">Manager Category Device</a>              
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerTypeAccessory") ? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerTypeAccessory") ? txtSelected : txtNotSelect %>"><a href="?options=ManagerTypeAccessory" class="text-title">Manager Type Accessory</a></div>               
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerAccessory") ? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerAccessory")? txtSelected : txtNotSelect %>"> <a href="?options=ManagerAccessory" class="text-title">Manager Accessory</a></div>               
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title">
-                                        <div class="text-title-chil"><a href="?options=ManagerComplaint" class="text-title-chil">Manager Complaint</a></div>               
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerDevice") || ops.equalsIgnoreCase("CreateDevice") || ops.equalsIgnoreCase("DeviceInfo")? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerDevice") || ops.equalsIgnoreCase("CreateDevice") || ops.equalsIgnoreCase("DeviceInfo")? txtSelected : txtNotSelect %>"> <a href="?options=ManagerDevice" class="text-title">Manager Device</a></div>               
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title">
-                                        <div class="text-title-chil"> <a class="text-title-chil" href="?options=ManagerSchedule">Manager Schedule Work</a></div>               
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerLab") ? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerLab")? txtSelected : txtNotSelect %>"> <a href="?options=ManagerLab" class="text-title">Manager Labs Room</a></div>               
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title">
-                                        <div class="text-title-chil"> <a class="text-title-chil" href="?options=ManagerWorkingShift">Manager Working Shift</a></div>               
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? txtSelected : txtNotSelect %>"><a href="?options=ManagerClasses" class="text-title"> Manager Class</a></div>               
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <a href="?options=manageruser" class="text-title">Manager User</a>               
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerComplaint") || ops.equalsIgnoreCase("complaintDetails") ? bgSelected : bgNotSelect %>">
+                                        <a href="?options=ManagerComplaint" class="<%=ops.equalsIgnoreCase("ManagerComplaint") || ops.equalsIgnoreCase("complaintDetails")? txtSelected : txtNotSelect %>">Manager Complaint</a>            
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"> <a href="?options=ManagerShift" class="text-title">Manager Shift Name</a></div>               
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerShift") ? bgSelected : bgNotSelect %>">
+                                        <div class="<%=ops.equalsIgnoreCase("ManagerShift") ? txtSelected : txtNotSelect %>"> <a href="?options=ManagerShift" class="text-title">Manager Shift Name</a></div>               
                                     </div>
                                 </td>
                             </tr>
-
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"><a href="?options=ManagerCategoryDevice" class="text-title">Manager Category Device</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"><a href="?options=ManagerTypeAccessory" class="text-title">Manager Type Accessory</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"> <a href="?options=ManagerAccessory" class="text-title">Manager Accessory</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"> <a href="?options=ManagerDevice" class="text-title">Manager Device</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"> <a href="?options=ManagerLab" class="text-title">Manager Labs Room</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="bg-title2">
-                                        <div class="text-title"><a href="?options=ManagerClasses" class="text-title"> Manager Class</a></div>               
-                                    </div>
-                                </td>
-                            </tr>
-
                         </table>
 
                     </div>
