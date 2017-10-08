@@ -12,6 +12,7 @@
         if (op.equalsIgnoreCase("logout")) {
             session.removeAttribute("useradmin");
             response.sendRedirect("/computerlabs/?option=login");
+            return;
         }
     }
     if(request.getParameter("options") != null){
@@ -81,13 +82,7 @@
                             </tr>
                             
 
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? bgSelected : bgNotSelect %>">
-                                        <a href="?options=ManagerCategoryDevice" class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? txtSelected : txtNotSelect %>">Manager Category Device</a>              
-                                    </div>
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerTypeAccessory") ? bgSelected : bgNotSelect %>">
@@ -102,11 +97,25 @@
                                     </div>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? bgSelected : bgNotSelect %>">
+                                        <a href="?options=ManagerCategoryDevice" class="<%=ops.equalsIgnoreCase("ManagerCategoryDevice") ? txtSelected : txtNotSelect %>">Manager Category Device</a>              
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerDevice") || ops.equalsIgnoreCase("CreateDevice") || ops.equalsIgnoreCase("DeviceInfo")? bgSelected : bgNotSelect %>">
                                        <a href="?options=ManagerDevice" class="<%=ops.equalsIgnoreCase("ManagerDevice") || ops.equalsIgnoreCase("CreateDevice") || ops.equalsIgnoreCase("DeviceInfo")? txtSelected : txtNotSelect %>">Manager Device</a>               
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? bgSelected : bgNotSelect %>">
+                                        <a href="?options=ManagerClasses" class="<%=ops.equalsIgnoreCase("ManagerClasses") ? txtSelected : txtNotSelect %>"> Manager Class</a>           
                                     </div>
                                 </td>
                             </tr>
@@ -119,18 +128,12 @@
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? bgSelected : bgNotSelect %>">
-                                        <a href="?options=ManagerClasses" class="<%=ops.equalsIgnoreCase("ManagerClasses") ? txtSelected : txtNotSelect %>"> Manager Class</a>           
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerComplaint") || ops.equalsIgnoreCase("complaintDetails") ? bgSelected : bgNotSelect %>">
                                         <a href="?options=ManagerComplaint" class="<%=ops.equalsIgnoreCase("ManagerComplaint") || ops.equalsIgnoreCase("complaintDetails")? txtSelected : txtNotSelect %>">Manager Complaint</a>            
                                     </div>
                                 </td>
                             </tr>
+                            
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerShift") ? bgSelected : bgNotSelect %>">

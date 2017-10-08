@@ -26,18 +26,18 @@
         <script src="../js/jquery-ui.min.js"></script>
         <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
         <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-       <script>
-           $(document).ready(function(){
+        <script>
+            $(document).ready(function() {
                 $(function() {
                     $("#txtDateFrom").datepicker({
                         dateFormat: "yy/mm/dd"
-                      });
+                    });
                     $("#txtDateTo").datepicker({
                         dateFormat: "yy/mm/dd"
-                      });  
+                    });
                 });
                 $("#test").validationEngine();
-                
+
             });
             function BASIC_SelectItem()
             {
@@ -75,6 +75,7 @@
                 new setXMLHttpRe();
                 var getText = pagenumber;  //Used to prevent caching during ajax call
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
@@ -85,11 +86,19 @@
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
                     }
                 }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
+                    }
+                }
                 v_dateTo = document.test.txtDateTo.value;
                 v_dateFrom = document.test.txtDateFrom.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showSchedule?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showSchedule?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -99,6 +108,7 @@
                 var c_value = "";
                 c_value = document.test.go.value;
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
@@ -107,6 +117,14 @@
                     if (document.test.roomname[i].selected)
                     {
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
                     }
                 }
                 v_dateTo = document.test.txtDateTo.value;
@@ -115,7 +133,7 @@
                 var getText = c_value;  //Used to prevent caching during ajax call
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showSchedule?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showSchedule?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -123,6 +141,7 @@
             function Search()
             {
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
@@ -133,21 +152,35 @@
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
                     }
                 }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
+                    }
+                }
                 v_dateTo = document.test.txtDateTo.value;
                 v_dateFrom = document.test.txtDateFrom.value;
                 new setXMLHttpRe();
                 var getText = v_room;  //Used to prevent caching during ajax call
+                var getShift = v_shift;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showSchedule?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showSchedule?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + getShift, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
+                
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText.getElementById("fcuk"); //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Không kết nối được với Server");
@@ -155,7 +188,7 @@
                 }
             }
         </script>
-        
+
     </head>  
     <body>  
 
@@ -173,9 +206,21 @@
 
         <form action="../updateSchedule" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
-                <tr >
+                <tr>
 
                     <td style="height: 50px;" colspan="9" align="right" >
+                        <%
+                            int shiftType = 1;
+                            if (request.getParameter("shiftType") != null) {
+                                shiftType = Integer.parseInt(request.getParameter("shiftType"));
+                            }
+                        %>                        
+                        <select name="shiftType" style="width: 150px;height: 25px;">
+
+                            <option value="1" <%=shiftType == 1 ? "selected" : ""%> >Morning Shift</option>
+                            <option value="2" <%=shiftType == 2 ? "selected" : ""%> >Outgoing Shift</option>
+                            <option value="3" <%=shiftType == 3 ? "selected" : ""%> >Night Shift</option>
+                        </select>
                         <select name="roomname" style="width: 150px;height: 25px;">
                             <%
                                 Connection cnn = null;
@@ -212,22 +257,19 @@
                             %>
                         </select>
 
-
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        
                         <input type="button" value="Search" class="button_example" onclick= "Search();" />
                     </td>
-
                 </tr> 
                 <tr> 
                     <td align="center" colspan="3">
                         <a class="button_example" href="?options=CreateSchedule">Create Schedule</a>
                     </td>
                     <td colspan="6" align="right">  
-                        <!--<form method="get" action="NewServlet">  -->
                         <table align="right">  
                             <tr> 
-
                                 <%--Fist--%>
                                 <td>
                                     <div id="container" style="margin-bottom:20px">
@@ -304,8 +346,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -337,8 +377,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -370,8 +408,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -399,10 +435,7 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
-
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
                                             %>
                                             <li class="actived" onclick="javascript:show(<%=pageNumbers.get(i)%>);">
@@ -505,7 +538,7 @@
                         Connection cnn2 = null;
                         Statement st2 = null;
                         ResultSet rs2 = null;
-                        String sql2 = "select * from tbl_shiftname where shiftID!=7";
+                        String sql2 = "select * from tbl_shiftname where status = 1 and shiftType=" + shiftType + "  ";
                         cnn2 = dbconnect.Connect();
                         try {
                             st2 = cnn2.createStatement();
@@ -546,7 +579,8 @@
                             + "</td>");
                     String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
                     String[] strGetID = studentDetailsDTO.getId().split("/");
-                    for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+                    //for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+                    for (int j = 0; j <= (strGetStatus.length - 1); j++) {
                         totalRequestByScheID totalRq = new totalRequestByScheID();
                         if (Integer.parseInt(strGetStatus[j].trim()) == 1) {
                             checkRequest check = new checkRequest();
@@ -568,7 +602,10 @@
                             + "</td>");
                     outPutRoomID output = new outPutRoomID();
                     if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
-                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"><a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a></td>");
+                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"><a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>"
+                                + "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>"
+                                + "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/delete.png\" width=\"15px\" height=\"15px\" /></a>"
+                                + "</td>");
                     } else {
                         out.println("<td style='background: #dfefff;height:30px' align=\"center\"></td>");
                     }
@@ -581,7 +618,8 @@
                 %>  
 
 
-            </table> <br/>
+            </table>
+            <br/>
             <table cellpadding="1px" cellspacing="1px" id="tb" width="950px" align="center"> 
                 <tr > 
                     <td align="center">
@@ -591,9 +629,12 @@
                             ResultSet rs1 = null;
                             int dateID = 0;
                             int roomID = 0;
+                            String whereSQL = "";
                             if (request.getParameter("dateID") != null) {
                                 try {
                                     dateID = Integer.parseInt(request.getParameter("dateID"));
+                                    whereSQL += " AND dateworkID=" + dateID + " ";
+
                                 } catch (Exception ex) {
 
                                 }
@@ -601,6 +642,7 @@
                             if (request.getParameter("roomID") != null) {
                                 try {
                                     roomID = Integer.parseInt(request.getParameter("roomID"));
+                                    whereSQL += " AND roomID=" + roomID + " ";
                                 } catch (Exception ex) {
 
                                 }
@@ -608,7 +650,7 @@
                             int cntsche = 0;
                             SimpleDateFormat formart = new SimpleDateFormat("EE, MMM dd,yyyy");
                             String sql1 = "select s.scheduleID as scheduleID,shift.shiftname as shiftname,shift.starttime as starttime,shift.endtime as endtime ,s.status "
-                                    + " as scheStatus ,d.dateword as dateword from tbl_schedule as s inner join tbl_shiftname as shift on s.shiftID=shift.shiftID inner join tbl_datework as d on s.dateworkID=d.datewordID where dateworkID=" + dateID + " and roomID=" + roomID;
+                                    + " as scheStatus ,d.dateword as dateword from tbl_schedule as s inner join tbl_shiftname as shift on s.shiftID=shift.shiftID inner join tbl_datework as d on s.dateworkID=d.datewordID where 1=1 " + whereSQL;
                             if (roomID > 0 && dateID > 0) {
                                 cnn1 = dbconnect.Connect();
 
@@ -677,7 +719,10 @@
                     <td colspan="9"><input type="text" name="txtResultShift"  size="5" id="txtResultShift" style="visibility: hidden;"  /></td>
                 </tr>
                 <tr>
-                    <tr>
+            </table>
+        </form>
+        <table cellpadding="1px" cellspacing="1px"  width="950px" align="center">   
+            <tr>
                     <td>Note:</td>
                 </tr>
                 <tr>
@@ -685,13 +730,13 @@
                         <img src="../img/khonglamviec.png" />
                     </td>
                     <td colspan="2">
-                    <img src="../img/chuachon.png" />
+                        <img src="../img/chuachon.png" />
                     </td>   
-                     <td colspan="2">
-                    <img src="../img/dangcho.png" />
+                    <td colspan="2">
+                        <img src="../img/dangcho.png" />
                     </td>  
-                     <td colspan="3">
-                    <img src="../img/daduyet.png" />
+                    <td colspan="3">
+                        <img src="../img/daduyet.png" />
                     </td>           
                 </tr>
                 <tr>
@@ -699,18 +744,16 @@
                         &nbsp;&nbsp;&nbsp;No working
                     </td>
                     <td colspan="2">
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty
                     </td>   
-                     <td colspan="2">
-                    Waiting approve
+                    <td colspan="2">
+                        Waiting approve
                     </td>  
-                     <td colspan="3">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
+                    <td colspan="3">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
-                
-            </table>
-        </form>
+        </table>
         <script type="text/javascript">
 
             var form = $('#test');

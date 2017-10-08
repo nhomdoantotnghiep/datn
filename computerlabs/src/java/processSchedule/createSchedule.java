@@ -170,7 +170,7 @@ public class createSchedule extends HttpServlet {
         //End Split Room
         SimpleDateFormat sdf = new SimpleDateFormat("EE/yyyy/MM/dd");
         for (int j = 0; j < roomID.length; j++) {
-            String outPutEnddate = outPutEnddate(Integer.parseInt(roomID[j]));
+            String outPutEnddate = outPutEnddate(Integer.parseInt(roomID[j]));//ngay cuoi cung trong db
             String[] str = outPutEnddate.split("/");
             int year = Integer.parseInt(str[0].toString().trim());
             int month = Integer.parseInt(str[1].toString().trim());
@@ -289,7 +289,7 @@ public class createSchedule extends HttpServlet {
                                                     for (int k = 0; k < arrshiftIDChecked.length; k++) {
                                                         if (shiftID == Integer.parseInt(arrshiftIDChecked[k].toString())) {
                                                             check = false;
-                                                            System.out.println("ShiftChecked: " + shiftID + " - " + roomID[j]);
+                                                            System.out.println("th1ShiftChecked: " + shiftID + " - " + roomID[j]);
                                                             //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                                             createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 1);
                                                             cntResult = cntResult + 1;
@@ -297,7 +297,7 @@ public class createSchedule extends HttpServlet {
 
                                                     }
                                                     if (check == true) {
-                                                        System.out.println("ShiftNoCheck: " + shiftID + " - " + roomID[j]);
+                                                        System.out.println("th1ShiftNoCheck: " + shiftID + " - " + roomID[j]);
                                                         //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                                         createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 0);
                                                         cntResult = cntResult + 1;
@@ -386,7 +386,7 @@ public class createSchedule extends HttpServlet {
                                                     for (int k = 0; k < arrshiftIDChecked.length; k++) {
                                                         if (shiftID == Integer.parseInt(arrshiftIDChecked[k].toString())) {
                                                             check = false;
-                                                            System.out.println("ShiftChecked: " + shiftID + " - " + roomID[j]);
+                                                            System.out.println("th2ShiftChecked: " + shiftID + " - " + roomID[j]);
                                                             //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                                             createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 1);
                                                             cntResult = cntResult + 1;
@@ -394,7 +394,7 @@ public class createSchedule extends HttpServlet {
 
                                                     }
                                                     if (check == true) {
-                                                        System.out.println("ShiftNoCheck: " + shiftID + " - " + roomID[j]);
+                                                        System.out.println("th2ShiftNoCheck: " + shiftID + " - " + roomID[j]);
                                                         //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                                         createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 0);
                                                         cntResult = cntResult + 1;
@@ -435,7 +435,7 @@ public class createSchedule extends HttpServlet {
                 }
             
             } else { // truong hop nguoc lai khong can sua
-                int number = NumberDay(numberDay, year, month, day);
+                int number = NumberDay(numberEnter, year, month, day);
                 int chiadu=numberEnter%6;         
                
                      
@@ -480,12 +480,13 @@ public class createSchedule extends HttpServlet {
                                 while (rsShift.next()) {
                                     int shiftID = rsShift.getInt("shiftID");
                                     String datework = EE[1] + "-" + EE[2] + "-" + EE[3];//l
-                                    if (i <= (number - datenull)) {
+//                                    if (i <= (number - datenull)) {
+                                    if (i <= (number )) {
                                         boolean check = true;
                                         for (int k = 0; k < arrshiftIDChecked.length; k++) {
                                             if (shiftID == Integer.parseInt(arrshiftIDChecked[k].toString())) {
                                                 check = false;
-                                                System.out.println("ShiftChecked: " + shiftID + " - " + roomID[j]);
+                                                System.out.println("th3ShiftChecked: " + shiftID + " - " + roomID[j]);
                                                 //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                                 createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 1);
                                                 cntResult = cntResult + 1;
@@ -493,7 +494,7 @@ public class createSchedule extends HttpServlet {
 
                                         }
                                         if (check == true) {
-                                            System.out.println("ShiftNoCheck: " + shiftID + " - " + roomID[j]);
+                                            System.out.println("th3ShiftNoCheck: " + shiftID + " - " + roomID[j]);
                                             //String datework = EE[1] + "-" + EE[2] + "-" + EE[3];
                                             createSchedule(shiftID, Integer.parseInt(roomID[j]), datework, 0);
                                             cntResult = cntResult + 1;

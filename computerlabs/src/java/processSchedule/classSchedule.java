@@ -16,7 +16,10 @@ public class classSchedule {
     private String roomName;  
     private String dateword;
     private String keyword;
+    private String status;
     private int dateworkID;
+    private int dayid;
+    private int shiftID;
 
     public int getDateworkID() {
         return dateworkID;
@@ -25,7 +28,7 @@ public class classSchedule {
     public void setDateworkID(int dateworkID) {
         this.dateworkID = dateworkID;
     }
-    private String status;
+    
 
     public String getId() {
         return id;
@@ -75,6 +78,22 @@ public class classSchedule {
         this.status = status;
     }
 
+    public int getDayid() {
+        return dayid;
+    }
+
+    public void setDayid(int dayid) {
+        this.dayid = dayid;
+    }
+
+    public int getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(int shiftID) {
+        this.shiftID = shiftID;
+    }
+    
    
      public classSchedule(String id,String shiftname, String roomName, String dateword,  
             String keyword,String status,int dateworkID) {  
@@ -86,4 +105,18 @@ public class classSchedule {
          this.status=status;
          this.dateworkID=dateworkID;
     }  
+
+    public classSchedule(String id, String shiftname, String roomName, String dateword, String keyword, String status, int dateworkID, int dayid, int shiftID) {
+        this.id = id;
+        this.shiftname = shiftname;
+        this.roomName = roomName;
+        this.dateword = dateword;
+        this.keyword = keyword;
+        this.status = status;
+        this.dateworkID = dateworkID;
+        this.dayid = dayid;
+        this.shiftID = shiftID;
+    }
+     
+     
 }

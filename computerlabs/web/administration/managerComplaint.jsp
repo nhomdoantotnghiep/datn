@@ -16,14 +16,22 @@
         <title>Manager</title>  
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+        <link rel="stylesheet" href="../css/jquery-ui.min.css" />
         <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="../js/jquery-ui.min.js"></script>
         <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
         <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script>jQuery(document).ready(function() {
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
                 jQuery("#test").validationEngine();
-            });</script>
-        <script>
+                $("#txtDateFrom").datepicker({
+                    dateFormat: "yy/mm/dd"
+                });
+                $("#txtDateTo").datepicker({
+                    dateFormat: "yy/mm/dd"
+                });
+            });
             function BASIC_SelectItem(act, id)
             {
                 var getID = id;
@@ -33,8 +41,6 @@
             }
 
 
-        </script>
-        <script type="text/javascript">
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -103,9 +109,12 @@
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -298,8 +307,8 @@
                 <tr >
 
                     <td colspan="4" style="height: 30px" >
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <select name="status">
                             <%
                                 if (request.getAttribute("statusSelected") != null) {

@@ -14,7 +14,23 @@
     <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
         <title>Manager</title>  
-        <script>
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js" type="text/javascript"></script>
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(function() {
+                    $("#txtDateFrom").datepicker({
+                        dateFormat: "yy/mm/dd"
+                      });
+                    $("#txtDateTo").datepicker({
+                        dateFormat: "yy/mm/dd"
+                      });  
+                });                
+            });
             function BASIC_SelectItem(act, id)
             {
                 var getID = id;
@@ -24,8 +40,7 @@
             }
 
 
-        </script>
-        <script type="text/javascript">
+       
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -94,9 +109,12 @@
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -289,8 +307,8 @@
                 <tr >
 
                     <td colspan="4" style="height: 30px" >
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <select name="status">
                             <%
                                 if (request.getAttribute("statusSelected") != null) {

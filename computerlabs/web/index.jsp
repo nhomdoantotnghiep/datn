@@ -5,12 +5,15 @@
             if (session.getAttribute("Instructors") != null) {
                 session.removeAttribute("Instructors");
                 response.sendRedirect("/computerlabs/?option=login");
+                return;
             } else if (session.getAttribute("TechnicalStaff") != null) {
                 session.removeAttribute("TechnicalStaff");
                 response.sendRedirect("/computerlabs/?option=login");
+                return;
             } else if (session.getAttribute("Students") != null) {
                 session.removeAttribute("Students");
                 response.sendRedirect("/computerlabs/?option=login");
+                return;
             }
         }
     }
