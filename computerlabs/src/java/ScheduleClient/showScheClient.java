@@ -72,6 +72,14 @@ public class showScheClient extends HttpServlet {
                  roomid=Integer.parseInt(request.getParameter("roomid"));
             }
         }
+        int shiftType = 1;
+        if (request.getParameter("shiftType") != null) {
+            if (request.getParameter("shiftType").equalsIgnoreCase("")) {
+                shiftType = 1;
+            } else {
+                shiftType = Integer.parseInt(request.getParameter("shiftType"));
+            }
+        }
         if (pageNumberValue != null) {
             try {
                 page = Integer.parseInt(pageNumberValue);
@@ -81,7 +89,7 @@ public class showScheClient extends HttpServlet {
             }
         }
         int offset = maxEntriesPerPage * (page - 1);
-        TestList(offset, maxEntriesPerPage,roomid,inputdateTo,inputdateFrom);
+        TestList(offset, maxEntriesPerPage,roomid,inputdateTo,inputdateFrom,shiftType);
 
         HttpSession httpSession = request.getSession();
         httpSession.setAttribute("pages", getPages());
@@ -96,25 +104,30 @@ public class showScheClient extends HttpServlet {
      * Hard-coded sample data. Normally this would come from a real data source 
      * such as a database 
      */
-    public void fillList(int roomid,String inputdateTo,String inputdateFrom) {
+    public void fillList(int roomid,String inputdateTo,String inputdateFrom, int shiftType) {
         list = new ArrayList();
         Connection cnn = null;
         Statement st = null;
         ResultSet rs = null;
 
         String sql = "select sche.scheduleID as ID,shift.shiftname as shiftname,lab.roomName as roomName,d.dateword as datework,"
-                + " we.keyword as keywork,sche.status as status,sche.dateworkID sdateworkID from tbl_schedule as sche inner join "
+                + " we.keyword as keywork,sche.status as status,sche.dateworkID sdateworkID, we.dayid, shift.shiftID"
+                + " from tbl_schedule as sche inner join "
                 + " tbl_shiftname as shift on sche.shiftID=shift.shiftID inner "
                 + " join tbl_labroom as lab on sche.roomID=lab.roomID inner join "
                 + " tbl_datework as d on sche.dateworkID=d.datewordID inner join "
-                + " days_week as we on d.dayID=we.dayID where lab.roomID="+roomid+" and d.dateword >='"+outPutDateSelect()+"'";
+                + " days_week as we on d.dayID=we.dayID where lab.roomID="+roomid+" ";
+                //+ "and d.dateword >='"+outPutDateSelect()+"'";
         if (inputdateTo.trim().length() > 3) {
             sql += " and d.dateword >='" + inputdateTo + "'";
         }
         if (inputdateFrom.trim().length() > 3) {
             sql += " and d.dateword <='" + inputdateFrom + "'";
         }
-        sql+=" order by ID desc ";
+        if(shiftType > 0){
+            sql += " and shift.shiftType =" + shiftType + " ";
+        }
+        sql+=" order by d.dateword desc, shift.shiftID asc ";
         //String connectionURL = "jdbc:odbc:sem4";
         try {
             //Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
@@ -163,10 +176,10 @@ public class showScheClient extends HttpServlet {
      * @param offset
      * @param length
      */
-    public void TestList(int offset, int length,int roomid,String inputdateTo,String inputdateFrom) {
+    public void TestList(int offset, int length,int roomid,String inputdateTo,String inputdateFrom, int shiftType) {
         this.offset = offset;
         this.length = length;
-        fillList(roomid,inputdateTo,inputdateFrom);
+        fillList(roomid,inputdateTo,inputdateFrom,shiftType);
     }
     private String outPutDateSelect(){
         
