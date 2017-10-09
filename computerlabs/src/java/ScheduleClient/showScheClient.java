@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,7 +155,7 @@ public class showScheClient extends HttpServlet {
                 daysweek = rs.getString("keywork");
                 status += rs.getString("status") + "/";
                 dateworkID = rs.getInt("sdateworkID");
-                int totalShift=cntShiftShow();
+                int totalShift=cntShiftShow(shiftType);
                 if (count % totalShift == 0) {
                     list.add(new classSchedule(ID, shiftname, roomName, datework, daysweek, status,dateworkID));
                     ID = "";
@@ -213,11 +214,11 @@ public class showScheClient extends HttpServlet {
     }
 
     
-   private int cntShiftShow(){
+   private int cntShiftShow(int shiftType){
        Connection cnn=null;
        Statement st=null;
        ResultSet rs=null;
-       String sql="select COUNT(shiftID) as cnt from tbl_shiftname where shiftID!=7";
+       String sql="select COUNT(shiftID) as cnt from tbl_shiftname where status = 1 AND shiftType = "+shiftType;
        cnn=dbconnect.Connect();
         try {
             st=cnn.createStatement();
@@ -256,6 +257,7 @@ public class showScheClient extends HttpServlet {
         for (int i = this.offset; i < to; i++) {
             arrayList.add(list.get(i));
         }
+        Collections.reverse(arrayList);// reverse list dao chieu list lan nua
         return arrayList;
     }
 
