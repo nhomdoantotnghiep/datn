@@ -16,14 +16,13 @@ public class ReportConstant {
 	
 	//type bao cao
 	/// DLI 1.1 Tinh
-	public static final String DLI1_1_CT = "DLI1_1_CT";
-	public static final String DLI1_1_TH = "DLI1_1_TH";
+	public static final int TIME_TABLE = 1;
 	
 	/* ten file jrxml va ten file se duoc export*/
 	public static final String TEN_FILE_DEFAULT = "default";//100
 
-	public static final String GIAY_DLI1_1_CT_TEMP = "dli_11_ct.jrxml"; 
-	public static final String GIAY_DLI1_1_CT_EXPORT = "dli_11_ct" ;
+	public static final String GIAY_TIMETABLE_TEMP = "TimeTable.jrxml"; 
+	public static final String GIAY_TIMETABLE_EXPORT = "TimeTable" ;
 	
 	
 }

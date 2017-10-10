@@ -1,4 +1,5 @@
 
+<%@page import="reporting.ReportConstant"%>
 <%@page import="processSchedule.totalRequestByScheID"%>
 <%@page import="processSchedule.outPutRoomID"%>
 <%@page import="processSchedule.checkRequest"%>
@@ -171,6 +172,12 @@
             xmlHttpRe.send(null);
         }
     }
+    function Export()
+    {
+        var typeRP = <%=String.valueOf(ReportConstant.TIME_TABLE) %>;
+        var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+        window.open("ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP,"_blank");
+    }
     function handleResponse() {
         var parser = new DOMParser();
         if (xmlHttpRe.readyState === 4) {
@@ -257,6 +264,7 @@
                 <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
 
                 &nbsp;&nbsp;&nbsp;<input type="button" value="Search" class="button_example" onclick= "Search();" />
+                &nbsp;&nbsp;&nbsp;<input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
             </td>
 
         </tr> 
@@ -544,7 +552,7 @@
                 Connection cnn2 = null;
                 Statement st2 = null;
                 ResultSet rs2 = null;
-                String sql2 = "select * from tbl_shiftname where shiftID!=7";
+                String sql2 = "select * from tbl_shiftname where status=1 and shiftType=" + shiftType + "  ";
                 cnn2 = dbconnect.Connect();
                 try {
                     st2 = cnn2.createStatement();
@@ -583,7 +591,8 @@
                     + "</td>");
             String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
             String[] strGetID = studentDetailsDTO.getId().split("/");
-            for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+            //for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+            for (int j = 0; j <= (strGetStatus.length - 1); j++) {
                 totalRequestByScheID totalRq = new totalRequestByScheID();
                 if (Integer.parseInt(strGetStatus[j].trim()) == 1) {
                     checkRequest check = new checkRequest();
