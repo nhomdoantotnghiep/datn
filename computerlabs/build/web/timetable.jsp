@@ -21,6 +21,14 @@
     if (request.getParameter("roomid") != null) {
         checked = Integer.parseInt(request.getParameter("roomid"));
     }    
+    String inputdateFrom = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateFrom = String.valueOf(request.getAttribute("inputdateFrom"));
+    }
+    String inputdateTo = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateTo = String.valueOf(request.getAttribute("inputdateTo"));
+    }
 %>
 <link rel="stylesheet" href="css/jquery-ui.css" />
 <link rel="stylesheet" href="css/contentcss.css" />
@@ -103,8 +111,8 @@
                 v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
             }
         }
-        v_dateTo = document.test.txtDateTo.value;
-        v_dateFrom = document.test.txtDateFrom.value;
+        v_dateTo = document.test.inputdateTo.value;
+        v_dateFrom = document.test.inputdateFrom.value;
         if (xmlHttpRe) {
 
             xmlHttpRe.open("GET", "showScheClient?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift, true);// chú ý
@@ -136,8 +144,8 @@
                 v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
             }
         }
-        v_dateTo = document.test.txtDateTo.value;
-        v_dateFrom = document.test.txtDateFrom.value;
+        v_dateTo = document.test.inputdateTo.value;
+        v_dateFrom = document.test.inputdateFrom.value;
         new setXMLHttpRe();
         var getText = c_value;  //Used to prevent caching during ajax call
         if (xmlHttpRe) {
@@ -169,8 +177,8 @@
                 v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
             }
         }
-        v_dateTo = document.test.txtDateTo.value;
-        v_dateFrom = document.test.txtDateFrom.value;
+        v_dateTo = document.test.inputdateTo.value;
+        v_dateFrom = document.test.inputdateFrom.value;
         new setXMLHttpRe();
         var getText = v_room;  //Used to prevent caching during ajax call
         var getShift = v_shift;
@@ -181,12 +189,7 @@
             xmlHttpRe.send(null);
         }
     }
-    function Export()
-    {
-        var typeRP = <%=String.valueOf(ReportConstant.TIME_TABLE) %>;
-        var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
-        window.open("ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP,"_blank");
-    }
+    
     function handleResponse() {
         var parser = new DOMParser();
         if (xmlHttpRe.readyState === 4) {
@@ -199,6 +202,30 @@
                 alert("Không kết nối được với Server");
             }
         }
+    }
+
+    
+    function Export()
+    {
+        var typeRP = <%=String.valueOf(ReportConstant.TIME_TABLE) %>;
+        var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+        var fromRP = "<%=inputdateFrom %>";
+        var toRP = "<%=inputdateTo %>";
+        var labRP = 1;
+
+        for (var i = 0; i < document.test.roomname.length; i++)
+
+        {
+            if (document.test.roomname[i].selected)
+            {
+                labRP = document.test.roomname[i].value;
+            }
+        }
+        
+        toRP = document.test.inputdateTo.value;
+        fromRP = document.test.inputdateFrom.value;
+        
+        window.open("ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP,"_blank");
     }
 
 
@@ -218,7 +245,11 @@
 %>  
 
 <form action="../updateSchedule" name="test" id="test" method="post">
-    <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
+    <table cellpadding="1px" cellspacing="1px" id="fcuk1" width="950px" align="center"> 
+        <%
+        
+        %>
+        
         <tr >
 
             <td style="height: 50px;" colspan="9" align="right" >                       
@@ -261,8 +292,8 @@
                     %>
                 </select>
 
-                <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
-                <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                <input type="text" name="inputdateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                <input type="text" name="inputdateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
 
                 &nbsp;&nbsp;&nbsp;<input type="button" value="Search" class="button_example" onclick= "Search();" />
                 &nbsp;&nbsp;&nbsp;<input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
@@ -546,7 +577,8 @@
                 <!-- </form>   -->
             </td>  
         </tr>  
-
+    </table>
+    <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
         <tr bgcolor="#78bbe3" >
             <td class="td-show" style="color: white;" width="100px" height="50px" align="center">Shift Name<br />/Date</td>
             <%
@@ -582,6 +614,7 @@
         <%
             String color = "style='background: #e7f5fe;height:30px'";
             for (int i = (list.size() - 1); i >= 0; i--) {
+                System.out.println("-list.size()-"+list.size());    
                 out.println("<tr>");
         %>  
 

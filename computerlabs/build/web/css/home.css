@@ -156,7 +156,7 @@ border:1px solid #67bcd1; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 }
 .site-input-left
 {
-    width:40px; height:20px;float:left;background: url('../../img/bg-title-admin.png');padding-top: 7px;padding-left: 10px;-moz-border-radius: 5px 0px 0px 5px;
+    width:40px; height:20px;float:left;background: url('../img/bg-title-admin.png');padding-top: 7px;padding-left: 10px;-moz-border-radius: 5px 0px 0px 5px;
 -webkit-border-radius:5px 0px 0px 5px;
          
 }

@@ -37,11 +37,17 @@ public class ReportBusinessUtils {
         System.out.println("inBaoCao-realPath-"+realPath);
         String type = resourceRequest.getParameter("typeRP");
         String duoiFile = resourceRequest.getParameter("duoiFileRP");
+        String from = resourceRequest.getParameter("fromRP");
+        String to = resourceRequest.getParameter("toRP");
+        String lab = resourceRequest.getParameter("labRP");
         try {
             if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TIME_TABLE))) {
                 HashMap<String, Object> input = new HashMap<String, Object>();
                 input.put("type", type);
                 input.put("duoiFile", duoiFile);
+                input.put("from",from);
+                input.put("to", to);
+                input.put("lab", lab);
                 String tenFile_Export = ReportConstant.GIAY_TIMETABLE_EXPORT + "_" + currentTimeFull;
 
                 TimeTableModel objectReport = TimeTableExport.getModel(input);
