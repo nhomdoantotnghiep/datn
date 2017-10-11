@@ -147,28 +147,28 @@
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" selected="selected" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                             } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option selected="selected"  value="1" >Dissatisfactory</option>
+                            <option selected="selected"  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                             } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option selected="selected"  value="2" >Approved</option>
                             <%
                             } else {
                             %>
                             <option selected="selected" value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                                 }
@@ -176,7 +176,7 @@
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                                 }
@@ -382,7 +382,7 @@
                             request.setAttribute("date", dateword);
                 %>
                 <tr>
-                    <td align="left" colspan="6" ><span style="font-size: 13px;color: #AAA;font-style: italic;">Shift Name: <%=sName%> &nbsp; (<%=starttime.substring(0, 5) + "-" + endtime.substring(0, 5)%>)&nbsp;&nbsp; Room Name: <%=roomName%> &nbsp;&nbsp;&nbsp;Date Work: <%=dateword%></span></td>
+                    <td align="left" colspan="6" ><span style="font-size: 13px;font-style: italic;font-weight: bold;">Shift Name: <%=sName%> &nbsp; (<%=starttime.substring(0, 5) + "-" + endtime.substring(0, 5)%>)&nbsp;&nbsp; Room Name: <%=roomName%> &nbsp;&nbsp;&nbsp;Date Work: <%=dateword%> (mm/dd/yyyy)</span></td>
                 </tr>
                 <%
                         }
@@ -403,9 +403,9 @@
 
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Class Name</td>
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Course Name</td>
-                    <td style="width: 200px;height: 25px;color: white;" align="center" >User Name</td>
-                    <td style="width: 200px;height: 25px;color: white;" align="center" >Full Name</td>
-                    <td style="width: 50px;height: 25px;color: white;" align="center" >Date Send</td>
+                    <td style="width: 120px;height: 25px;color: white;" align="center" >User Name Order</td>
+                    <td style="width: 200px;height: 25px;color: white;" align="center" >Full Name Order</td>
+                    <td style="width: 130px;height: 25px;color: white;" align="center" >Date Send</td>
                     <td style="width: 100px;height: 25px;color: white;" align="center" >Status</td>
                     <td align="center" style="color: white;">Action</td>
                 </tr>
@@ -430,20 +430,20 @@
                                 if (requestSche.getStatus().trim().equalsIgnoreCase("0")) {
                             %>
                             <option value="0" >Waiting</option>
-                            <option value="1" >Dissatisfactory</option>
-                            <option value="2" >approved</option>
+                            <option value="1" >Rejected</option>
+                            <option value="2" >Approved</option>
                             <%
                             } else if (requestSche.getStatus().trim().equalsIgnoreCase("1")) {
                             %>
                             <option value="0" >Waiting</option>
-                            <option selected="selected" value="1" >Dissatisfactory</option>
-                            <option value="2" >approved</option>
+                            <option selected="selected" value="1" >Rejected</option>
+                            <option value="2" >Approved</option>
                             <%
                             } else {
                             %>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option selected="selected" value="2" >approved</option>
+                            <option  value="1" >Rejected</option>
+                            <option selected="selected" value="2" >Approved</option>
                             <%
                                 }
                             %>
@@ -467,20 +467,20 @@
                                 if (requestSche.getStatus().trim().equalsIgnoreCase("0")) {
                             %>
                             <option value="0" >Waiting</option>
-                            <option value="1" >Dissatisfactory</option>
-                            <option value="2" >approved</option>
+                            <option value="1" >Rejected</option>
+                            <option value="2" >Approved</option>
                             <%
                             } else if (requestSche.getStatus().trim().equalsIgnoreCase("1")) {
                             %>
                             <option value="0" >Waiting</option>
-                            <option selected="selected" value="1" >Dissatisfactory</option>
-                            <option value="2" >approved</option>
+                            <option selected="selected" value="1" >Rejected</option>
+                            <option value="2" >Approved</option>
                             <%
                             } else {
                             %>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option selected="selected" value="2" >approved</option>
+                            <option  value="1" >Rejected</option>
+                            <option selected="selected" value="2" >Approved</option>
                             <%
                                 }
                             %>
@@ -507,7 +507,9 @@
                     data: form.serialize(),
                     success: function(data) {
                         var result = data;
-                        $('#content').show().html(result).delay(4000).fadeOut();
+                        $('#content').show().html(result).fadeOut(4000,function() {
+                            window.location.href = "?options=ManagerSchedule";
+                        });
 
                     }
                 });

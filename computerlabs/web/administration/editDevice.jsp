@@ -697,7 +697,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><input type="submit" value="     Create       "  class="button_example"  />&nbsp;&nbsp;&nbsp;&nbsp;<input class="button_example" value="     Reset       "   type="reset"/></td>
+                    <td colspan="2"><input type="submit" value="     Update       "  class="button_example"  />&nbsp;&nbsp;&nbsp;&nbsp;<input class="button_example" value="     Reset       "   type="reset"/></td>
                 </tr>
                 <tr>
                     <td align="center" colspan="2"><div id='content' class="style-result"></div></td>
@@ -802,7 +802,9 @@
                     data: form.serialize(),
                     success: function(data) {
                         var result = data;
-                        $('#content').show().html(result).delay(4000).fadeOut();
+                        $('#content').show().html(result).fadeOut(4000,function() {
+                            window.location.href = "?options=ManagerDevice";
+                        });
 
                     }
                 });

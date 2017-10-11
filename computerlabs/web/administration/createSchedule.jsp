@@ -168,7 +168,9 @@
                     data: form.serialize(),
                     success: function(data) {
                         var result = data;
-                        $('#content').show().html(result).delay(4000).fadeOut();
+                        $('#content').show().html(result).fadeOut(4000,function() {
+                            window.location.href = "?options=ManagerSchedule";
+                        });
 
                     }
                 });

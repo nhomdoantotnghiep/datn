@@ -148,28 +148,28 @@
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" selected="selected" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                             } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option selected="selected"  value="1" >Dissatisfactory</option>
+                            <option selected="selected"  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                             } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option selected="selected"  value="2" >Approved</option>
                             <%
                             } else {
                             %>
                             <option selected="selected" value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                                 }
@@ -177,7 +177,7 @@
                             %>
                             <option value="3" >ALL</option>
                             <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="1" >Rejected</option>
                             <option  value="2" >Approved</option>
                             <%
                                 }
@@ -387,12 +387,12 @@
                         } else if (requestSche.getStatus().trim().equalsIgnoreCase("1")) {
                         %>
 
-                        Dissatisfactory
+                        Rejected
                         <%
                         } else {
                         %>
 
-                        approved
+                        Approved
                         <%
                             }
                         %>
@@ -429,12 +429,12 @@
                         } else if (requestSche.getStatus().trim().equalsIgnoreCase("1")) {
                         %>
 
-                        Dissatisfactory
+                        Rejected
                         <%
                         } else {
                         %>
 
-                        approved
+                        Approved
                         <%
                             }
                         %>
