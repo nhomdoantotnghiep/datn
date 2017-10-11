@@ -1,0 +1,11 @@
+Admin : Có tất cả các quyền tạo lịch trực ở trong admin , admin phân việc giải quyết phản hồi cho ai .
+Giáo viên : Có quyền đăng ký lịch học và gửi phản hồi
+Kỹ thuật : có nhiệm vụ giải quyết phản hồi
+Sinh viên : Có nhiệm vụ đăng ký phòng lab
+
+
+- Sau khi gửi phản hồi quay lại danh sách phản hồi đã gửi . Giáo viên cũng có thể nhìn thấy danh sách phản hồi
+- Sửa lại phân trang các trang ajax 
+- Làm lịch trực 
+- Đổi thông tin người dùng
+- Ẩn HOD của phần người dùng
