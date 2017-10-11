@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 import processSchedule.checkRequest;
 import processSchedule.classSchedule;
 import processSchedule.totalRequestByScheID;
+import reporting.CusConvertUtil;
 
 
 
@@ -255,6 +257,10 @@ public class TimeTableExport {
                 String datework = "";
                 String daysweek = "";
                 int dateworkID=0;
+                Date now = new Date();
+                String timeNowStr = CusConvertUtil.parseDateToString2(now);
+                Date timeNow = CusConvertUtil.parseStringToDate2(timeNowStr);
+                
                 SimpleDateFormat formarter=new SimpleDateFormat("EE, MMM d,yyyy");
                 while (rs.next()) {
                     count = count + 1;
@@ -268,7 +274,22 @@ public class TimeTableExport {
                     dateworkID = rs.getInt("sdateworkID");
                     int totalShift=cntShiftShow();
                     if (count % totalShift == 0) {
-                        list.add(new classSchedule(ID, shiftname, roomName, datework, daysweek, status,dateworkID));
+                        Date dateTemp = CusConvertUtil.parseStringToDateEEMMDYYY(datework);
+                        boolean canSet = true;
+                        if (timeNow.compareTo(dateTemp) > 0) {
+                            System.out.println("Date1 is after Date2");// ngay now 11 sau ngay temp 10
+                            canSet = false;
+                        } else if (timeNow.compareTo(dateTemp) < 0) {
+                            System.out.println("Date1 is before Date2");// ngay now 8 truoc ngay temp 11
+                            canSet = true;
+                        } else if (timeNow.compareTo(dateTemp) == 0) {
+                            System.out.println("Date1 is equal to Date2");// 2 ngay now temp cung thoi diem
+                            canSet = true;
+                        }
+                        if(canSet){
+                            list.add(new classSchedule(ID, shiftname, roomName, datework, daysweek, status,dateworkID));
+                        }
+                        
                         ID = "";
                         shiftname = "";
                         status = "";
