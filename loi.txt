@@ -7,6 +7,7 @@ Sinh viên : Có nhiệm vụ đăng ký phòng lab
 ***- Sửa lại phân trang các trang ajax 
 ***- Ẩn HOD của phần người dùng
 ///- Sau khi gửi phản hồi quay lại danh sách phản hồi đã gửi . Giáo viên cũng có thể nhìn thấy danh sách phản hồi
+- THêm trường số lượng chỗ trong 1 phòng máy
 - Làm lịch trực 
 - Làm Đổi thông tin người dùng
 
