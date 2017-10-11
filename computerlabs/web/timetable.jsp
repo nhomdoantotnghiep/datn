@@ -12,7 +12,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@page import="java.util.List"%>  
 
-
+<%
+    int shiftType = 1;
+    if (request.getParameter("shiftType") != null) {
+        shiftType = Integer.parseInt(request.getParameter("shiftType"));
+    }
+    int checked = 1;
+    if (request.getParameter("roomid") != null) {
+        checked = Integer.parseInt(request.getParameter("roomid"));
+    }    
+%>
 <link rel="stylesheet" href="css/jquery-ui.css" />
 <link rel="stylesheet" href="css/contentcss.css" />
 <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
@@ -41,7 +50,7 @@
     function BASIC_SelectItem()
     {
         var c_value = "";
-        ;
+        
         for (var i = 0; i < document.test.chk.length; i++)
 
         {
@@ -205,19 +214,14 @@
 
 <%
     List pageNumbers = (List) session.getAttribute("pages");
+    
 %>  
 
 <form action="../updateSchedule" name="test" id="test" method="post">
     <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
         <tr >
 
-            <td style="height: 50px;" colspan="9" align="right" >
-                <%
-                    int shiftType = 1;
-                    if (request.getParameter("shiftType") != null) {
-                        shiftType = Integer.parseInt(request.getParameter("shiftType"));
-                    }
-                %>                        
+            <td style="height: 50px;" colspan="9" align="right" >                       
                 <select name="shiftType" style="width: 150px;height: 25px;">
 
                     <option value="1" <%=shiftType == 1 ? "selected" : ""%> >Morning Shift</option>
@@ -235,10 +239,7 @@
                             st = cnn.createStatement();
                             rs = st.executeQuery(sql);
                             while (rs.next()) {
-                                int checked = 1;
-                                if (request.getParameter("roomid") != null) {
-                                    checked = Integer.parseInt(request.getParameter("roomid"));
-                                }
+                                
                                 int roomID = rs.getInt("roomID");
                                 if (checked == roomID) {
                     %>           
@@ -547,7 +548,7 @@
         </tr>  
 
         <tr bgcolor="#78bbe3" >
-            <td class="td-show" style="color: white;" width="100px" height="50px" align="center">Shift Name / Date</td>
+            <td class="td-show" style="color: white;" width="100px" height="50px" align="center">Shift Name<br />/Date</td>
             <%
                 Connection cnn2 = null;
                 Statement st2 = null;
