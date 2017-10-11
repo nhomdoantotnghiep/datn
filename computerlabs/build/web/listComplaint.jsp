@@ -135,8 +135,58 @@
 
         <form action="updateStatus" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0"  width="950px" align="center">  
+                <tr >
 
-
+                    <td colspan="4" style="height: 30px" >
+                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        <select name="status">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="3">Status ALL</option>
+                            <option selected="selected" value="0">Process</option>
+                            <option value="1">Processing</option>
+                            <option value="2">Processed</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="3">Status ALL</option>
+                            <option  value="0">Process</option>
+                            <option selected="selected" value="1">Processing</option>
+                            <option value="2">Processed</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
+                            %>
+                            <option value="3">Status ALL</option>
+                            <option  value="0">Process</option>
+                            <option value="1">Processing</option>
+                            <option selected="selected"  value="2">Processed</option>
+                            <%
+                            } else {
+                            %>
+                            <option value="3">Status ALL</option>
+                            <option  value="0">Process</option>
+                            <option value="1">Processing</option>
+                            <option  value="2">Processed</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="3">Status ALL</option>
+                            <option  value="0">Process</option>
+                            <option value="1">Processing</option>
+                            <option  value="2">Processed</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                        <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
+                    </td>
+                </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center"> 
                 <tr>  
 
                     <td colspan="4" align="right">  
@@ -299,58 +349,8 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
-
-                    <td colspan="4" style="height: 30px" >
-                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
-                        <select name="status">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="3">Status ALL</option>
-                            <option selected="selected" value="0">Process</option>
-                            <option value="1">Processing</option>
-                            <option value="2">Processed</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="3">Status ALL</option>
-                            <option  value="0">Process</option>
-                            <option selected="selected" value="1">Processing</option>
-                            <option value="2">Processed</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
-                            %>
-                            <option value="3">Status ALL</option>
-                            <option  value="0">Process</option>
-                            <option value="1">Processing</option>
-                            <option selected="selected"  value="2">Processed</option>
-                            <%
-                            } else {
-                            %>
-                            <option value="3">Status ALL</option>
-                            <option  value="0">Process</option>
-                            <option value="1">Processing</option>
-                            <option  value="2">Processed</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="3">Status ALL</option>
-                            <option  value="0">Process</option>
-                            <option value="1">Processing</option>
-                            <option  value="2">Processed</option>
-                            <%
-                                }
-                            %>
-                        </select>
-                        <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
-                    </td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center">  
+                
+ 
                 <tr bgcolor="#78bbe3" >
 
                     <td class="td-show" style="color:#ffffff;" width="250px" align="center">Type name</td>

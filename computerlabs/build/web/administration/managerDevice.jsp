@@ -148,7 +148,149 @@
 
         <form action="../deleteDe" name="test" id="test" method="post">
             <table cellpadding="1px" border="0" cellspacing="1px"  width="950px" align="center">  
+                <tr >
+                    <td style="height: 30px;width: 30px" >
+                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
+                    </td>
+                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("name") == null ? "" : request.getParameter("name")%>" name="txtSearchName" type="text" placeholder="Search by Device"  /></td>
+                    <td style="height: 30px">
+                        <select name="status">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option selected="selected" value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option selected="selected" value="1">Show</option>
+                            <%
+                            } else {
+                            %>
+                            <option selected="selected" value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option  value="1">Show</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <select name="roomID">
+                            <%
+                                Connection cnn = null;
+                                Statement st = null;
+                                ResultSet rs = null;
+                                String sql = "select * from tbl_labroom ";
+                                cnn = dbconnect.Connect();
+                                try {
+                                    st = cnn.createStatement();
+                                    rs = st.executeQuery(sql);
+                                    while (rs.next()) {
+                                        int rsID = rs.getInt("roomID");
+                                        String rsName = rs.getString("roomName");
+                                        checkExits check = new checkExits();
+                                        if (check.checkExit("tbl_device", "roomID", rsID) > 0) {
+                                            if (request.getAttribute("RoomSelected") != null) {
+                                                if (rsID == Integer.parseInt(request.getAttribute("RoomSelected").toString().trim())) {
+                            %>
+                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                            } else {
+                            %>
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                }
+                            } else {
+                            %>
 
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                            }
+                                        }
+                                    }
+
+                                } catch (Exception ex) {
+
+                                } finally {
+                                    try {
+                                        rs.close();
+                                        st.close();
+                                        cnn.close();
+                                    } catch (Exception ex1) {
+
+                                    }
+                                }
+
+                            %>
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <select name="cateID">
+                            <option value="0">ALL Category</option>
+                            <%                            Connection cnn1 = null;
+                                Statement st1 = null;
+                                ResultSet rs1 = null;
+                                String sql1 = "select * from tbl_category ";
+                                cnn1 = dbconnect.Connect();
+                                try {
+                                    st1 = cnn1.createStatement();
+                                    rs1 = st1.executeQuery(sql1);
+                                    while (rs1.next()) {
+                                        int rsID = rs1.getInt("cateID");
+                                        String rsName = rs1.getString("cateName");
+                                        checkExits check = new checkExits();
+                                        if (check.checkExit("tbl_device", "cateID", rsID) > 0) {
+                                            if (request.getAttribute("CateSelected") != null) {
+                                                if (rsID == Integer.parseInt(request.getAttribute("CateSelected").toString().trim())) {
+                            %>
+                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                            } else {
+                            %>
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                }
+                            } else {
+                            %>
+
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                            }
+                                        }
+                                    }
+                                } catch (Exception ex) {
+
+                                } finally {
+                                    try {
+                                        rs1.close();
+                                        st1.close();
+                                        cnn1.close();
+                                    } catch (Exception ex1) {
+
+                                    }
+                                }
+                            %>
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <input type="button" onclick="Search();" value="Search"/>
+                    </td>
+                    <td style="height: 30px;" colspan="3"></td>
+                </tr>  
+            </table>
+            <table cellpadding="1px" border="0" cellspacing="1px" id="fcuk" width="950px" align="center">  
                
                 <tr>  
                     <td colspan="2" align="center"><a class="button_example" href="?options=CreateDevice">Create Device</a>  </td>
@@ -312,149 +454,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>   
-                <tr >
-                    <td style="height: 30px;width: 30px" >
-                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
-                    </td>
-                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("name") == null ? "" : request.getParameter("name")%>" name="txtSearchName" type="text" placeholder="Search by Device"  /></td>
-                    <td style="height: 30px">
-                        <select name="status">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option selected="selected" value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option selected="selected" value="1">Show</option>
-                            <%
-                            } else {
-                            %>
-                            <option selected="selected" value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option  value="1">Show</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                                }
-                            %>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <select name="roomID">
-                            <%
-                                Connection cnn = null;
-                                Statement st = null;
-                                ResultSet rs = null;
-                                String sql = "select * from tbl_labroom ";
-                                cnn = dbconnect.Connect();
-                                try {
-                                    st = cnn.createStatement();
-                                    rs = st.executeQuery(sql);
-                                    while (rs.next()) {
-                                        int rsID = rs.getInt("roomID");
-                                        String rsName = rs.getString("roomName");
-                                        checkExits check = new checkExits();
-                                        if (check.checkExit("tbl_device", "roomID", rsID) > 0) {
-                                            if (request.getAttribute("RoomSelected") != null) {
-                                                if (rsID == Integer.parseInt(request.getAttribute("RoomSelected").toString().trim())) {
-                            %>
-                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                            } else {
-                            %>
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                }
-                            } else {
-                            %>
 
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                            }
-                                        }
-                                    }
-
-                                } catch (Exception ex) {
-
-                                } finally {
-                                    try {
-                                        rs.close();
-                                        st.close();
-                                        cnn.close();
-                                    } catch (Exception ex1) {
-
-                                    }
-                                }
-
-                            %>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <select name="cateID">
-                            <option value="0">ALL Category</option>
-                            <%                            Connection cnn1 = null;
-                                Statement st1 = null;
-                                ResultSet rs1 = null;
-                                String sql1 = "select * from tbl_category ";
-                                cnn1 = dbconnect.Connect();
-                                try {
-                                    st1 = cnn1.createStatement();
-                                    rs1 = st1.executeQuery(sql1);
-                                    while (rs1.next()) {
-                                        int rsID = rs1.getInt("cateID");
-                                        String rsName = rs1.getString("cateName");
-                                        checkExits check = new checkExits();
-                                        if (check.checkExit("tbl_device", "cateID", rsID) > 0) {
-                                            if (request.getAttribute("CateSelected") != null) {
-                                                if (rsID == Integer.parseInt(request.getAttribute("CateSelected").toString().trim())) {
-                            %>
-                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                            } else {
-                            %>
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                }
-                            } else {
-                            %>
-
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                            }
-                                        }
-                                    }
-                                } catch (Exception ex) {
-
-                                } finally {
-                                    try {
-                                        rs1.close();
-                                        st1.close();
-                                        cnn1.close();
-                                    } catch (Exception ex1) {
-
-                                    }
-                                }
-                            %>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <input type="button" onclick="Search();" value="Search"/>
-                    </td>
-                    <td style="height: 30px;" colspan="3"></td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" border="0" cellspacing="1px" id="fcuk" width="950px" align="center">  
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="50px" align="center">ID</td>
                     <td class="td-show" width="200px" align="center">Device name</td>

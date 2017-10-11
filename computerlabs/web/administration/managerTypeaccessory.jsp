@@ -188,7 +188,47 @@
 
         <form action="../processType" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0"  width="850px" align="center">  
+                <tr >
 
+                    <td colspan="4" style="height: 30px" >
+                        <input id="typeName" value="<%=request.getParameter("typeName")==null?"":request.getParameter("typeName") %>" name="typeName" type="text" placeholder="Search by Type Accessory"  />
+                        <select name="status">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option selected="selected" value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option selected="selected" value="1">Show</option>
+                            <%
+                            } else {
+                            %>
+                            <option selected="selected" value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option  value="1">Show</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                        <input type="button" class="button_example" onclick="Search();" value="Search"/>
+                        <a href="?options=ManagerTypeAccessory&actCreate=Create" class="button_example">Create Type Accessory</a>
+                    </td>
+                </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center"> 
 
                 <tr>  
 
@@ -352,47 +392,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
 
-                    <td colspan="4" style="height: 30px" >
-                        <input id="typeName" value="<%=request.getParameter("typeName")==null?"":request.getParameter("typeName") %>" name="typeName" type="text" placeholder="Search by Type Accessory"  />
-                        <select name="status">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option selected="selected" value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option selected="selected" value="1">Show</option>
-                            <%
-                            } else {
-                            %>
-                            <option selected="selected" value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option  value="1">Show</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                                }
-                            %>
-                        </select>
-                        <input type="button" class="button_example" onclick="Search();" value="Search"/>
-                        <a href="?options=ManagerTypeAccessory&actCreate=Create" class="button_example">Create Type Accessory</a>
-                    </td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center"> 
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="80px" align="center">ID</td>
                     <td class="td-show" width="450px" align="center">Type name</td>

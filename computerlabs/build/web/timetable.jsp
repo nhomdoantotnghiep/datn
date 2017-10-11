@@ -245,7 +245,7 @@
 %>  
 
 <form action="../updateSchedule" name="test" id="test" method="post">
-    <table cellpadding="1px" cellspacing="1px" id="fcuk1" width="950px" align="center"> 
+    <table cellpadding="1px" cellspacing="1px" width="950px" align="center"> 
         <%
         
         %>
@@ -300,6 +300,8 @@
             </td>
 
         </tr> 
+    </table>
+    <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
         <tr> 
 
             <td colspan="8" align="right">  
@@ -577,8 +579,7 @@
                 <!-- </form>   -->
             </td>  
         </tr>  
-    </table>
-    <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
+
         <tr bgcolor="#78bbe3" >
             <td class="td-show" style="color: white;" width="100px" height="50px" align="center">Shift Name<br />/Date</td>
             <%

@@ -4,8 +4,9 @@ Kỹ thuật : có nhiệm vụ giải quyết phản hồi
 Sinh viên : Có nhiệm vụ đăng ký phòng lab
 
 
-- Sau khi gửi phản hồi quay lại danh sách phản hồi đã gửi . Giáo viên cũng có thể nhìn thấy danh sách phản hồi
-- Sửa lại phân trang các trang ajax 
+***- Sửa lại phân trang các trang ajax 
+***- Ẩn HOD của phần người dùng
+///- Sau khi gửi phản hồi quay lại danh sách phản hồi đã gửi . Giáo viên cũng có thể nhìn thấy danh sách phản hồi
 - Làm lịch trực 
-- Đổi thông tin người dùng
-- Ẩn HOD của phần người dùng
+- Làm Đổi thông tin người dùng
+

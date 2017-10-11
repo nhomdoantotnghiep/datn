@@ -34,46 +34,75 @@ public class updateStatusAccount extends HttpServlet {
         PrintWriter out = response.getWriter();
         int userID = 0;
         int statusUser = 0;
-        int departID = 0;
-        int HOD = 0;
+        String addressStr = "";
+        String fullNameStr = "";
+        String emailStr = "";
+        String username ="";
         try {
             userID = Integer.parseInt(request.getParameter("ID").toString().trim());
             String nameStatus = "statusUser" + userID;
+            
+            username = request.getParameter("usernameU"+userID);
+            
             statusUser = Integer.parseInt(request.getParameter(nameStatus));
-            String nameDepart = "department" + userID;
-            departID = Integer.parseInt(request.getParameter(nameDepart));
-            String nameHOD = "HOD" + userID;
-            HOD = Integer.parseInt(request.getParameter(nameHOD));
+            String address = "addressU" + userID;
+            addressStr = request.getParameter(address);
+//            String nameHOD = "HOD" + userID;
+//            HOD = Integer.parseInt(request.getParameter(nameHOD));
+            String fullName = "txtUFullName" + userID;
+            fullNameStr = request.getParameter(fullName);
+            String email = "txtUEmail" + userID;
+            emailStr = request.getParameter(email);
         } catch (Exception ex1) {
 
         }
-        Connection cnn = dbconnect.Connect();
-        PreparedStatement pst = null;
-        String sql = "update tbl_user set [status]=?,departmentID=?,HOD=? where userID=?";
-        try {
-            pst = cnn.prepareStatement(sql);
-            pst.setInt(1, statusUser);
-            pst.setInt(2, departID);
-            pst.setInt(3, HOD);
-            pst.setInt(4, userID);
-            int row = pst.executeUpdate();
-            if (row > 0) {
-
-                out.println("<div class=\"style-result\">Update Successfull!</div>");
-
-            } else {
-                out.println("<div class=\"style-result\">Update fail!</div>");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(updateStatusAccount.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        boolean check = true;
+        int fail = 0;
+        if(!(addressStr != null && addressStr.trim().length() > 0)){
+            fail = fail+1;
+        }
+        if(!(fullNameStr != null && fullNameStr.trim().length() > 0)){
+            fail = fail+1;
+        }
+        if(!(emailStr != null && emailStr.trim().length() > 0)){
+            fail = fail+1;
+        }
+        if(fail > 0){
+            check = false;
+        }
+        if(check){
+            Connection cnn = dbconnect.Connect();
+            PreparedStatement pst = null;
+            String sql = "update tbl_user set [status]=?,address=?,fullname=?,email=? where userID=?";
             try {
-                pst.close();
-                cnn.close();
+                pst = cnn.prepareStatement(sql);
+                pst.setInt(1, statusUser);
+                pst.setString(2, addressStr);
+                pst.setString(3, fullNameStr);
+                pst.setString(4, emailStr);
+                pst.setInt(5, userID);
+                int row = pst.executeUpdate();
+                if (row > 0) {
+
+                    out.println("<div class=\"style-result\">Update Successfull - User name: "+username+" !</div>");
+
+                } else {
+                    out.println("<div class=\"style-result-fail\">Update fail - User name: "+username+" !</div>");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(updateStatusAccount.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    pst.close();
+                    cnn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(updateStatusAccount.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        }else{
+            out.println("<div class=\"style-result-fail\">Validate your input - User name: "+username+" !</div>");
         }
+        
     }
 
     @Override

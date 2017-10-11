@@ -135,9 +135,9 @@ public class showUser extends HttpServlet {
         if (!department.trim().equalsIgnoreCase("ALL")) {
             sql += " and departmentID=" + department;
         }
-        if (!HOD.trim().equalsIgnoreCase("ALL")) {
-            sql += " and HOD=" + HOD;
-        }
+//        if (!HOD.trim().equalsIgnoreCase("ALL")) {
+//            sql += " and HOD=" + HOD;
+//        }
         sql += " order by userID,departmentID desc";
         String connectionURL = "jdbc:odbc:sem4";
 
@@ -149,7 +149,7 @@ public class showUser extends HttpServlet {
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 list.add(new classUser(rs.getInt("userID"), rs.getString("username"), rs.getString("fullname"),
-                        rs.getInt("gender"), rs.getDate("birthday").toString(), rs.getInt("status"), rs.getInt("departmentID"), rs.getInt("HOD")));
+                        rs.getInt("gender"), rs.getDate("birthday").toString(), rs.getInt("status"), rs.getInt("departmentID"), rs.getInt("HOD"),rs.getString("email"),rs.getString("address")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -108,7 +108,7 @@ background: url('img/login-pwd.png');
                         <td>  
                             <table class="lable-input">
                                 <tr>
-                                    <td class="lable-td"><input type="checkbox" name="remember" id="remember" />&nbsp;&nbsp;Remember Me</td>
+                                    <!--<td class="lable-td"><input type="checkbox" name="remember" id="remember" />&nbsp;&nbsp;Remember Me</td>-->
                                     <td align="right"><input type="submit" value="Login" class="myButton"  /></td>
                                 </tr>
                             </table>

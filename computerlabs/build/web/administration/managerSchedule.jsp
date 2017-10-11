@@ -294,6 +294,8 @@
                         <input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
                     </td>
                 </tr> 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr> 
                     <td align="center" colspan="3">
                         <a class="button_example" href="?options=CreateSchedule">Create Schedule</a>
@@ -562,8 +564,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
+
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="100px" height="50px" align="center">Shift Name/<br />Date</td>
                     <%

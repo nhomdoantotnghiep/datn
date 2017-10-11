@@ -9,6 +9,7 @@ import computerlabs.dbconnect;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -149,13 +150,16 @@ public class sendComplaint extends HttpServlet {
 
     private int CreateComplaint(int userID,String title) {
         Connection cnn = null;
-        Statement st = null;
+        PreparedStatement pst = null;
         SimpleDateFormat formater=new SimpleDateFormat("yyyy/MM/dd");
-        String sql = "insert into tbl_complaint(userSend,status,datesend,title) values(" + userID + ",0,'"+formater.format(new Date())+"','"+title+"')";
+        String sql = "insert into tbl_complaint(userSend,status,datesend,title) values(?,0,?,?)";
         cnn = dbconnect.Connect();
         try {
-            st = cnn.createStatement();
-            int row = st.executeUpdate(sql);
+            pst = cnn.prepareStatement(sql);
+            pst.setInt(1, userID);
+            pst.setString(2, formater.format(new Date()));
+            pst.setString(3, title);
+            int row = pst.executeUpdate();
             if (row > 0) {
                 return 1;
             } else {
@@ -166,7 +170,7 @@ public class sendComplaint extends HttpServlet {
             return 0;
         } finally {
             try {
-                st.close();
+                pst.close();
                 cnn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(sendComplaint.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,12 +180,15 @@ public class sendComplaint extends HttpServlet {
     }
 private int CreateComplaintDetails(int complaintID,int dID,String content) {
         Connection cnn = null;
-        Statement st = null;
-        String sql = "insert into tbl_complaint_device values(" + complaintID + ","+dID+",'"+content+"')";
+        PreparedStatement pst = null;
+        String sql = "insert into tbl_complaint_device values(?,?,?)";
         cnn = dbconnect.Connect();
         try {
-            st = cnn.createStatement();
-            int row = st.executeUpdate(sql);
+            pst = cnn.prepareStatement(sql);
+            pst.setInt(1, complaintID);
+            pst.setInt(2, dID);
+            pst.setString(3, content);
+            int row = pst.executeUpdate();
             if (row > 0) {
                 return 1;
             } else {
@@ -192,7 +199,7 @@ private int CreateComplaintDetails(int complaintID,int dID,String content) {
             return 0;
         } finally {
             try {
-                st.close();
+                pst.close();
                 cnn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(sendComplaint.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,6 +5,13 @@
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+
+
+<link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+<link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+<script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
+<script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+<script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
 <script type="text/javascript">
     $(document).ready(function() {
         //called when key is pressed in textbox
@@ -32,12 +39,6 @@
     }
 
 </script>
-
-<link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-<link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-<script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-<script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-<script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
 <script>jQuery(document).ready(function() {
         // binds form submission and fields to the validation engine 
         jQuery("#test").validationEngine();
@@ -50,15 +51,16 @@
             <td style="width: 90px;color: white;" align="center">Shift Name</td>
             <td style="width: 120px;color: white;" align="center">Start Time</td>
             <td style="width: 120px;color: white;" align="center">End Time</td>
-            <td style="width: 120px;color: white;" align="center">Status</td>
-            <td style="width: 120px;color: white;" align="center">Action</td>
+            <td style="width: 60px;color: white;" align="center">Status</td>
+            <td style="width: 80px;color: white;" align="center">Shift Type</td>
+            <td style="width: 100px;color: white;" align="center">Action</td>
         </tr>
 
         <%
             Connection cnn = null;
             Statement st = null;
             ResultSet rs = null;
-            String sql = "select * from tbl_shiftname where shiftID!=7";
+            String sql = "select * from tbl_shiftname where status=1";
             cnn = dbconnect.Connect();
             st = cnn.createStatement();
             rs = st.executeQuery(sql);
@@ -69,6 +71,7 @@
                 String endTime = rs.getTime("endtime").toString().substring(0, 5);
                 String sName = rs.getString("shiftname");
                 int status = rs.getInt("status");
+                int shiftType = rs.getInt("shiftType");
                 cnt = cnt + 1;
                 if (cnt % 2 == 0) {
         %>
@@ -112,6 +115,17 @@
                         out.println("Show");
                     } else {
                         out.println("Hide");
+                    }
+                %>
+            </td>
+            <td align="center" style="background: #e7f5fe;height:30px; ">
+                <%
+                    if (shiftType == 1) {
+                        out.println("Morning Shift");
+                    } else if (shiftType == 2){
+                        out.println("Outgoing Shift");
+                    } else if (shiftType == 3){
+                        out.println("Night Shift");
                     }
                 %>
             </td>
@@ -179,6 +193,17 @@
                         out.println("Show");
                     } else {
                         out.println("Hide");
+                    }
+                %>
+            </td>
+            <td align="center" >
+                <%
+                    if (shiftType == 1) {
+                        out.println("Morning Shift");
+                    } else if (shiftType == 2){
+                        out.println("Outgoing Shift");
+                    } else if (shiftType == 3){
+                        out.println("Night Shift");
                     }
                 %>
             </td>

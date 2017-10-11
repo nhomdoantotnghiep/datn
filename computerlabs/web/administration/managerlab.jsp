@@ -189,8 +189,48 @@
 
         <form action="../processLab" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0" width="850px" align="center">  
+                <tr >
 
-
+                    <td colspan="8" style="height: 30px" >
+                        <input id="roomName" value="<%=request.getParameter("roomName") == null ? "" : request.getParameter("roomName")%>" name="roomName" type="text" placeholder="Search by Room Name"  />
+                        <select name="status">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option selected="selected" value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option selected="selected" value="1">Show</option>
+                            <%
+                            } else {
+                            %>
+                            <option selected="selected" value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option  value="1">Show</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                        <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
+                        <a href="?options=ManagerLab&actCreate=Create" class="button_example">Create Labroom</a>
+                    </td>
+                </tr> 
+                 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">
                 <tr>  
 
                     <td colspan="8" align="right">  
@@ -353,47 +393,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
 
-                    <td colspan="8" style="height: 30px" >
-                        <input id="roomName" value="<%=request.getParameter("roomName") == null ? "" : request.getParameter("roomName")%>" name="roomName" type="text" placeholder="Search by Room Name"  />
-                        <select name="status">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option selected="selected" value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option selected="selected" value="1">Show</option>
-                            <%
-                            } else {
-                            %>
-                            <option selected="selected" value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option  value="1">Show</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                                }
-                            %>
-                        </select>
-                        <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
-                        <a href="?options=ManagerLab&actCreate=Create" class="button_example">Create Labroom</a>
-                    </td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="50px" align="center">ID</td>
                     <td class="td-show" width="170px" align="center">Room name</td>

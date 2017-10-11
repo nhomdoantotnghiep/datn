@@ -83,7 +83,7 @@ public class NewServlet extends HttpServlet {
             while(rs.next()){
                  list.add(new classUser(rs.getInt("userID"),rs.getString("username"),rs.getString("fullname"),
                          rs.getInt("gender"),rs.getDate("birthday").toString()
-                         ,rs.getInt("status"),rs.getInt("departmentID"),rs.getInt("HOD")));  
+                         ,rs.getInt("status"),rs.getInt("departmentID"),rs.getInt("HOD"),rs.getString("email"),rs.getString("address")));  
             }
         } catch (SQLException ex) {
             Logger.getLogger(NewServlet.class.getName()).log(Level.SEVERE, null, ex);

@@ -19,6 +19,24 @@ public class classUser implements Serializable {
     private String status;  
     private String departmentID;  
     private String HOD;  
+    private String email;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     
     public int getId() {
@@ -87,7 +105,7 @@ public class classUser implements Serializable {
     
   
     public classUser(int id,String username, String fullname, int gender,  
-            String birthday,int status,int departmentID,int HOD) {  
+            String birthday,int status,int departmentID,int HOD, String email,String address) {  
          this.id=id;
             this.username=username;
             this.fullname=fullname;         
@@ -121,6 +139,8 @@ public class classUser implements Serializable {
             else{
                 this.HOD="---";
             }
+            this.email = email;
+            this.address = address;
     }  
 
 }

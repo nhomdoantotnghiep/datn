@@ -113,10 +113,10 @@ public class createuser extends HttpServlet {
         String department = request.getParameter("department");
         //HOD
         String hod = request.getParameter("rsCheckbox");
-        int statusHOD = 0;
-        if (hod.equalsIgnoreCase("checked")) {
-            statusHOD = 1;
-        }
+        int statusHOD = 1;
+        //if (hod.equalsIgnoreCase("checked")) {
+        //    statusHOD = 1;
+        //}
         //
         boolean check = true;
         if (usename.equalsIgnoreCase("") || txtEmail.equalsIgnoreCase("") || txtpwd.equalsIgnoreCase("") || txtfullname.equalsIgnoreCase("") || txtAddress.equalsIgnoreCase("")) {

@@ -69,6 +69,7 @@
                 <tr>
                     <td colspan="2" align="center">
                         <input type="submit" class="button_example" value="Send Complaint" />
+                        &nbsp;&nbsp;<input type="button" onclick="window.location.href = '?option=roomlab'" class="button_example" value="Back" />
                     </td>
                 </tr>
                 <tr>

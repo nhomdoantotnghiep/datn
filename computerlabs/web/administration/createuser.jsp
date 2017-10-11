@@ -12,31 +12,39 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script>
+
+       
+
+        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+        <script>jQuery(document).ready(function() {
+                // binds form submission and fields to the validation engine 
+                jQuery("#ajaxform").validationEngine();
+            });</script>
+         <script>
             function BASIC_SelectItem()
             {
-                var isOK = false;
-                if (document.ajaxform.chk.checked)
+                //var isOK = true;
+                /*if (document.ajaxform.chk.checked)
                 {
                     isOK = true;
-                }
-                if (isOK == true) {
+                }*/
+                document.ajaxform.rsCheckbox.value = 'checked';
+                /*if (isOK == true) {
                     document.ajaxform.rsCheckbox.value = 'checked';
                 }
                 else {
                     document.ajaxform.rsCheckbox.value = 'nochecked';
-                }
+                }*/
             }
 
 
         </script>
 
-        <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+        
         <script type="text/javascript">
             $(document).ready(function() {
                 //called when key is pressed in textbox
@@ -64,20 +72,8 @@
             }
 
         </script>
-
-        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script>jQuery(document).ready(function() {
-                // binds form submission and fields to the validation engine 
-                jQuery("#ajaxform").validationEngine();
-            });</script>
             <%--check username--%>
 
-    </head>
-    <body>
         <form id='ajaxform' name='ajaxform' action='../createuser' method='post'>
             <table width="500px" border="0" align="center" cellpadding="7px" cellspacing="0">
                 <tr>
@@ -145,7 +141,7 @@
                             <div class="site-input-left"><img src="../img/mail.png"/></div>
                             <div class="site-input-rigth">
                                 <input placeholder="Please enter email..." id="txtEmail" style="width:395px; height:26px; border:0px solid #d1d1d1;-moz-border-radius: 5px;
-                                       -webkit-border-radius: 5px;" name="txtEmail"  type="text" class="validate[required,custom[email] text-input" />
+                                       -webkit-border-radius: 5px;" name="txtEmail"  type="text" class="validate[required,custom[email]] text-input" />
                             </div>
                         </div>
                     </td>
@@ -242,7 +238,7 @@
                                 }
                             %>
                         </select>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chk" onclick="BASIC_SelectItem();" value="5" />&nbsp;Head of Department 
+                        <!--&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="chk" onclick="BASIC_SelectItem();" value="5" />&nbsp;Head of Department -->
                         <input type="text" name="rsCheckbox" id="rsCheckbox" style="visibility: hidden" value=""/>
                     </td>
                 </tr>
@@ -274,5 +270,3 @@
 
                 return false;
             }); </script>
-    </body>
-</html>

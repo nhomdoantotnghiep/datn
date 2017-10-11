@@ -199,6 +199,91 @@
 
         <form action="../processAccess" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0"  width="850px" align="center">  
+                <tr >
+
+                    <td colspan="6" style="height: 30px" >
+                        <input id="accessName" value="<%=request.getParameter("accessName") == null ? "" : request.getParameter("accessName")%>" name="accessName" type="text" placeholder="Search by Accessory"  />
+                        <select name="typeName">
+                            <option value="0">ALL Type Access</option>
+                            <%
+                                Connection cnn = null;
+                                Statement st = null;
+                                ResultSet rs = null;
+                                String sql = "select * from tbl_type_accessory";
+                                cnn = dbconnect.Connect();
+                                try {
+                                    st = cnn.createStatement();
+                                    rs = st.executeQuery(sql);
+                                    while (rs.next()) {
+                                        int rsID = rs.getInt("typeID");
+                                        String rsName = rs.getString("type_accessory");
+                                        if (request.getAttribute("typeSelected") != null) {
+                                            if (rsID == Integer.parseInt(request.getAttribute("typeSelected").toString().trim())) {
+                            %>
+                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                            } else {
+                            %>
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                }
+                            } else {
+                            %>
+
+                            <option value="<%=rsID%>"><%=rsName%></option>
+                            <%
+                                        }
+                                    }
+                                } catch (Exception ex) {
+
+                                } finally {
+                                    try {
+                                        rs.close();
+                                        st.close();
+                                        cnn.close();
+                                    } catch (Exception ex1) {
+
+                                    }
+                                }
+                            %>
+                        </select>
+                        <select name="status">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option selected="selected" value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option selected="selected" value="1">Show</option>
+                            <%
+                            } else {
+                            %>
+                            <option selected="selected" value="2">Status ALL</option>
+                            <option  value="0">Hide</option>
+                            <option  value="1">Show</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="2">Status ALL</option>
+                            <option value="0">Hide</option>
+                            <option value="1">Show</option>
+                            <%
+                                }
+                            %>
+                        </select>
+                        <input type="button" class="button_example" onclick="Search();" value="Search"/>
+                        <a href="?options=ManagerAccessory&actCreate=Create" class="button_example">Create Accessory</a>
+                    </td>
+                </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">
                 <tr>  
 
                     <td colspan="6" align="right">  
@@ -361,91 +446,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
-
-                    <td colspan="6" style="height: 30px" >
-                        <input id="accessName" value="<%=request.getParameter("accessName") == null ? "" : request.getParameter("accessName")%>" name="accessName" type="text" placeholder="Search by Accessory"  />
-                        <select name="typeName">
-                            <option value="0">ALL Type Access</option>
-                            <%
-                                Connection cnn = null;
-                                Statement st = null;
-                                ResultSet rs = null;
-                                String sql = "select * from tbl_type_accessory";
-                                cnn = dbconnect.Connect();
-                                try {
-                                    st = cnn.createStatement();
-                                    rs = st.executeQuery(sql);
-                                    while (rs.next()) {
-                                        int rsID = rs.getInt("typeID");
-                                        String rsName = rs.getString("type_accessory");
-                                        if (request.getAttribute("typeSelected") != null) {
-                                            if (rsID == Integer.parseInt(request.getAttribute("typeSelected").toString().trim())) {
-                            %>
-                            <option selected="selected" value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                            } else {
-                            %>
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                }
-                            } else {
-                            %>
-
-                            <option value="<%=rsID%>"><%=rsName%></option>
-                            <%
-                                        }
-                                    }
-                                } catch (Exception ex) {
-
-                                } finally {
-                                    try {
-                                        rs.close();
-                                        st.close();
-                                        cnn.close();
-                                    } catch (Exception ex1) {
-
-                                    }
-                                }
-                            %>
-                        </select>
-                        <select name="status">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option selected="selected" value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option selected="selected" value="1">Show</option>
-                            <%
-                            } else {
-                            %>
-                            <option selected="selected" value="2">Status ALL</option>
-                            <option  value="0">Hide</option>
-                            <option  value="1">Show</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="2">Status ALL</option>
-                            <option value="0">Hide</option>
-                            <option value="1">Show</option>
-                            <%
-                                }
-                            %>
-                        </select>
-                        <input type="button" class="button_example" onclick="Search();" value="Search"/>
-                        <a href="?options=ManagerAccessory&actCreate=Create" class="button_example">Create Accessory</a>
-                    </td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">
+                
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="80px" align="center">ID</td>
                     <td class="td-show" width="225px" align="center">Accessory</td>

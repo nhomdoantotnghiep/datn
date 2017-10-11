@@ -99,11 +99,12 @@
                 v_fullname = document.test.txtFullName.value;
                 v_status = document.test.status.value;
                 v_department = document.test.txtDepartment.value;
-                v_HOD = document.test.HOD.value;
+                //v_HOD = document.test.HOD.value;
                 new setXMLHttpRe();
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showUser?user=" + v_user + "&fullname=" + v_fullname + "&status=" + v_status + "&department=" + v_department + "&hod=" + v_HOD, true);// chú ý
+                    //xmlHttpRe.open("GET", "../showUser?user=" + v_user + "&fullname=" + v_fullname + "&status=" + v_status + "&department=" + v_department + "&hod=" + v_HOD, true);// chú ý
+                    xmlHttpRe.open("GET", "../showUser?user=" + v_user + "&fullname=" + v_fullname + "&status=" + v_status + "&department=" + v_department, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -139,8 +140,42 @@
 
         <form action="../updateStatusAccount" name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" width="950px" align="center">  
+                <tr >
+                    <td style="height: 30px;width: 30px" >
+                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
+                    </td>
+                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("user") == null ? "" : request.getParameter("user")%>" name="txtSearchName" type="text" placeholder="Search by Username"  /></td>
+                    <td style="height: 30px" ><input id="txtFullName" value="<%=request.getParameter("fullname") == null ? "" : request.getParameter("fullname")%>" name="txtFullName" type="text" placeholder="Search by Full Name"  /></td>
+                    <td style="height: 30px" >
+                        <select name="status">
+                            <option value="ALL">Status ALL</option>
+                            <option value="0">Lock</option>
+                            <option value="1">UnLock</option>
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <select name="txtDepartment">
 
-
+                            <option value="ALL">ALL Department</option>
+                            <option value="2">Instructors</option>
+                            <option value="3">Technical   Staff</option>
+                            <option value="4">Students</option>
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <!--<select name="HOD">
+                            <option value="ALL">Status HOD</option>
+                            <option value="1">HOD</option>
+                            <option value="0">Not HOD</option>
+                        </select>-->
+                    </td>
+                    <td style="height: 30px" >
+                        <input type="button" onclick="Search();" value="Search"/>
+                    </td>
+                    <td style="height: 30px;" colspan="3"></td>
+                </tr> 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr>  
                     <td colspan="2" align="center"><a class="button_example" href="?options=CreateUser">Create User</a>  </td>
                     <td colspan="5" align="right">  
@@ -303,50 +338,15 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
-                    <td style="height: 30px;width: 30px" >
-                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
-                    </td>
-                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("user") == null ? "" : request.getParameter("user")%>" name="txtSearchName" type="text" placeholder="Search by Username"  /></td>
-                    <td style="height: 30px" ><input id="txtFullName" value="<%=request.getParameter("fullname") == null ? "" : request.getParameter("fullname")%>" name="txtFullName" type="text" placeholder="Search by Full Name"  /></td>
-                    <td style="height: 30px" >
-                        <select name="status">
-                            <option value="ALL">Status ALL</option>
-                            <option value="0">Lock</option>
-                            <option value="1">UnLock</option>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <select name="txtDepartment">
-
-                            <option value="ALL">ALL Department</option>
-                            <option value="2">Instructors</option>
-                            <option value="3">Technical   Staff</option>
-                            <option value="4">Students</option>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <select name="HOD">
-                            <option value="ALL">Status HOD</option>
-                            <option value="1">HOD</option>
-                            <option value="0">Not HOD</option>
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <input type="button" onclick="Search();" value="Search"/>
-                    </td>
-                    <td style="height: 30px;" colspan="3"></td>
-                </tr>  
-            </table>
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="50px" align="center">ID</td>
-                    <td class="td-show" width="200px" align="center">User name</td>
-                    <td class="td-show" width="180px" align="center">Full name</td>
-                    <td class="td-show" width="70px" align="center">Status</td>
                     <td class="td-show" width="70px" align="center">Department</td>
-                    <td class="td-show" width="100px" align="center">HOD</td>
-                    <td class="td-show" width="120px" align="center" colspan="3" >Action</td>
+                    <td class="td-show" width="180px" align="center">User name</td>
+                    <td class="td-show" width="120px" align="center">Full name</td>
+                    <td class="td-show" width="80px" align="center">Email</td>
+                    <td class="td-show" width="120px" align="center">Address</td>
+                    <td class="td-show" width="70px" align="center">Status</td>
+                    <td class="td-show" width="90px" align="center" colspan="3" >Action</td>
                 </tr>  
                 <%
                     String color = "style='background: #e7f5fe;height:30px'";
@@ -357,12 +357,12 @@
                         classUser studentDetailsDTO = (classUser) list
                                 .get(i);
                         if (i % 2 == 0) {
-                            out.println("<td style='height:30px' align=\"center\">" + studentDetailsDTO.getId()
-                                    + "</td>");
-                            out.println("<td style='height:30px' > " + studentDetailsDTO.getUsername()
-                                    + "</td>");
-                            out.println("<td style='height:30px' >" + studentDetailsDTO.getFullname()
-                                    + "</td>");
+                            out.println("<td style='height:30px' align=\"center\">" + studentDetailsDTO.getId()+ "</td>");
+                            out.println("<td style='height:30px' align=\"center\">" + studentDetailsDTO.getDepartmentID()+ "</td>");
+                            out.println("<td style='height:30px' > <input type='hidden' name='usernameU"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getUsername()+ "'/>" + studentDetailsDTO.getUsername()+ "</td>");
+                            out.println("<td style='height:30px'  ><input type='text' class='validate[required] text-input'  name='txtUFullName"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getFullname()+ "'></input></td>");
+                            out.println("<td style='height:30px'  ><input type='text' class='validate[required,custom[email]] text-input' name='txtUEmail"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getEmail()+ "'></input></td>");
+                            out.println("<td style='height:30px'  ><input type='text' class='validate[required] text-input' name='addressU"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getAddress()+ "'></input></td>");
                     %>
                     <td style='height:30px' align="center">
                         <select name="statusUser<%=studentDetailsDTO.getId()%>" >
@@ -381,7 +381,7 @@
                             %>
                         </select>
                     </td>
-                    <td style="height:30px;" align="center">
+                    <!--<td style="height:30px;" align="center">
                         <select name="department<%=studentDetailsDTO.getId()%>" >
                             <%
                                 if (studentDetailsDTO.getDepartmentID().trim().equalsIgnoreCase("Instructors")) {
@@ -405,8 +405,9 @@
                                 }
                             %>
                         </select>
-                    </td>
-                    <td style="height:30px;" align="center">
+                            <%=studentDetailsDTO.getDepartmentID().trim()%>
+                    </td>-->
+                    <!--<td style="height:30px;" align="center">
                         <select name="HOD<%=studentDetailsDTO.getId()%>" >
                             <%
                                 if (studentDetailsDTO.getHOD().trim().equalsIgnoreCase("HOD")) {
@@ -422,19 +423,19 @@
                                 }
                             %>
                         </select>
-                    </td>
+                    </td>-->
                     <td align='center' ><a href="?options=manageruser&uID=<%=studentDetailsDTO.getId() %>"><img title="View" src="../img/preview.png" width="23px" height="23px" /></a></td>  
                     <td align='center'><input title="Update" type="submit" style="background: url('../img/edit.png');width: 23px;height: 23px;" name="update" onclick="BASIC_SelectItem(<%=studentDetailsDTO.getId()%>)" class="button_img" height="20px" value="" /></td>
                     <td align='center'><input type="button" title="Delete"  name="delete" style="background: url('../img/delete.png');width: 23px;height: 23px;" onclick="deleteUser(<%=studentDetailsDTO.getId()%>)" class="button_img" height="20px" value="" /></td>
                         <%
                             //out.println("<td style='height:30px' align=\"center\"><a href=\"?options=manageruser&id=" + studentDetailsDTO.getId() + "\" title=\"Delete User\"><img src=\"../img/delete.png\" width=\"20px\" height=\"20px\"></a></td>");
                         } else {
-                            out.println("<td " + color + " align=\"center\">" + studentDetailsDTO.getId()
-                                    + "</td>");
-                            out.println("<td " + color + "> " + studentDetailsDTO.getUsername()
-                                    + "</td>");
-                            out.println("<td " + color + " >" + studentDetailsDTO.getFullname()
-                                    + "</td>");
+                            out.println("<td " + color + " align=\"center\">" + studentDetailsDTO.getId()+ "</td>");
+                            out.println("<td " + color + " align=\"center\">" + studentDetailsDTO.getDepartmentID()+ "</td>");
+                            out.println("<td " + color + "> <input type='hidden' name='usernameU"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getUsername()+ "'/> " + studentDetailsDTO.getUsername()+ "</td>");
+                            out.println("<td " + color + " ><input type='text' class='validate[required] text-input' name='txtUFullName"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getFullname()+ "'></input></td>");
+                            out.println("<td " + color + " ><input type='text' class='validate[required,custom[email]] text-input' name='txtUEmail"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getEmail()+ "'></input></td>");
+                            out.println("<td " + color + " ><input type='text' class='validate[required] text-input' name='addressU"+studentDetailsDTO.getId()+"' value='" + studentDetailsDTO.getAddress()+ "'></input></td>");
                         %>
                     <td style="height:30px;background: #e7f5fe;" align="center">
                         <select name="statusUser<%=studentDetailsDTO.getId()%>" >
@@ -453,7 +454,7 @@
                             %>
                         </select>
                     </td>
-                    <td style="height:30px;background: #e7f5fe;" align="center">
+                    <!--<td style="height:30px;background: #e7f5fe;" align="center">
                         <select name="department<%=studentDetailsDTO.getId()%>" >
                             <%
                                 if (studentDetailsDTO.getDepartmentID().trim().equalsIgnoreCase("Instructors")) {
@@ -477,8 +478,8 @@
                                 }
                             %>
                         </select>
-                    </td>
-                    <td style="height:30px;background: #e7f5fe;" align="center">
+                    </td>-->
+                    <!--<td style="height:30px;background: #e7f5fe;" align="center">
                         <select name="HOD<%=studentDetailsDTO.getId()%>" >
                             <%
                                 if (studentDetailsDTO.getHOD().trim().equalsIgnoreCase("HOD")) {
@@ -494,7 +495,7 @@
                                 }
                             %>
                         </select>
-                    </td>
+                    </td>-->
 
                     <td align='center' style="height:30px;background: #e7f5fe;width: 40px;"><a href="?options=manageruser&uID=<%=studentDetailsDTO.getId() %>"><img title="View" src="../img/preview.png" width="23px" height="23px" /></a></td>                   
                     <td align='center' style="height:30px;background: #e7f5fe;width: 40px;"><input title="Update" type="submit" style="background: url('../img/edit.png');width: 23px;height: 23px;" name="update" id="update" onclick="BASIC_SelectItem(<%=studentDetailsDTO.getId()%>)" class="button_img" height="20px" value="" /></td>
@@ -634,10 +635,10 @@
              <td class="td-popup"><div class="td-left-pop">&nbsp;&nbsp;&nbsp;Department:</div></td>
              <td><div class="td-rigth-pop"><%=strDepart %></div></td>
         </tr>
-         <tr>
+         <!--<tr>
              <td class="td-popup"><div class="td-left-pop">&nbsp;&nbsp;&nbsp;HOD:</div></td>
              <td><div class="td-rigth-pop"><%=strHOD %></div></td>
-        </tr>
+        </tr>-->
         <tr>
             <td class="td-popup"><div class="td-left-pop">&nbsp;&nbsp;&nbsp;Status:</div></td>
             <td><div class="td-rigth-pop"><%=strStatus %></div></td>

@@ -132,7 +132,65 @@
 
         <form id='ajaxform' name='ajaxform' action='../updateRequest' method='post'>
             <table cellpadding="1px" cellspacing="1px" width="950px" align="center">  
-                 
+                <tr >
+                    <td style="height: 30px;width: 30px" >
+                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
+                    </td>
+                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("user") == null ? "" : request.getParameter("user")%>" name="txtSearchName" type="text" placeholder="Search by Username"  /></td>
+                    <td style="height: 30px" ><input id="txtFullName" value="<%=request.getParameter("fullname") == null ? "" : request.getParameter("fullname")%>" name="txtFullName" type="text" placeholder="Search by Full Name"  /></td>
+                    <td style="height: 30px" ><input id="txtClassName" value="<%=request.getParameter("classname") == null ? "" : request.getParameter("classname")%>" name="txtClassName" type="text" placeholder="Search by Class Name"  /></td>
+                    <td style="height: 30px" >
+                        <select name="searchstatus">
+                            <%
+                                if (request.getAttribute("statusSelected") != null) {
+                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
+                            %>
+                            <option value="3" >ALL</option>
+                            <option value="0" selected="selected" >Waiting</option>
+                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="2" >Approved</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
+                            %>
+                            <option value="3" >ALL</option>
+                            <option value="0" >Waiting</option>
+                            <option selected="selected"  value="1" >Dissatisfactory</option>
+                            <option  value="2" >Approved</option>
+                            <%
+                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
+                            %>
+                            <option value="3" >ALL</option>
+                            <option value="0" >Waiting</option>
+                            <option  value="1" >Dissatisfactory</option>
+                            <option selected="selected"  value="2" >Approved</option>
+                            <%
+                            } else {
+                            %>
+                            <option selected="selected" value="3" >ALL</option>
+                            <option value="0" >Waiting</option>
+                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="2" >Approved</option>
+                            <%
+                                }
+                            } else {
+                            %>
+                            <option value="3" >ALL</option>
+                            <option value="0" >Waiting</option>
+                            <option  value="1" >Dissatisfactory</option>
+                            <option  value="2" >Approved</option>
+                            <%
+                                }
+                            %>
+
+                        </select>
+                    </td>
+                    <td style="height: 30px" >
+                        <input type="button" onclick="Search();" value="Search"/>
+                    </td>
+                    <td style="height: 30px;" colspan="3"></td>
+                </tr> 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr>  
                     <td colspan="7" align="right">  
                         <!--<form method="get" action="NewServlet">  -->
@@ -294,63 +352,7 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-                <tr >
-                    <td style="height: 30px;width: 30px" >
-                        <input type="text" value="manageruser" name="options" style="width: 30px; visibility: hidden;"/>
-                    </td>
-                    <td style="height: 30px" ><input id="txtSearchName" value="<%=request.getParameter("user") == null ? "" : request.getParameter("user")%>" name="txtSearchName" type="text" placeholder="Search by Username"  /></td>
-                    <td style="height: 30px" ><input id="txtFullName" value="<%=request.getParameter("fullname") == null ? "" : request.getParameter("fullname")%>" name="txtFullName" type="text" placeholder="Search by Full Name"  /></td>
-                    <td style="height: 30px" ><input id="txtClassName" value="<%=request.getParameter("classname") == null ? "" : request.getParameter("classname")%>" name="txtClassName" type="text" placeholder="Search by Class Name"  /></td>
-                    <td style="height: 30px" >
-                        <select name="searchstatus">
-                            <%
-                                if (request.getAttribute("statusSelected") != null) {
-                                    if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 0) {
-                            %>
-                            <option value="3" >ALL</option>
-                            <option value="0" selected="selected" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option  value="2" >Approved</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 1) {
-                            %>
-                            <option value="3" >ALL</option>
-                            <option value="0" >Waiting</option>
-                            <option selected="selected"  value="1" >Dissatisfactory</option>
-                            <option  value="2" >Approved</option>
-                            <%
-                            } else if (Integer.parseInt(request.getAttribute("statusSelected").toString().trim()) == 2) {
-                            %>
-                            <option value="3" >ALL</option>
-                            <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option selected="selected"  value="2" >Approved</option>
-                            <%
-                            } else {
-                            %>
-                            <option selected="selected" value="3" >ALL</option>
-                            <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option  value="2" >Approved</option>
-                            <%
-                                }
-                            } else {
-                            %>
-                            <option value="3" >ALL</option>
-                            <option value="0" >Waiting</option>
-                            <option  value="1" >Dissatisfactory</option>
-                            <option  value="2" >Approved</option>
-                            <%
-                                }
-                            %>
-
-                        </select>
-                    </td>
-                    <td style="height: 30px" >
-                        <input type="button" onclick="Search();" value="Search"/>
-                    </td>
-                    <td style="height: 30px;" colspan="3"></td>
-                </tr> 
+                
                 <%
                     Connection cnn = null;
                     Statement st = null;
@@ -396,8 +398,7 @@
                         }
                     }
                 %>
-            </table>
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
+
                 <tr bgcolor="#78bbe3">
 
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Class Name</td>
