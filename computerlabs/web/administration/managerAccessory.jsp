@@ -14,77 +14,73 @@
 <%@page import="java.util.List"%>  
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager User</title>  
-        <script type="text/javascript">
-            $(document).ready(function() {
-                //called when key is pressed in textbox
-                $("#accessNameUp").keypress(function(e)
-                {
-                    $("#error").hide();
-                    $("#autoSuggestionsList").hide();
-                    //if the letter is not digit then display error and don't type anything
-                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
-                    {
-                        //display error message
-                        $("#error").html("No Special Characters.Only number & alphabets").show();
-                        return false;
-                    }
-                });
-            });
-            function lookup(txtName, ID) {
-                if (txtName.length < 1) {
-                    $('#autoSuggestionsList').hide();
-                } else {
-                    $.post("../checkAccessNameEdit", {name: "" + txtName + "", aID: "" + ID + ""}, function(data) {
-                        $('#autoSuggestionsList').html(data).show();
-                    });
-                }
-            }
 
-        </script>
-
-        <%----%>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                //called when key is pressed in textbox
-                $("#namecreate").keypress(function(e)
-                {
-                    $("#error").hide();
-                    $("#autoSuggestionsList").hide();
-                    //if the letter is not digit then display error and don't type anything
-                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
-                    {
-                        //display error message
-                        $("#error").html("No Special Characters.Only number & alphabets").show();
-                        return false;
-                    }
-                });
-            });
-            function lookupCreate(txtuser) {
-                if (txtuser.length < 1) {
-                    $('#autoSuggestionsList').hide();
-                } else {
-                    $.post("../checkAccessNameCreate", {namecreate: "" + txtuser + ""}, function(data) {
-                        $('#autoSuggestionsList').html(data).show();
-                    });
-                }
-            }
-
-        </script>
+       
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
         <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
         <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+           $(document).ready(function() {
+               //called when key is pressed in textbox
+               $("#accessNameUp").keypress(function(e)
+               {
+                   $("#error").hide();
+                   $("#autoSuggestionsList").hide();
+                   //if the letter is not digit then display error and don't type anything
+                   if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
+                   {
+                       //display error message
+                       $("#error").html("No Special Characters.Only number & alphabets").show();
+                       return false;
+                   }
+               });
+           });
+           function lookup(txtName, ID) {
+               if (txtName.length < 1) {
+                   $('#autoSuggestionsList').hide();
+               } else {
+                   $.post("../checkAccessNameEdit", {name: "" + txtName + "", aID: "" + ID + ""}, function(data) {
+                       $('#autoSuggestionsList').html(data).show();
+                   });
+               }
+           }
+
+       </script>
+
+       <%----%>
+       <script type="text/javascript">
+           $(document).ready(function() {
+               //called when key is pressed in textbox
+               $("#namecreate").keypress(function(e)
+               {
+                   $("#error").hide();
+                   $("#autoSuggestionsList").hide();
+                   //if the letter is not digit then display error and don't type anything
+                   if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
+                   {
+                       //display error message
+                       $("#error").html("No Special Characters.Only number & alphabets").show();
+                       return false;
+                   }
+               });
+           });
+           function lookupCreate(txtuser) {
+               if (txtuser.length < 1) {
+                   $('#autoSuggestionsList').hide();
+               } else {
+                   $.post("../checkAccessNameCreate", {namecreate: "" + txtuser + ""}, function(data) {
+                       $('#autoSuggestionsList').html(data).show();
+                   });
+               }
+           }
+
+       </script>
         <script>jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
                 jQuery("#test").validationEngine();
-            });</script>
-        <script>
+            });
             function BASIC_SelectItem(act, id)
             {
                 var getID = id;
@@ -104,9 +100,6 @@
                 }
             }
 
-
-        </script>
-        <script type="text/javascript">
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -176,9 +169,12 @@
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -187,8 +183,7 @@
             }
 
         </script>
-    </head>  
-    <body>  
+ 
 
 
         <%!
@@ -203,9 +198,7 @@
         %>  
 
         <form action="../processAccess" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">  
-
-
+            <table cellpadding="1px" cellspacing="1px" border="0"  width="850px" align="center">  
                 <tr>  
 
                     <td colspan="6" align="right">  
@@ -451,6 +444,8 @@
                         <a href="?options=ManagerAccessory&actCreate=Create" class="button_example">Create Accessory</a>
                     </td>
                 </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="850px" align="center">
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="80px" align="center">ID</td>
                     <td class="td-show" width="225px" align="center">Accessory</td>
@@ -839,8 +834,7 @@
                 </tr>
             </table> 
         </form>
-    </body>  
-</html>  
+   
 <script type="text/javascript">
 
     var form = $('#test');

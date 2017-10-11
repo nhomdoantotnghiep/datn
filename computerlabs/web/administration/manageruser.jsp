@@ -12,11 +12,7 @@
 <%@page import="java.util.List"%>  
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager User</title>  
+
        <link href="css/popup.css" rel="stylesheet" type="text/css" />
          <script type="text/javascript" src="../js/ajaxpopup.js"></script>
         <script type="text/javascript" src="../js/jspopup.js"></script>
@@ -113,9 +109,12 @@
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -124,8 +123,7 @@
             }
 
         </script>
-    </head>  
-    <body>  
+     
 
 
         <%!
@@ -140,7 +138,7 @@
         %>  
 
         <form action="../updateStatusAccount" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center">  
+            <table cellpadding="1px" cellspacing="1px" width="950px" align="center">  
 
 
                 <tr>  
@@ -339,6 +337,8 @@
                     </td>
                     <td style="height: 30px;" colspan="3"></td>
                 </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="50px" align="center">ID</td>
                     <td class="td-show" width="200px" align="center">User name</td>

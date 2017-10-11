@@ -207,7 +207,7 @@
     
     function Export()
     {
-        var typeRP = <%=String.valueOf(ReportConstant.TIME_TABLE) %>;
+        var typeRP = <%=String.valueOf(ReportConstant.TYPE_TIME_TABLE) %>;
         var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
         var fromRP = "<%=inputdateFrom %>";
         var toRP = "<%=inputdateTo %>";
@@ -296,7 +296,7 @@
                 <input type="text" name="inputdateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
 
                 &nbsp;&nbsp;&nbsp;<input type="button" value="Search" class="button_example" onclick= "Search();" />
-                &nbsp;&nbsp;&nbsp;<input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
+                &nbsp;&nbsp;&nbsp;<input type="button" value="Export Time Table" class="button_example" onclick= "Export();" />
             </td>
 
         </tr> 

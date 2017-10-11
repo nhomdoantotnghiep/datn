@@ -12,20 +12,20 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <link rel="stylesheet" href="css/contentcss.css" />
+        <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
+        <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+<script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
         <script>jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
                 jQuery("#ajaxform").validationEngine();
-            });</script>
-        <script>
+            });
             function BASIC_SelectItem(id)
             {
                 if (confirm("I want deleted?")== true) {
@@ -36,9 +36,6 @@
                 }
             }
 
-
-        </script>
-        <script type="text/javascript">
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -68,7 +65,7 @@
                 v_classname = document.ajaxform.txtClassName.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../scheduleDetails?pageNumber=" + getText + strStatus + "&user=" + v_user + "&classname=" + v_classname, true);// chú ý
+                    xmlHttpRe.open("GET", "scheduleDetailsClient?pageNumber=" + getText + strStatus + "&user=" + v_user + "&classname=" + v_classname, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -86,7 +83,7 @@
                 v_classname = document.ajaxform.txtClassName.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../scheduleDetails?pageNumber=" + c_value + strStatus + "&user=" + v_user + "&classname=" + v_classname, true);// chú ý
+                    xmlHttpRe.open("GET", "scheduleDetailsClient?pageNumber=" + c_value + strStatus + "&user=" + v_user + "&classname=" + v_classname, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -102,15 +99,18 @@
                 new setXMLHttpRe();
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../scheduleDetails?user=" + v_user + "&searchstatus=" + v_status + "&classname=" + v_classname, true);// chú ý
+                    xmlHttpRe.open("GET", "scheduleDetailsClient?user=" + v_user + "&searchstatus=" + v_status + "&classname=" + v_classname, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
             }
             function handleResponse() {
+                var parser = new DOMParser();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString(xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -119,8 +119,7 @@
             }
 
         </script>
-    </head>
-    <body>
+
         <%!
             int pageSelected;
         %>
@@ -133,7 +132,7 @@
         %>  
 
         <form id='ajaxform' name='ajaxform' action='deleteRequest' method='post'>
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center">  
+            <table cellpadding="1px" cellspacing="1px" width="950px" align="center">  
 
                 <tr>  
                     <td colspan="7" align="right">  
@@ -353,6 +352,8 @@
                     </td>
                     <td style="height: 30px;" colspan="3"></td>
                 </tr> 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center">  
                 <tr bgcolor="#78bbe3">
 
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Class Name</td>
@@ -366,8 +367,7 @@
                 <%
                     String color = "style='background: #e7f5fe;height:30px'";
                     for (int i = 0; i < list.size(); i++) {
-                        classRequest requestSche = (classRequest) list
-                                .get(i);
+                        classRequest requestSche = (classRequest) list.get(i);
                         if (i % 2 == 0) {
                 %>
                 <tr>
@@ -477,5 +477,3 @@
 
                 return false;
             }); </script>
-    </body>
-</html>

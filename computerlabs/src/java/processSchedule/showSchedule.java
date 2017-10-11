@@ -115,12 +115,15 @@ public class showSchedule extends HttpServlet {
                 + " tbl_shiftname as shift on sche.shiftID=shift.shiftID inner "
                 + " join tbl_labroom as lab on sche.roomID=lab.roomID inner join "
                 + " tbl_datework as d on sche.dateworkID=d.datewordID inner join "
-                + " days_week as we on d.dayID=we.dayID where lab.roomID=" + roomid;
+                + " days_week as we on d.dayID=we.dayID where 1=1 ";
+        if(roomid > 0){
+            sql += " and lab.roomID=" + roomid;
+        }
         if (inputdateTo.trim().length() > 3) {
-            sql += " and d.dateword >='" + inputdateTo + "' ";
+            sql += " and d.dateword <='" + inputdateTo + "' ";
         }
         if (inputdateFrom.trim().length() > 3) {
-            sql += " and d.dateword <='" + inputdateFrom + "' ";
+            sql += " and d.dateword >='" + inputdateFrom + "' ";
         }
         if(shiftType > 0){
             sql += " and shift.shiftType =" + shiftType + " ";

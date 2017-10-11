@@ -26,9 +26,25 @@ public class CusConvertUtil {
 	public static SimpleDateFormat formatDateFullTime3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	public static DecimalFormat formatNumber = new DecimalFormat("#,##0.00");
 	public static DecimalFormat formatNumber2 = new DecimalFormat("#,##0");
+        public static SimpleDateFormat formartDateEEMMDYYY = new SimpleDateFormat("EE, MMM d,yyyy");
 	
-	
-	
+	public static Date parseStringToDateEEMMDYYY(String data) {
+		try {
+			
+			return formartDateEEMMDYYY.parse(data);
+		} catch (Exception es) {
+			
+		}
+		return new Date();
+	}
+	public static String parseDateEEMMDYYYToString(Date date) {
+		try {
+			return formartDateEEMMDYYY.format(date);
+		} catch (Exception es) {
+			
+		}
+		return "";
+	}
 	public static Date parseStringToDateOfSendDate(String data) {
 		try {
 			
@@ -47,7 +63,14 @@ public class CusConvertUtil {
 		}
 		return "";
 	}
-	
+	public static Date parseStringToDate2(String date) {
+		try {
+			return formatDateShort2.parse(date);
+		} catch (Exception es) {
+			
+		}
+		return new Date();
+	}
 	public static String parseDateToString3(Date date) {
 		try {
 			return formatDateFullTime3.format(date);

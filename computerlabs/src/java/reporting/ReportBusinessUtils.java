@@ -1,10 +1,12 @@
 package reporting;
 
-import com.sun.faces.util.CollectionsUtils;
+
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import reporting.scheduleWork.ScheduleWorkExport;
+import reporting.scheduleWork.ScheduleWorkModel;
 import reporting.timeTable.TimeTableExport;
 import reporting.timeTable.TimeTableModel;
 
@@ -41,7 +43,7 @@ public class ReportBusinessUtils {
         String to = resourceRequest.getParameter("toRP");
         String lab = resourceRequest.getParameter("labRP");
         try {
-            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TIME_TABLE))) {
+            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_TIME_TABLE))) {
                 HashMap<String, Object> input = new HashMap<String, Object>();
                 input.put("type", type);
                 input.put("duoiFile", duoiFile);
@@ -53,7 +55,22 @@ public class ReportBusinessUtils {
                 TimeTableModel objectReport = TimeTableExport.getModel(input);
                 JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
                 parameters = new HashMap<String, Object>();
-                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.TIMETABLE, ReportConstant.GIAY_TIMETABLE_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
+                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_TIMETABLE, ReportConstant.GIAY_TIMETABLE_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
+
+            }
+            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_SCHEDULEWORK))) {
+                HashMap<String, Object> input = new HashMap<String, Object>();
+                input.put("type", type);
+                input.put("duoiFile", duoiFile);
+                input.put("from",from);
+                input.put("to", to);
+                input.put("lab", lab);
+                String tenFile_Export = ReportConstant.GIAY_SCHEDULEWORK_EXPORT + "_" + currentTimeFull;
+
+                ScheduleWorkModel objectReport = ScheduleWorkExport.getModel(input);
+                JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
+                parameters = new HashMap<String, Object>();
+                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_SCHEDULE, ReportConstant.GIAY_SCHEDULEWORK_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
 
             }
             /*if(Validator.isNotNull(maTinh)

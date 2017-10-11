@@ -1,5 +1,8 @@
 
 
+<%@page import="reporting.CusConvertUtil"%>
+<%@page import="java.util.Date"%>
+<%@page import="reporting.ReportConstant"%>
 <%@page import="processSchedule.totalRequestByScheID"%>
 <%@page import="processSchedule.outPutRoomID"%>
 <%@page import="processSchedule.checkRequest"%>
@@ -12,12 +15,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@page import="java.util.List"%>  
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager Schedule</title>  
+<%
+    int shiftType = 1;
+    if (request.getParameter("shiftType") != null) {
+        shiftType = Integer.parseInt(request.getParameter("shiftType"));
+    }
+    int checked = 1;
+    if (request.getParameter("roomid") != null) {
+        checked = Integer.parseInt(request.getParameter("roomid"));
+    }    
+    String inputdateFrom = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateFrom = String.valueOf(request.getAttribute("inputdateFrom"));
+    }
+    String inputdateTo = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateTo = String.valueOf(request.getAttribute("inputdateTo"));
+    }
+%>
         <link rel="stylesheet" href="css/contentcss.css" />
         <link rel="stylesheet" href="../css/jquery-ui.min.css" />
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
@@ -187,10 +202,32 @@
                     }
                 }
             }
+            function Export()
+            {
+                var typeRP = <%=String.valueOf(ReportConstant.TYPE_SCHEDULEWORK) %>;
+                var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+                var fromRP = "<%=inputdateFrom %>";
+                var toRP = "<%=inputdateTo %>";
+                var labRP = 1;
+
+                for (var i = 0; i < document.test.roomname.length; i++)
+
+                {
+                    if (document.test.roomname[i].selected)
+                    {
+                        labRP = document.test.roomname[i].value;
+                    }
+                }
+
+                toRP = document.test.inputdateTo.value;
+                fromRP = document.test.inputdateFrom.value;
+
+                window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP,"_blank");
+            }
         </script>
 
-    </head>  
-    <body>  
+    
+    
 
 
         <%!
@@ -205,16 +242,11 @@
         %>  
 
         <form action="../updateSchedule" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
+            <table cellpadding="1px" cellspacing="1px" width="950px" align="center"> 
                 <tr>
 
                     <td style="height: 50px;" colspan="9" align="right" >
-                        <%
-                            int shiftType = 1;
-                            if (request.getParameter("shiftType") != null) {
-                                shiftType = Integer.parseInt(request.getParameter("shiftType"));
-                            }
-                        %>                        
+                                              
                         <select name="shiftType" style="width: 150px;height: 25px;">
 
                             <option value="1" <%=shiftType == 1 ? "selected" : ""%> >Morning Shift</option>
@@ -232,10 +264,7 @@
                                     st = cnn.createStatement();
                                     rs = st.executeQuery(sql);
                                     while (rs.next()) {
-                                        int checked = 1;
-                                        if (request.getParameter("roomid") != null) {
-                                            checked = Integer.parseInt(request.getParameter("roomid"));
-                                        }
+                                        
                                         int roomID = rs.getInt("roomID");
                                         if (checked == roomID) {
                             %>           
@@ -257,10 +286,12 @@
                             %>
                         </select>
 
-                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        <input type="text" name="inputdateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="inputdateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         
                         <input type="button" value="Search" class="button_example" onclick= "Search();" />
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
                     </td>
                 </tr> 
                 <tr> 
@@ -531,9 +562,10 @@
                         <!-- </form>   -->
                     </td>  
                 </tr>  
-
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr bgcolor="#78bbe3" >
-                    <td class="td-show" width="100px" height="50px" align="center">Shift Name / Date</td>
+                    <td class="td-show" width="100px" height="50px" align="center">Shift Name/<br />Date</td>
                     <%
                         Connection cnn2 = null;
                         Statement st2 = null;
@@ -573,10 +605,23 @@
                 %>  
 
                 <%
-                    classSchedule studentDetailsDTO = (classSchedule) list
-                            .get(i);
-                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getKeyword()
-                            + "</td>");
+                    classSchedule studentDetailsDTO = (classSchedule) list.get(i);
+                    Date now = new Date();
+                    String timeNowStr = CusConvertUtil.parseDateToString2(now);
+                    Date timeNow = CusConvertUtil.parseStringToDate2(timeNowStr);
+                    Date dateTemp = CusConvertUtil.parseStringToDateEEMMDYYY(studentDetailsDTO.getDateword());
+                    boolean canSet = true;
+                    if (timeNow.compareTo(dateTemp) > 0) {
+                        System.out.println("Date1 is after Date2");// ngay now 11 sau ngay temp 10
+                        canSet = false;
+                    } else if (timeNow.compareTo(dateTemp) < 0) {
+                        System.out.println("Date1 is before Date2");// ngay now 8 truoc ngay temp 11
+                        canSet = true;
+                    } else if (timeNow.compareTo(dateTemp) == 0) {
+                        System.out.println("Date1 is equal to Date2");// 2 ngay now temp cung thoi diem
+                        canSet = true;
+                    }
+                    out.println("<td style='background:"+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">" + studentDetailsDTO.getKeyword() + "</td>");
                     String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
                     String[] strGetID = studentDetailsDTO.getId().split("/");
                     //for (int j = (strGetStatus.length - 1); j >= 0; j--) {
@@ -586,28 +631,31 @@
                             checkRequest check = new checkRequest();
 
                             if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 2) {
-                                out.println("<td style='background: #bbff84;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 0) {
-                                out.println("<td style='background: #fffdc1;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else {
-                                out.println("<td style='background: #ececec;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             }
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 0) {
-                            out.println("<td style='background: #ffe6e6;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
+                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 2) {
-                            out.println("<td style='background: #efffc7;height:30px' align=\"center\"></td>");
+                            out.println("<td style='background: "+(canSet ?"#efffc7;":"#f76060;")+"height:30px' align=\"center\"></td>");
                         }
                     }
-                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getDateword()
-                            + "</td>");
+                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">" + studentDetailsDTO.getDateword()+ "</td>");
                     outPutRoomID output = new outPutRoomID();
                     if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
-                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"><a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>"
-                                + "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>"
-                                + "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/delete.png\" width=\"15px\" height=\"15px\" /></a>"
-                                + "</td>");
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">");   
+                    if(canSet){
+                        out.println( "<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>");
+                        //out.println( "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
+                        //out.println("&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/delete.png\" width=\"15px\" height=\"15px\" /></a>");
+                    }
+                        
+                         out.println( "</td>");
                     } else {
-                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"></td>");
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\"></td>");
                     }
                     out.println("</tr>");
                 %>  
@@ -727,6 +775,9 @@
                 </tr>
                 <tr>
                     <td colspan="2">
+                        <img src="../img/expried.png" />
+                    </td>
+                    <td colspan="2">
                         <img src="../img/khonglamviec.png" />
                     </td>
                     <td colspan="2">
@@ -735,11 +786,14 @@
                     <td colspan="2">
                         <img src="../img/dangcho.png" />
                     </td>  
-                    <td colspan="3">
+                    <td colspan="2">
                         <img src="../img/daduyet.png" />
                     </td>           
                 </tr>
                 <tr>
+                     <td  colspan="2">
+                        &nbsp;&nbsp;&nbsp;Expried Date
+                    </td>
                     <td  colspan="2">
                         &nbsp;&nbsp;&nbsp;No working
                     </td>
@@ -749,7 +803,7 @@
                     <td colspan="2">
                         Waiting approve
                     </td>  
-                    <td colspan="3">
+                    <td colspan="2">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
@@ -775,5 +829,4 @@
 
                 return false;
             }); </script>
-    </body>  
-</html>  
+ 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TimeTable" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be46b67d-c15c-4555-beac-ec9dfcd88efa">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TimeTable" pageWidth="992" pageHeight="595" orientation="Landscape" columnWidth="952" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be46b67d-c15c-4555-beac-ec9dfcd88efa">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="140"/>
 	<property name="ireport.y" value="0"/>
 	<subDataset name="dataset1" uuid="7413e015-37f7-426f-8047-313d8c404471">
 		<queryString>
@@ -63,6 +63,9 @@
 		</field>
 		<field name="shift9" class="java.lang.String">
 			<fieldDescription><![CDATA[shift9]]></fieldDescription>
+		</field>
+		<field name="working" class="java.lang.String">
+			<fieldDescription><![CDATA[working]]></fieldDescription>
 		</field>
 	</subDataset>
 	<subDataset name="dataset2" uuid="1eec1605-e4ba-40f5-b1b1-d816dfde5602">
@@ -126,6 +129,9 @@
 		<field name="shift9" class="java.lang.String">
 			<fieldDescription><![CDATA[shift9]]></fieldDescription>
 		</field>
+		<field name="working" class="java.lang.String">
+			<fieldDescription><![CDATA[working]]></fieldDescription>
+		</field>
 	</subDataset>
 	<queryString>
 		<![CDATA[]]>
@@ -154,14 +160,14 @@
 	<title>
 		<band height="79" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="0" y="0" width="802" height="50" uuid="76ea2939-559c-43e4-8ec6-815ab53724c6"/>
+				<reportElement positionType="Float" x="0" y="0" width="952" height="50" uuid="76ea2939-559c-43e4-8ec6-815ab53724c6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="36" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Time Table"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Schedule Work"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="0" y="50" width="100" height="29" uuid="19942e63-004b-43ef-9772-d80720dbf9b7"/>
+				<reportElement positionType="Float" x="0" y="50" width="162" height="29" uuid="19942e63-004b-43ef-9772-d80720dbf9b7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -169,7 +175,7 @@
 				<textFieldExpression><![CDATA["Lab Room:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="100" y="50" width="242" height="29" uuid="14e90840-885f-4d4e-8766-34bebeca52ca"/>
+				<reportElement positionType="Float" x="162" y="50" width="290" height="29" uuid="14e90840-885f-4d4e-8766-34bebeca52ca"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="5"/>
@@ -177,7 +183,7 @@
 				<textFieldExpression><![CDATA[(($F{labName} != null && $F{labName}.trim().length() > 0) ? $F{labName} : "")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="342" y="50" width="90" height="29" uuid="3595b306-7bb4-4c85-887b-79b7ecd26934"/>
+				<reportElement positionType="Float" x="452" y="50" width="90" height="29" uuid="3595b306-7bb4-4c85-887b-79b7ecd26934"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -185,7 +191,7 @@
 				<textFieldExpression><![CDATA["From: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="432" y="50" width="150" height="29" uuid="f159c67b-89d1-4828-b284-9d06cb705ba5"/>
+				<reportElement positionType="Float" x="542" y="50" width="170" height="29" uuid="f159c67b-89d1-4828-b284-9d06cb705ba5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -193,7 +199,7 @@
 				<textFieldExpression><![CDATA[(($F{from} != null && $F{from}.trim().length() > 0) ? $F{from} : "All")]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="582" y="50" width="70" height="29" uuid="5a7823b9-0b17-49a2-b4e8-8d08ce5967a2"/>
+				<reportElement positionType="Float" x="712" y="50" width="70" height="29" uuid="5a7823b9-0b17-49a2-b4e8-8d08ce5967a2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -201,7 +207,7 @@
 				<textFieldExpression><![CDATA["To: "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="652" y="50" width="150" height="29" uuid="eeeef09d-12f3-43a2-ae45-662e96c1cad3"/>
+				<reportElement positionType="Float" x="782" y="50" width="170" height="29" uuid="eeeef09d-12f3-43a2-ae45-662e96c1cad3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -213,12 +219,12 @@
 	<detail>
 		<band height="197" splitType="Stretch">
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="40" width="802" height="50" uuid="3f3e2679-0e68-4193-a085-604a65761488"/>
+				<reportElement positionType="Float" x="0" y="40" width="952" height="50" uuid="3f3e2679-0e68-4193-a085-604a65761488"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dataset1" uuid="8b7ae5fb-332d-48b9-8f4e-d73f28d00137">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLst})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="50" width="802">
+					<jr:listContents height="50" width="952">
 						<textField>
 							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="82" height="50" uuid="1a0b40ed-2b05-431d-a951-fbd8614619f2"/>
 							<box>
@@ -489,16 +495,31 @@
 							</textElement>
 							<textFieldExpression><![CDATA["Date"]]></textFieldExpression>
 						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="802" y="0" width="150" height="50" uuid="604375f0-84fe-4524-ad13-9ee85f695304"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Working"]]></textFieldExpression>
+						</textField>
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="90" width="802" height="50" uuid="b5e3c7f1-2e84-4e81-a528-ab3e9c6e27be"/>
+				<reportElement positionType="Float" x="0" y="90" width="952" height="50" uuid="b5e3c7f1-2e84-4e81-a528-ab3e9c6e27be"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dataset2" uuid="13209a5c-98b6-4481-9db1-14bbc85c713e">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLstTable})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:listContents height="50" width="802">
+					<jr:listContents height="50" width="952">
 						<textField>
 							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="82" height="50" uuid="c3b2bd57-5466-4711-ae85-556ee8f71cdd"/>
 							<box>
@@ -769,6 +790,21 @@
 							</textElement>
 							<textFieldExpression><![CDATA[(($F{dateW} != null && $F{dateW}.trim().length() > 0) ? $F{dateW} : "")]]></textFieldExpression>
 						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="802" y="0" width="150" height="50" uuid="085e4d93-252b-4633-9a8d-4f5128eeb586"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{working} != null && $F{working}.trim().length() > 0) ? $F{working} : "")]]></textFieldExpression>
+						</textField>
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
@@ -820,9 +856,9 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="132" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="0" y="0" width="202" height="29" uuid="471cba1c-b914-4022-acd8-23623a166966"/>
+				<reportElement positionType="Float" x="0" y="0" width="202" height="59" uuid="471cba1c-b914-4022-acd8-23623a166966"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -837,7 +873,7 @@
 				<textFieldExpression><![CDATA["<b>X</b>: No Working"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="202" y="0" width="200" height="29" uuid="dda9d816-0007-4473-bb74-d9a45e1a554d"/>
+				<reportElement positionType="Float" x="202" y="0" width="200" height="59" uuid="dda9d816-0007-4473-bb74-d9a45e1a554d"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -850,6 +886,36 @@
 					<paragraph leftIndent="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>O</b>: Working"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="402" y="30" width="200" height="29" uuid="55fc9bc6-2803-4a78-b5af-657732f50e75"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>||</b>: Un-Available"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="402" y="0" width="200" height="29" uuid="de725a9c-211b-4ee2-b8e6-bd80d19fd45c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>V</b>: Available"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

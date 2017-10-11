@@ -9,11 +9,7 @@
 <%@page import="java.util.List"%>  
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager</title>  
+  
         <link rel="stylesheet" href="css/jquery-ui.css" />
         <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
         <script src="js/jquery.bxslider.min.js"></script>
@@ -123,8 +119,7 @@
             }
 
         </script>
-    </head>  
-    <body>  
+     
 
 
         <%!
@@ -139,7 +134,7 @@
         %>  
 
         <form action="updateStatus" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center">  
+            <table cellpadding="1px" cellspacing="1px" border="0"  width="950px" align="center">  
 
 
                 <tr>  
@@ -354,6 +349,8 @@
                         <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
                     </td>
                 </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center">  
                 <tr bgcolor="#78bbe3" >
 
                     <td class="td-show" style="color:#ffffff;" width="250px" align="center">Type name</td>
@@ -584,8 +581,7 @@
                 </tr>
             </table> 
         </form>
-    </body>  
-</html>  
+    
 <script type="text/javascript">
 
     var form = $('#test');

@@ -10,11 +10,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
         <script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
         <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
@@ -27,8 +23,7 @@
                 // binds form submission and fields to the validation engine 
                 jQuery("#ajaxform").validationEngine();
             });</script>
-    </head>
-    <body>
+
 
         <%
             int userID = 0;
@@ -169,5 +164,4 @@
 
                 return false;
             }); </script>
-    </body>
-</html>
+    

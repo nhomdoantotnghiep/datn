@@ -134,7 +134,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="120px">
-                                                            <a href="?option=viewinfo" class="btnView"><span style="color: white;">View Info</span></a>
+                                                           <!-- <a href="?option=viewinfo" class="btnView"><span style="color: white;">View Request</span></a>-->
                                                         </td>
                                                         <td>  <a href="?option=logout" class="btnOut"><span style="color: white;">LogOut</span></a></td>
                                                     </tr>

@@ -9,11 +9,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
         <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
         <script src="js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
@@ -23,8 +19,7 @@
                 // binds form submission and fields to the validation engine 
                 jQuery("#test").validationEngine();
             });</script>
-    </head>
-    <body>
+ 
         <form action="sendComplaint" name="test" id="test" method="post">
             <table cellpadding="10px" border="0" cellspacing="10px" id="fcuk" width="600px" align="center">  
                 <tr>
@@ -89,8 +84,7 @@
             </table>
         </form>
 
-    </body>
-</html>
+ 
 <script type="text/javascript">
 
     var form = $('#test');

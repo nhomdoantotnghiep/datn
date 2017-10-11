@@ -27,18 +27,18 @@ import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
-import static com.sun.xml.ws.security.impl.policy.Constants.Validator;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.http.entity.ContentType;
-import reporting.ReportConstant;
+
 
 public class ReportUtils {
 
     public static final String PATH_FILE_REPORT = "template";
     public static final String PATH_FILE_EXPORT = "export";
 
-    public static final String TIMETABLE = "timetable";
+    public static final String FOLDER_TIMETABLE = "timetable";
+    public static final String FOLDER_SCHEDULE = "schedule";
 
     public static String getTemplateReportFilePath(HttpServletRequest request, String reportOrexport, String fileName) {
 

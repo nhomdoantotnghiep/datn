@@ -12,10 +12,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
         <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
@@ -24,8 +21,7 @@
         <script>jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
                 jQuery("#ajaxform").validationEngine();
-            });</script>
-        <script>
+            });
             function BASIC_SelectItem(id)
             {
                 var getID = id;
@@ -33,8 +29,7 @@
             }
 
 
-        </script>
-        <script type="text/javascript">
+        
             var xmlHttpRe;
             function setXMLHttpRe() {
                 try {
@@ -109,9 +104,12 @@
                 }
             }
             function handleResponse() {
+                var parser = new DOMParser();
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        var responseDoc = parser.parseFromString(xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Can not connect Server");
@@ -120,8 +118,7 @@
             }
 
         </script>
-    </head>
-    <body>
+
         <%!
             int pageSelected;
         %>
@@ -134,7 +131,7 @@
         %>  
 
         <form id='ajaxform' name='ajaxform' action='../updateRequest' method='post'>
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center">  
+            <table cellpadding="1px" cellspacing="1px" width="950px" align="center">  
                  
                 <tr>  
                     <td colspan="7" align="right">  
@@ -399,6 +396,8 @@
                         }
                     }
                 %>
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr bgcolor="#78bbe3">
 
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Class Name</td>
@@ -514,5 +513,3 @@
 
                 return false;
             }); </script>
-    </body>
-</html>

@@ -9,11 +9,6 @@
 <%@page import="java.util.List"%>  
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager</title>  
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
         <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
         <link rel="stylesheet" href="../css/jquery-ui.min.css" />
@@ -123,8 +118,7 @@
             }
 
         </script>
-    </head>  
-    <body>  
+    
 
 
         <%!
@@ -139,7 +133,7 @@
         %>  
 
         <form action="../updateUserProcess" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center">  
+            <table cellpadding="1px" cellspacing="1px" border="0" width="950px" align="center">  
 
 
                 <tr>  
@@ -307,8 +301,8 @@
                 <tr >
 
                     <td colspan="4" style="height: 30px" >
-                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        <input type="text" name="inputdateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="inputdateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
                         <select name="status">
                             <%
                                 if (request.getAttribute("statusSelected") != null) {
@@ -354,6 +348,8 @@
                         <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
                     </td>
                 </tr>  
+            </table>
+            <table cellpadding="1px" cellspacing="1px" border="0" id="fcuk" width="950px" align="center"> 
                 <tr bgcolor="#78bbe3" >
 
                     <td class="td-show" width="250px" align="center">Type name</td>
@@ -637,8 +633,7 @@
                 </tr>
             </table> 
         </form>
-    </body>  
-</html>  
+    
 <script type="text/javascript">
 
     var form = $('#test');

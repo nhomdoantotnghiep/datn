@@ -161,7 +161,7 @@
 				<textFieldExpression><![CDATA["Time Table"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="0" y="50" width="150" height="29" uuid="19942e63-004b-43ef-9772-d80720dbf9b7"/>
+				<reportElement positionType="Float" x="0" y="50" width="100" height="29" uuid="19942e63-004b-43ef-9772-d80720dbf9b7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
 					<paragraph leftIndent="10"/>
@@ -169,10 +169,10 @@
 				<textFieldExpression><![CDATA["Lab Room:"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" x="150" y="50" width="192" height="29" uuid="14e90840-885f-4d4e-8766-34bebeca52ca"/>
+				<reportElement positionType="Float" x="100" y="50" width="242" height="29" uuid="14e90840-885f-4d4e-8766-34bebeca52ca"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="14" isBold="true"/>
-					<paragraph leftIndent="10"/>
+					<paragraph leftIndent="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[(($F{labName} != null && $F{labName}.trim().length() > 0) ? $F{labName} : "")]]></textFieldExpression>
 			</textField>
@@ -213,7 +213,7 @@
 	<detail>
 		<band height="197" splitType="Stretch">
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="10" width="802" height="50" uuid="3f3e2679-0e68-4193-a085-604a65761488"/>
+				<reportElement positionType="Float" x="0" y="40" width="802" height="50" uuid="3f3e2679-0e68-4193-a085-604a65761488"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dataset1" uuid="8b7ae5fb-332d-48b9-8f4e-d73f28d00137">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLst})]]></dataSourceExpression>
@@ -493,7 +493,7 @@
 				</jr:list>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="60" width="802" height="50" uuid="b5e3c7f1-2e84-4e81-a528-ab3e9c6e27be"/>
+				<reportElement positionType="Float" x="0" y="90" width="802" height="50" uuid="b5e3c7f1-2e84-4e81-a528-ab3e9c6e27be"/>
 				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dataset2" uuid="13209a5c-98b6-4481-9db1-14bbc85c713e">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLstTable})]]></dataSourceExpression>
@@ -772,6 +772,51 @@
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
+			<textField>
+				<reportElement positionType="Float" x="82" y="10" width="240" height="30" uuid="9444f8f1-c847-4e3d-8dbd-d8657bc0c7de"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Morning Shift"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="322" y="10" width="240" height="30" uuid="e63b7de2-1994-4374-be92-c080f8faab9a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Outgoing Shift"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="562" y="10" width="160" height="30" uuid="677c9030-2e4c-4cbd-91f5-ca92c832629d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Night Shift"]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<summary>
