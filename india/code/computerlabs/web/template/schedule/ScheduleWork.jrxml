@@ -1,0 +1,922 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TimeTable" pageWidth="992" pageHeight="595" orientation="Landscape" columnWidth="952" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be46b67d-c15c-4555-beac-ec9dfcd88efa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="140"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="7413e015-37f7-426f-8047-313d8c404471">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="class" class="java.lang.Class">
+			<fieldDescription><![CDATA[class]]></fieldDescription>
+		</field>
+		<field name="dateName" class="java.lang.String">
+			<fieldDescription><![CDATA[dateName]]></fieldDescription>
+		</field>
+		<field name="dateW" class="java.lang.String">
+			<fieldDescription><![CDATA[dateW]]></fieldDescription>
+		</field>
+		<field name="shift1" class="java.lang.String">
+			<fieldDescription><![CDATA[shift1]]></fieldDescription>
+		</field>
+		<field name="shift10" class="java.lang.String">
+			<fieldDescription><![CDATA[shift10]]></fieldDescription>
+		</field>
+		<field name="shift11" class="java.lang.String">
+			<fieldDescription><![CDATA[shift11]]></fieldDescription>
+		</field>
+		<field name="shift12" class="java.lang.String">
+			<fieldDescription><![CDATA[shift12]]></fieldDescription>
+		</field>
+		<field name="shift13" class="java.lang.String">
+			<fieldDescription><![CDATA[shift13]]></fieldDescription>
+		</field>
+		<field name="shift14" class="java.lang.String">
+			<fieldDescription><![CDATA[shift14]]></fieldDescription>
+		</field>
+		<field name="shift15" class="java.lang.String">
+			<fieldDescription><![CDATA[shift15]]></fieldDescription>
+		</field>
+		<field name="shift16" class="java.lang.String">
+			<fieldDescription><![CDATA[shift16]]></fieldDescription>
+		</field>
+		<field name="shift2" class="java.lang.String">
+			<fieldDescription><![CDATA[shift2]]></fieldDescription>
+		</field>
+		<field name="shift3" class="java.lang.String">
+			<fieldDescription><![CDATA[shift3]]></fieldDescription>
+		</field>
+		<field name="shift4" class="java.lang.String">
+			<fieldDescription><![CDATA[shift4]]></fieldDescription>
+		</field>
+		<field name="shift5" class="java.lang.String">
+			<fieldDescription><![CDATA[shift5]]></fieldDescription>
+		</field>
+		<field name="shift6" class="java.lang.String">
+			<fieldDescription><![CDATA[shift6]]></fieldDescription>
+		</field>
+		<field name="shift7" class="java.lang.String">
+			<fieldDescription><![CDATA[shift7]]></fieldDescription>
+		</field>
+		<field name="shift8" class="java.lang.String">
+			<fieldDescription><![CDATA[shift8]]></fieldDescription>
+		</field>
+		<field name="shift9" class="java.lang.String">
+			<fieldDescription><![CDATA[shift9]]></fieldDescription>
+		</field>
+		<field name="working" class="java.lang.String">
+			<fieldDescription><![CDATA[working]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="dataset2" uuid="1eec1605-e4ba-40f5-b1b1-d816dfde5602">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="class" class="java.lang.Class">
+			<fieldDescription><![CDATA[class]]></fieldDescription>
+		</field>
+		<field name="dateName" class="java.lang.String">
+			<fieldDescription><![CDATA[dateName]]></fieldDescription>
+		</field>
+		<field name="dateW" class="java.lang.String">
+			<fieldDescription><![CDATA[dateW]]></fieldDescription>
+		</field>
+		<field name="shift1" class="java.lang.String">
+			<fieldDescription><![CDATA[shift1]]></fieldDescription>
+		</field>
+		<field name="shift10" class="java.lang.String">
+			<fieldDescription><![CDATA[shift10]]></fieldDescription>
+		</field>
+		<field name="shift11" class="java.lang.String">
+			<fieldDescription><![CDATA[shift11]]></fieldDescription>
+		</field>
+		<field name="shift12" class="java.lang.String">
+			<fieldDescription><![CDATA[shift12]]></fieldDescription>
+		</field>
+		<field name="shift13" class="java.lang.String">
+			<fieldDescription><![CDATA[shift13]]></fieldDescription>
+		</field>
+		<field name="shift14" class="java.lang.String">
+			<fieldDescription><![CDATA[shift14]]></fieldDescription>
+		</field>
+		<field name="shift15" class="java.lang.String">
+			<fieldDescription><![CDATA[shift15]]></fieldDescription>
+		</field>
+		<field name="shift16" class="java.lang.String">
+			<fieldDescription><![CDATA[shift16]]></fieldDescription>
+		</field>
+		<field name="shift2" class="java.lang.String">
+			<fieldDescription><![CDATA[shift2]]></fieldDescription>
+		</field>
+		<field name="shift3" class="java.lang.String">
+			<fieldDescription><![CDATA[shift3]]></fieldDescription>
+		</field>
+		<field name="shift4" class="java.lang.String">
+			<fieldDescription><![CDATA[shift4]]></fieldDescription>
+		</field>
+		<field name="shift5" class="java.lang.String">
+			<fieldDescription><![CDATA[shift5]]></fieldDescription>
+		</field>
+		<field name="shift6" class="java.lang.String">
+			<fieldDescription><![CDATA[shift6]]></fieldDescription>
+		</field>
+		<field name="shift7" class="java.lang.String">
+			<fieldDescription><![CDATA[shift7]]></fieldDescription>
+		</field>
+		<field name="shift8" class="java.lang.String">
+			<fieldDescription><![CDATA[shift8]]></fieldDescription>
+		</field>
+		<field name="shift9" class="java.lang.String">
+			<fieldDescription><![CDATA[shift9]]></fieldDescription>
+		</field>
+		<field name="working" class="java.lang.String">
+			<fieldDescription><![CDATA[working]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="from" class="java.lang.String">
+		<fieldDescription><![CDATA[from]]></fieldDescription>
+	</field>
+	<field name="labName" class="java.lang.String">
+		<fieldDescription><![CDATA[labName]]></fieldDescription>
+	</field>
+	<field name="shiftLst" class="java.util.List">
+		<fieldDescription><![CDATA[shiftLst]]></fieldDescription>
+	</field>
+	<field name="shiftLstTable" class="java.util.List">
+		<fieldDescription><![CDATA[shiftLstTable]]></fieldDescription>
+	</field>
+	<field name="to" class="java.lang.String">
+		<fieldDescription><![CDATA[to]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="0" y="0" width="952" height="50" uuid="76ea2939-559c-43e4-8ec6-815ab53724c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="36" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Schedule Work"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="0" y="50" width="162" height="29" uuid="19942e63-004b-43ef-9772-d80720dbf9b7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Lab Room:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="162" y="50" width="290" height="29" uuid="14e90840-885f-4d4e-8766-34bebeca52ca"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{labName} != null && $F{labName}.trim().length() > 0) ? $F{labName} : "")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="452" y="50" width="90" height="29" uuid="3595b306-7bb4-4c85-887b-79b7ecd26934"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["From: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="542" y="50" width="170" height="29" uuid="f159c67b-89d1-4828-b284-9d06cb705ba5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{from} != null && $F{from}.trim().length() > 0) ? $F{from} : "All")]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="712" y="50" width="70" height="29" uuid="5a7823b9-0b17-49a2-b4e8-8d08ce5967a2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["To: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="782" y="50" width="170" height="29" uuid="eeeef09d-12f3-43a2-ae45-662e96c1cad3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{to} != null && $F{to}.trim().length() > 0) ? $F{to} : "All")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="197" splitType="Stretch">
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="40" width="952" height="50" uuid="3f3e2679-0e68-4193-a085-604a65761488"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="8b7ae5fb-332d-48b9-8f4e-d73f28d00137">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLst})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="952">
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="82" height="50" uuid="1a0b40ed-2b05-431d-a951-fbd8614619f2"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Shift Name<br>/Date"]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="82" y="0" width="40" height="50" uuid="3263fe87-cf0a-48dc-9cc5-9e1f2c923185"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift1} != null && $F{shift1}.trim().length() > 0) ? $F{shift1} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="0" width="40" height="50" uuid="bbddeef6-d51f-4da3-bc19-c2d13b6b159b"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift2} != null && $F{shift2}.trim().length() > 0) ? $F{shift2} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="162" y="0" width="40" height="50" uuid="f352c170-cdcc-4e51-a561-e89d46e12d2f"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift3} != null && $F{shift3}.trim().length() > 0) ? $F{shift3} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="202" y="0" width="40" height="50" uuid="1b4ec3a2-6bdc-4fa3-9ed6-c0d2d4751131"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift4} != null && $F{shift4}.trim().length() > 0) ? $F{shift4} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="242" y="0" width="40" height="50" uuid="a0fd3439-0934-4a72-b29a-a6cdf1cd86f7"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift5} != null && $F{shift5}.trim().length() > 0) ? $F{shift5} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="322" y="0" width="40" height="50" uuid="0793df66-6a6d-4b2e-b8c7-6ecb821c26ed"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift7} != null && $F{shift7}.trim().length() > 0) ? $F{shift7} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="282" y="0" width="40" height="50" uuid="e6c1db05-5218-401b-bd68-07bf7c545b6b"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift6} != null && $F{shift6}.trim().length() > 0) ? $F{shift6} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="362" y="0" width="40" height="50" uuid="b41be8ef-11d4-415c-9cab-4f748ca59e79"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift8} != null && $F{shift8}.trim().length() > 0) ? $F{shift8} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="0" width="40" height="50" uuid="1f2c2304-0756-4a7c-a06f-b76f036ee1f1"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift9} != null && $F{shift9}.trim().length() > 0) ? $F{shift9} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="442" y="0" width="40" height="50" uuid="368df8b7-d7e4-49e0-b6fd-802b1669bb77"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift10} != null && $F{shift10}.trim().length() > 0) ? $F{shift10} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="482" y="0" width="40" height="50" uuid="ea6f32b2-45e8-44fd-8ea0-ab2ef46eff7b"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift11} != null && $F{shift11}.trim().length() > 0) ? $F{shift11} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="522" y="0" width="40" height="50" uuid="e2d7f727-7206-4c83-9867-424251e0a863"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift12} != null && $F{shift12}.trim().length() > 0) ? $F{shift12} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="602" y="0" width="40" height="50" uuid="ff40a11c-1903-4db9-accf-0123421153a7"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift14} != null && $F{shift14}.trim().length() > 0) ? $F{shift14} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="562" y="0" width="40" height="50" uuid="1944ee7f-ad5e-419e-b31e-c3ab35f74a9d"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift13} != null && $F{shift13}.trim().length() > 0) ? $F{shift13} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="682" y="0" width="40" height="50" uuid="9e9092e3-4167-4d41-a27d-8a3a710cd562"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift16} != null && $F{shift16}.trim().length() > 0) ? $F{shift16} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="642" y="0" width="40" height="50" uuid="1eb11c59-9d45-4eb5-9686-f6555a04d173"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift15} != null && $F{shift15}.trim().length() > 0) ? $F{shift15} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="722" y="0" width="80" height="50" uuid="4a266505-7c21-4d26-a7e8-f7ca0cd06c1f"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Date"]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="802" y="0" width="150" height="50" uuid="604375f0-84fe-4524-ad13-9ee85f695304"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="true"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Working"]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="90" width="952" height="50" uuid="b5e3c7f1-2e84-4e81-a528-ab3e9c6e27be"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset2" uuid="13209a5c-98b6-4481-9db1-14bbc85c713e">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{shiftLstTable})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="50" width="952">
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="82" height="50" uuid="c3b2bd57-5466-4711-ae85-556ee8f71cdd"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{dateName} != null && $F{dateName}.trim().length() > 0) ? $F{dateName} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="82" y="0" width="40" height="50" uuid="7efa2f40-323d-49c2-8953-c9605c70a35d"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift1} != null && $F{shift1}.trim().length() > 0) ? $F{shift1} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="122" y="0" width="40" height="50" uuid="fa865406-be57-444a-aec3-d5d5356f812f"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift2} != null && $F{shift2}.trim().length() > 0) ? $F{shift2} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="162" y="0" width="40" height="50" uuid="cfec0519-8902-4536-9443-2f693746bcc0"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift3} != null && $F{shift3}.trim().length() > 0) ? $F{shift3} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="202" y="0" width="40" height="50" uuid="d2218953-5a66-4cac-a291-1413c12255d1"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift4} != null && $F{shift4}.trim().length() > 0) ? $F{shift4} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="242" y="0" width="40" height="50" uuid="289036e1-9796-4963-b0cf-0c5bd62c6383"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift5} != null && $F{shift5}.trim().length() > 0) ? $F{shift5} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="322" y="0" width="40" height="50" uuid="7d481626-af59-47ee-936b-abd7aaf00d95"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift7} != null && $F{shift7}.trim().length() > 0) ? $F{shift7} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="282" y="0" width="40" height="50" uuid="cecac311-5338-4ec3-a353-00332589b6a5"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift6} != null && $F{shift6}.trim().length() > 0) ? $F{shift6} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="362" y="0" width="40" height="50" uuid="db08fb12-9425-482c-8664-cbbc1bf12f2f"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift8} != null && $F{shift8}.trim().length() > 0) ? $F{shift8} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="402" y="0" width="40" height="50" uuid="31cce3f3-cbc8-40cf-9828-bbd0940993e1"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift9} != null && $F{shift9}.trim().length() > 0) ? $F{shift9} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="442" y="0" width="40" height="50" uuid="17e4bb7d-7a8b-45a1-88b5-25276b3aa79e"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift10} != null && $F{shift10}.trim().length() > 0) ? $F{shift10} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="482" y="0" width="40" height="50" uuid="70e4a783-f9ff-4076-ac28-6aba3c7d6259"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift11} != null && $F{shift11}.trim().length() > 0) ? $F{shift11} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="522" y="0" width="40" height="50" uuid="1b8ca4d3-5401-4602-973a-0f5e3a38bd17"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift12} != null && $F{shift12}.trim().length() > 0) ? $F{shift12} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="602" y="0" width="40" height="50" uuid="19731600-7c48-4f0f-811b-36df56102805"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift14} != null && $F{shift14}.trim().length() > 0) ? $F{shift14} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="562" y="0" width="40" height="50" uuid="ccc337c1-cf0e-4e47-8714-8251cc1b7926"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift13} != null && $F{shift13}.trim().length() > 0) ? $F{shift13} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="682" y="0" width="40" height="50" uuid="90c053f8-414e-457b-a432-32354f286aed"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift16} != null && $F{shift16}.trim().length() > 0) ? $F{shift16} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="642" y="0" width="40" height="50" uuid="d3dc4945-ce9e-4b4f-bfc9-df91c45399a5"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{shift15} != null && $F{shift15}.trim().length() > 0) ? $F{shift15} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="722" y="0" width="80" height="50" uuid="70ee8728-5262-4c1c-ae85-6b5351d6780c"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{dateW} != null && $F{dateW}.trim().length() > 0) ? $F{dateW} : "")]]></textFieldExpression>
+						</textField>
+						<textField>
+							<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="802" y="0" width="150" height="50" uuid="085e4d93-252b-4633-9a8d-4f5128eeb586"/>
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+								<font fontName="Times New Roman" size="14" isBold="false"/>
+								<paragraph leftIndent="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[(($F{working} != null && $F{working}.trim().length() > 0) ? $F{working} : "")]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement positionType="Float" x="82" y="10" width="240" height="30" uuid="9444f8f1-c847-4e3d-8dbd-d8657bc0c7de"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Morning Shift"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="322" y="10" width="240" height="30" uuid="e63b7de2-1994-4374-be92-c080f8faab9a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Outgoing Shift"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="562" y="10" width="160" height="30" uuid="677c9030-2e4c-4cbd-91f5-ca92c832629d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Night Shift"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="132" splitType="Stretch">
+			<textField>
+				<reportElement positionType="Float" x="0" y="0" width="202" height="59" uuid="471cba1c-b914-4022-acd8-23623a166966"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>X</b>: No Working"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="202" y="0" width="200" height="59" uuid="dda9d816-0007-4473-bb74-d9a45e1a554d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>O</b>: Working"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="402" y="30" width="200" height="29" uuid="55fc9bc6-2803-4a78-b5af-657732f50e75"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>||</b>: Un-Available"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="402" y="0" width="200" height="29" uuid="de725a9c-211b-4ee2-b8e6-bd80d19fd45c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="Times New Roman" size="14" isBold="false"/>
+					<paragraph leftIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>V</b>: Available"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -12,11 +12,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
         <script>
             function BASIC_SelectItem()
             {
@@ -55,8 +51,7 @@
             });</script>
             <%--check username--%>
 
-    </head>
-    <body>
+
 
         <form id='ajaxform' name='ajaxform' action='../createSchedule' method='post'>
             <table width="650px" border="0" align="center" cellpadding="0" cellspacing="0"> 
@@ -177,5 +172,3 @@
 
                 return false;
             }); </script>
-    </body>
-</html>
