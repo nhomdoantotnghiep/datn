@@ -105,11 +105,11 @@ public class scheduleDetailsClient extends HttpServlet {
         ResultSet rs = null;
         SimpleDateFormat formarter = new SimpleDateFormat("EE, MMM d,yyyy");
         String sql = "select u.username as username,c.className as className,r.courseName courseName,"
-                + "r.sendDate as sendDate,l.roomName roomName,s.shiftname as sName,s.starttime,s.endtime,d.dateword,u.fullname as fullname, r.status as restatus,r.requestID as requestID  "
-                + "from tbl_request as r inner join tbl_user as u on r.userID=u.userID "
-                + "inner join tbl_class as c on r.classID=c.classID inner join tbl_schedule "
-                + "as sche on r.scheduleID=sche.scheduleID inner join tbl_shiftname as s on "
-                + " sche.shiftID=s.shiftID inner join tbl_labroom as l on sche.roomID=l.roomID "
+                + "r.sendDate as sendDate,l.roomName roomName,s.shiftname as sName,s.starttime,s.endtime,d.dateword,u.fullname as fullname, r.status as restatus,r.requestID as requestID,r.sizeStudent as sizeStudent  "
+                + " from tbl_request as r inner join tbl_user as u on r.userID=u.userID "
+                + " inner join tbl_class as c on r.classID=c.classID inner join tbl_schedule as sche on r.scheduleID=sche.scheduleID "
+                + " inner join tbl_shiftname as s on  sche.shiftID=s.shiftID "
+                + " inner join tbl_labroom as l on sche.roomID=l.roomID "
                 + " inner join tbl_datework as d on sche.dateworkID=d.datewordID where u.userID=" + userID;
         if (!searchUser.trim().equalsIgnoreCase("")) {
             sql += " and username like '%" + searchUser + "%'";
@@ -137,8 +137,9 @@ public class scheduleDetailsClient extends HttpServlet {
                     String fullname = rs.getString("fullname");
                     int status = rs.getInt("restatus");
                     int requestID = rs.getInt("requestID");
+                    int sizeStudent = rs.getInt("sizeStudent");
                     cnt = cnt + 1;
-                    list.add(new classRequest(user, className, courseName, sendDate, roomName, sName, starttime.substring(0, 5) + "-" + endtime.substring(0, 5), dateword, fullname, status + "", cnt, requestID));
+                    list.add(new classRequest(user, className, courseName, sendDate, roomName, sName, starttime.substring(0, 5) + "-" + endtime.substring(0, 5), dateword, fullname, status + "", cnt, requestID,sizeStudent));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(scheduleDetailsClient.class.getName()).log(Level.SEVERE, null, ex);

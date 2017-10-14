@@ -78,6 +78,7 @@ public class sendRequest extends HttpServlet {
             int userID = 0;
             int classID = 0;
             int scheID = 0;
+            int numberStudents = 1;
             String courseName = "";
             HttpSession session = request.getSession();
             if (session.getAttribute("userID") != null) {
@@ -89,6 +90,9 @@ public class sendRequest extends HttpServlet {
                 session.removeAttribute("scheID");
             }
             courseName = request.getParameter("courseName");
+            if (request.getParameter("numberStudents") != null) {
+                numberStudents = Integer.parseInt(request.getParameter("numberStudents"));
+            }
             SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             if (checkNumberRequestSendOfUser(userID, scheID) == 1) {
@@ -97,7 +101,7 @@ public class sendRequest extends HttpServlet {
                 if(userID>0 && classID >0 && scheID >0){
                 Connection cnn = null;
                 PreparedStatement pst = null;
-                String sql = "insert into tbl_request(userID,classID,scheduleID,courseName,sendDate,[status]) values(?,?,?,?,'" + formater.format(date) + "',0)";
+                String sql = "insert into tbl_request(userID,classID,scheduleID,courseName,sendDate,[status],sizeStudent) values(?,?,?,?,'" + formater.format(date) + "',0,?)";
                 cnn = dbconnect.Connect();
                 try {
                     pst = cnn.prepareStatement(sql);
@@ -105,6 +109,7 @@ public class sendRequest extends HttpServlet {
                     pst.setInt(2, classID);
                     pst.setInt(3, scheID);
                     pst.setString(4, courseName);
+                    pst.setInt(5, numberStudents);
                     int row = pst.executeUpdate();
                     if (row > 0) {
                         out.println("Send Request Successfull. Please waiting reply to the administrator!");

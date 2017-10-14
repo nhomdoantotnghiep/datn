@@ -33,6 +33,7 @@ public class checklogin extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String user = request.getParameter("username");
             String pwd = request.getParameter("pwd");
+            
             if (CheckContent(user, pwd, request, response) == true) {
                 request.getRequestDispatcher("index.jsp?option=login").forward(request, response);
             } else {

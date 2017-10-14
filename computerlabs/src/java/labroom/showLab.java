@@ -84,7 +84,7 @@ public class showLab extends HttpServlet {
         Connection cnn = null;
         Statement st = null;
         ResultSet rs = null;
-SimpleDateFormat formater=new SimpleDateFormat("MM/dd/yyyy");
+SimpleDateFormat formater=new SimpleDateFormat("dd/MM/yyyy");
         String sql = "select * from tbl_labroom where 1=1 ";
         if (!roomName.trim().equalsIgnoreCase("")) {
             sql += " and roomName like '%" + roomName + "%'";
@@ -99,7 +99,7 @@ SimpleDateFormat formater=new SimpleDateFormat("MM/dd/yyyy");
             st = cnn.createStatement();
             rs = st.executeQuery(sql);
             while (rs.next()) {
-                list.add(new classLabroom(rs.getInt("roomID"), rs.getString("roomName"), rs.getInt("status"),rs.getFloat("width"),rs.getFloat("length"),formater.format(rs.getDate("datecreate"))));
+                list.add(new classLabroom(rs.getInt("roomID"), rs.getString("roomName"), rs.getInt("status"),rs.getFloat("width"),rs.getFloat("length"),formater.format(rs.getDate("datecreate")),rs.getInt("size")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(showLab.class.getName()).log(Level.SEVERE, null, ex);

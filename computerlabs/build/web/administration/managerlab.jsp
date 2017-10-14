@@ -27,7 +27,7 @@
                     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
                     {
                         //display error message
-                        $("#error").html("No Special Characters.Only number & alphabets").show();
+                        $("#error").html("No Special Characters <br/>Only number & alphabets").show();
                         return false;
                     }
                 });
@@ -56,7 +56,7 @@
                     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
                     {
                         //display error message
-                        $("#error").html("No Special Characters.Only number & alphabets").show();
+                        $("#error").html("No Special Characters<br/>Only number & alphabets").show();
                         return false;
                     }
                 });
@@ -397,9 +397,10 @@
                 <tr bgcolor="#78bbe3" >
                     <td class="td-show" width="50px" align="center">ID</td>
                     <td class="td-show" width="170px" align="center">Room name</td>
-                    <td class="td-show" width="80px" align="center">Width</td>
-                    <td class="td-show" width="80px" align="center">Length</td>
-                    <td class="td-show" width="150px" align="center">Date Create</td>
+                    <td class="td-show" width="60px" align="center">Width</td>
+                    <td class="td-show" width="60px" align="center">Length</td>
+                    <td class="td-show" width="70px" align="center">Max seats</td>
+                    <td class="td-show" width="120px" align="center">Date Create</td>
                     <td class="td-show" width="100px" align="center">Status</td>
                     <td class="td-show" width="220px" align="center" colspan="2" >Action</td>
                 </tr>  
@@ -440,6 +441,9 @@
                     <td style="height:30px" align="center"  class="row-td-backgroud-select">
                         <input name="lengthUp" style="width: 70px;"  id="lengthUp" value="<%=labdetails.getLength()%>" type="text"/>
                     </td>
+                    <td style="height:30px" align="center"  class="row-td-backgroud-select">
+                        <input name="maxSizeUp"  id="maxSizeUp" value="<%=labdetails.getMaxSize()%>" type="text"/>
+                    </td>
                     <td style="height:30px" class="row-td-backgroud-select" align="center"><%=labdetails.getDatecreate()%></td>
                     <td  class="row-td-backgroud-select" align="center">
                         <select name="statusUp">
@@ -464,6 +468,7 @@
                     <td style="height:30px" align="center"><%=labdetails.getRoomName()%></td>
                     <td style="height:30px" align="center"><%=labdetails.getWidth()%></td>
                     <td style="height:30px" align="center"><%=labdetails.getLength()%></td>
+                    <td style="height:30px" align="center"><%=labdetails.getMaxSize() %></td>
                     <td style="height:30px" align="center"><%=labdetails.getDatecreate()%></td>
                     <td style="height:30px" align="center">
                         <%
@@ -483,6 +488,7 @@
                     <td style="height:30px" align="center"><%=labdetails.getRoomName()%></td>
                     <td style="height:30px" align="center"><%=labdetails.getWidth()%></td>
                     <td style="height:30px" align="center"><%=labdetails.getLength()%></td>
+                    <td style="height:30px" align="center"><%=labdetails.getMaxSize() %></td>
                     <td style="height:30px" align="center"><%=labdetails.getDatecreate()%></td>
                     <td style="height:30px" align="center">
                         <%
@@ -548,6 +554,9 @@
                     <td style="height:30px" align="center"  class="row-td-backgroud-select">
                         <input name="lengthUp" style="width: 70px;"  id="lengthUp" value="<%=labdetails.getLength()%>" type="text"/>
                     </td>
+                    <td style="height:30px" align="center"  class="row-td-backgroud-select">
+                        <input name="maxSizeUp"  id="maxSizeUp" value="<%=labdetails.getMaxSize()%>" type="text"/>
+                    </td>
                     <td style="height:30px" class="row-td-backgroud-select" align="center"><%=labdetails.getDatecreate()%></td>
                     <td  class="row-td-backgroud-select" align="center">
                         <select name="statusUp">
@@ -572,6 +581,7 @@
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getRoomName()%></td>
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getWidth()%></td>
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getLength()%></td>
+                    <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getMaxSize()  %></td>
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getDatecreate()%></td>
                     <td style="height:30px"  class="row-td-backgroud" align="center">
                         <%
@@ -591,7 +601,8 @@
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getRoomName()%></td>
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getWidth()%></td>
                     <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getLength()%></td>
-                    <td class="row-td-backgroud" style="height:30px" align="center"><%=labdetails.getDatecreate()%></td>
+                    <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getMaxSize() %></td>
+                    <td style="height:30px" class="row-td-backgroud" align="center"><%=labdetails.getDatecreate()%></td>
                     <td style="height:30px" class="row-td-backgroud" align="center">
                         <%
                             if (labdetails.getStatus() == 1) {
@@ -669,13 +680,13 @@
                                     <div class="site-input-div" style="<%=visibly%>">
                                         <div class="site-input-left"><img src="../img/category.png"/></div>
                                         <div class="site-input-rigth">
-                                            <input placeholder="Please enter name..." id="namecreate" onkeyup="lookupCreate(this.value);" style="  width:395px; height:26px; border:0px solid #d1d1d1;-moz-border-radius: 5px;
+                                            <input placeholder="Please enter room lab name..." id="namecreate" onkeyup="lookupCreate(this.value);" style="  width:395px; height:26px; border:0px solid #d1d1d1;-moz-border-radius: 5px;
                                                    -webkit-border-radius: 5px;" name="namecreate" type="text" class="validate[required,minSize[3]] text-input"  />
                                         </div>   
                                     </div>
                                 </td>
                                 <td>
-                                    <div style="width: 30px;<%=visibly%>" >
+                                    <div style="<%=visibly%>" >
                                         <div style="display: none;" id="autoSuggestionsList"></div>
                                         <div style="display: none;" id="error"></div>
 
@@ -702,6 +713,17 @@
                                         <div class="site-input-rigth">
                                             <input name="lengthCreate" placeholder="Please enter length..." style="  width:395px; height:26px; border:0px solid #d1d1d1;-moz-border-radius: 5px;
                                                    -webkit-border-radius: 5px;" class="validate[required,custom[float]]" id="lengthCreate" value="" type="text"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="site-input-div" style="<%=visibly%>">
+                                        <div class="site-input-left"><img src="../img/category.png"/></div>
+                                        <div class="site-input-rigth">
+                                            <input name="maxSizeCreate" placeholder="Please max seats of room" style="  width:395px; height:26px; border:0px solid #d1d1d1;-moz-border-radius: 5px;
+                                                   -webkit-border-radius: 5px;" class="validate[required,custom[integer],min[1]]" id="maxSizeCreate" value="" type="text"/>
                                         </div>
                                     </div>
                                 </td>

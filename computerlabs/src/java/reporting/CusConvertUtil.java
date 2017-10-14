@@ -28,6 +28,27 @@ public class CusConvertUtil {
 	public static DecimalFormat formatNumber2 = new DecimalFormat("#,##0");
         public static SimpleDateFormat formartDateEEMMDYYY = new SimpleDateFormat("EE, MMM d,yyyy");
 	
+        public static int getDateByDate(Date date){
+            int out = 0;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            out = cal.get(Calendar.DATE);
+            return out;
+        }
+        public static int getMonthByDate(Date date){
+            int out = 0;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            out = cal.get(Calendar.MONTH);
+            return out;
+        }
+        public static int getYearByDate(Date date){
+            int out = 0;
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            out = cal.get(Calendar.YEAR);
+            return out;
+        }
 	public static Date parseStringToDateEEMMDYYY(String data) {
 		try {
 			

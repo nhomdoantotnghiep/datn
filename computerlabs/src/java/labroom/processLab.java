@@ -10,6 +10,7 @@ import computerlabs.dbconnect;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -56,6 +57,7 @@ public class processLab extends HttpServlet {
             int status = 0;
             float width=0;
             float length=0;
+            int maxSize = 1;
             if (request.getParameter("roomNameUp") != null) {
                 roomNameUp = request.getParameter("roomNameUp").toString().trim();
             }
@@ -68,10 +70,13 @@ public class processLab extends HttpServlet {
             if (request.getParameter("lengthUp") != null) {
                 length = Float.parseFloat(request.getParameter("lengthUp").toString().trim());
             }
+            if (request.getParameter("maxSizeUp") != null) {
+                maxSize = Integer.parseInt(request.getParameter("maxSizeUp").toString().trim());
+            }
             CheckUsername check = new CheckUsername();
             int result = check.checkUsername(roomNameUp, "tbl_labroom", "roomName", " and roomID!=" + id);
             if (result == 0) {
-                if (updateInfo(id, roomNameUp,width,length,status) == 1) {
+                if (updateInfo(id, roomNameUp,width,length,status,maxSize) == 1) {
                     out.println("<div class=\"style-result\">Update successfull!</div>");
                 } else {
                     out.println("<div class=\"style-result\">Update fail!</div>");
@@ -85,6 +90,7 @@ public class processLab extends HttpServlet {
             int status = 0;
             float width=0;
             float length=0;
+            int maxSize = 1;
             if (request.getParameter("namecreate") != null) {
                 roomNameCreate = request.getParameter("namecreate").toString().trim();
             }
@@ -97,10 +103,13 @@ public class processLab extends HttpServlet {
             if (request.getParameter("lengthCreate") != null) {
                 length = Float.parseFloat(request.getParameter("lengthCreate").toString().trim());
             }
+            if (request.getParameter("maxSizeCreate") != null) {
+                maxSize = Integer.parseInt(request.getParameter("maxSizeCreate").toString().trim());
+            }
             CheckUsername check = new CheckUsername();
             int result = check.checkUsername(roomNameCreate, "tbl_labroom", "roomName", "");
             if (result == 0) {
-                if (createLab(roomNameCreate, status,width,length) == 1) {
+                if (createLab(roomNameCreate, status,width,length,maxSize) == 1) {
                     out.println("<div class=\"style-result\">Create successfull!</div>");
                 } else {
                     out.println("<div class=\"style-result\">Create fail!</div>");
@@ -140,14 +149,21 @@ public class processLab extends HttpServlet {
 
     }
 
-    private int updateInfo(int labID, String roomName,float width,float length, int status) {
+    private int updateInfo(int labID, String roomName,float width,float length, int status, int size) {
         Connection cnn = null;
-        Statement st = null;
-        String sql = "update tbl_labroom set roomName='" + roomName + "',status=" + status + " ,width="+width+" , length="+length+" where roomID=" + labID;
+        //Statement st = null;
+        PreparedStatement pst = null;
+        String sql = "update tbl_labroom set roomName=? ,status=? ,width=? , length=?, size=? where roomID=?";
         cnn = dbconnect.Connect();
         try {
-            st = cnn.createStatement();
-            int row = st.executeUpdate(sql);
+            pst = cnn.prepareStatement(sql);
+            pst.setString(1, roomName);
+            pst.setInt(2, status);
+            pst.setFloat(3, width);
+            pst.setFloat(4, length);
+            pst.setInt(5, size);
+            pst.setInt(6, labID);
+            int row = pst.executeUpdate();
             if (row > 0) {
                 return 1;
 
@@ -159,7 +175,7 @@ public class processLab extends HttpServlet {
             return 0;
         } finally {
             try {
-                st.close();
+                pst.close();
                 cnn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(processLab.class.getName()).log(Level.SEVERE, null, ex);
@@ -196,16 +212,23 @@ public class processLab extends HttpServlet {
 
     }
 
-    private int createLab(String roomName, int status,float width,float length) {
+    private int createLab(String roomName, int status,float width,float length, int size) {
         Connection cnn = null;
-        Statement st = null;
+        //Statement st = null;
+        PreparedStatement pst = null;
         Date date=new Date();
         SimpleDateFormat formart=new SimpleDateFormat("yyyy/MM/dd");
-        String sql = "insert into tbl_labroom(roomName,status,width,length,datecreate) values('" + roomName + "'," + status + ","+width+","+length+",'"+formart.format(date)+"')";
+        String sql = "insert into tbl_labroom(roomName,status,width,length,datecreate,size) values(?,?,?,?,?,?)";
         cnn = dbconnect.Connect();
         try {
-            st = cnn.createStatement();
-            int row = st.executeUpdate(sql);
+            pst = cnn.prepareStatement(sql);
+            pst.setString(1, roomName);
+            pst.setInt(2, status);
+            pst.setFloat(3, width);
+            pst.setFloat(4, length);
+            pst.setString(5, formart.format(date));
+            pst.setInt(6, size);
+            int row = pst.executeUpdate();
             if (row > 0) {
                 return 1;
 
@@ -217,7 +240,7 @@ public class processLab extends HttpServlet {
             return 0;
         } finally {
             try {
-                st.close();
+                pst.close();
                 cnn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(processLab.class.getName()).log(Level.SEVERE, null, ex);

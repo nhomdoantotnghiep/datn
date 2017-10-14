@@ -358,12 +358,13 @@
                     Statement st = null;
                     ResultSet rs = null;
                     int sID = 0;
+                    int maxSize = 1;
                     SimpleDateFormat formarter = new SimpleDateFormat("MM/dd/yyyy");
                     if (session.getAttribute("scheID") != null) {
                         sID = Integer.parseInt(session.getAttribute("scheID").toString().trim());
                     }
                     String sql = "select TOP 1 u.username as username,c.className as className,r.courseName courseName,"
-                            + "r.sendDate as sendDate,l.roomName roomName,s.shiftname as sName,s.starttime,s.endtime,d.dateword,u.fullname as fullname, r.status as restatus "
+                            + "r.sendDate as sendDate,l.roomName roomName,s.shiftname as sName,s.starttime,s.endtime,d.dateword,u.fullname as fullname, r.status as restatus,lab.size as lsize "
                             + "from tbl_request as r inner join tbl_user as u on r.userID=u.userID "
                             + "inner join tbl_class as c on r.classID=c.classID inner join tbl_schedule "
                             + "as sche on r.scheduleID=sche.scheduleID inner join tbl_shiftname as s on "
@@ -380,9 +381,14 @@
                             String endtime = rs.getTime("endtime").toString();
                             String dateword = formarter.format(rs.getDate("dateword"));
                             request.setAttribute("date", dateword);
+                            maxSize = rs.getInt("lsize");
                 %>
                 <tr>
-                    <td align="left" colspan="6" ><span style="font-size: 13px;font-style: italic;font-weight: bold;">Shift Name: <%=sName%> &nbsp; (<%=starttime.substring(0, 5) + "-" + endtime.substring(0, 5)%>)&nbsp;&nbsp; Room Name: <%=roomName%> &nbsp;&nbsp;&nbsp;Date Work: <%=dateword%> (mm/dd/yyyy)</span></td>
+                    <td align="left" colspan="6" ><span style="font-size: 13px;font-style: italic;font-weight: bold;">
+                            Shift Name: <%=sName%> &nbsp; (<%=starttime.substring(0, 5) + "-" + endtime.substring(0, 5)%>)
+                            <br/> Room Name: <%=roomName%> 
+                            <br/>Max seats: <%=maxSize%> 
+                            <br/> Date Work: <%=dateword%> (mm/dd/yyyy)</span></td>
                 </tr>
                 <%
                         }
@@ -405,6 +411,7 @@
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Course Name</td>
                     <td style="width: 120px;height: 25px;color: white;" align="center" >User Name Order</td>
                     <td style="width: 200px;height: 25px;color: white;" align="center" >Full Name Order</td>
+                    <td style="width: 80px;height: 25px;color: white;" align="center" >Number of Student</td>
                     <td style="width: 130px;height: 25px;color: white;" align="center" >Date Send</td>
                     <td style="width: 100px;height: 25px;color: white;" align="center" >Status</td>
                     <td align="center" style="color: white;">Action</td>
@@ -423,6 +430,7 @@
                     <td align="center"><%=requestSche.getCourseName()%></td>
                     <td align="center" ><%=requestSche.getUsername()%></td>
                     <td align="center" ><%=requestSche.getFullname()%></td>
+                    <td align="center" ><%=requestSche.getMaxSize()%></td>
                     <td align="center" ><%=requestSche.getSendDate()%></td>
                     <td align="center" >
                         <select name="status<%=requestSche.getReqID()%>" >
@@ -459,6 +467,7 @@
                     <td align="center" class="color-tabletd"><%=requestSche.getCourseName()%></td>
                     <td align="center" class="color-tabletd"><%=requestSche.getUsername()%></td>
                     <td align="center" class="color-tabletd"><%=requestSche.getFullname()%></td>
+                    <td align="center" class="color-tabletd"><%=requestSche.getMaxSize()%></td>
                     <td align="center" class="color-tabletd"><%=requestSche.getSendDate()%></td>
 
                     <td align="center" class="color-tabletd">

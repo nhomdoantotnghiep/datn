@@ -40,8 +40,8 @@
                     <tr>
                         <td></td>
                         <td valign="middle"  style="width: 200px;height: 31px;"><a href="#" class="link-admin">Welcome to: <%=session.getAttribute("useradmin") == null ? "" : session.getAttribute("useradmin")%></a></td>
-                        <td style="width: 36px;height: 31px;"><a href="#"><img src="../img/info.png" width="36px" height="31px" /></a></td>
-                        <td style="width: 36px;height: 31px;"><a href="#"><img src="../img/changepwd.png" width="36px" height="31px" /></a></td>
+                        <td style="width: 36px;height: 31px;"><a href="?options=myUserDetail"><img src="../img/info.png" width="36px" height="31px" /></a></td>
+                        <!--<td style="width: 36px;height: 31px;"><a href="#"><img src="../img/changepwd.png" width="36px" height="31px" /></a></td>-->
                         <td style="width: 33px;height: 31px;"><a href="?option=logout"><img src="../img/close.png" width="33px" height="31px" onclick="return confirm('Administration Logout?');" /></a></td>
                     </tr>
                 </table>
@@ -112,13 +112,7 @@
                                 </td>
                             </tr>
                             
-                            <tr>
-                                <td valign="top" class="bg-title-td">
-                                    <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? bgSelected : bgNotSelect %>">
-                                        <a href="?options=ManagerClasses" class="<%=ops.equalsIgnoreCase("ManagerClasses") ? txtSelected : txtNotSelect %>"> Manager Class</a>           
-                                    </div>
-                                </td>
-                            </tr>
+                            
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerLab") ? bgSelected : bgNotSelect %>">
@@ -133,7 +127,13 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerClasses") ? bgSelected : bgNotSelect %>">
+                                        <a href="?options=ManagerClasses" class="<%=ops.equalsIgnoreCase("ManagerClasses") ? txtSelected : txtNotSelect %>"> Manager Class</a>           
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerShift") ? bgSelected : bgNotSelect %>">
@@ -160,6 +160,8 @@
                                                     title = "Admin Create User";
                                                 } else if (opt.equalsIgnoreCase("userDetails")) {
                                                     title = "User Details";
+                                                } else if (opt.equalsIgnoreCase("myUserDetail")) {
+                                                    title = "User Detail";
                                                 } else if (opt.equalsIgnoreCase("search")) {
                                                     title = "Search";
                                                 } else if (opt.equalsIgnoreCase("ManagerSchedule")) {

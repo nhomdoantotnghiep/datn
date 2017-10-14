@@ -19,7 +19,16 @@ public class classLabroom {
     private float width;
     private float length;
     private String datecreate;
+    private int maxSize;
 
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+    
     public int getRoomID() {
         return roomID;
     }
@@ -68,12 +77,13 @@ public class classLabroom {
         this.datecreate = datecreate;
     }
     
-    public classLabroom(int roomID,String roomName,int status,float width, float length, String datecreate){
+    public classLabroom(int roomID,String roomName,int status,float width, float length, String datecreate,int maxSize){
         this.roomID=roomID;
         this.roomName=roomName;
         this.status=status;
         this.width=width;
         this.length=length;
         this.datecreate=datecreate;
+        this.maxSize = maxSize;
     }
 }

@@ -98,7 +98,10 @@ public class createuser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        int userid = Integer.parseInt(request.getParameter("userIDU"));
+        
         String usename = request.getParameter("txtuser");
+        String txtpwdold = request.getParameter("txtpwdold");
         String txtpwd = request.getParameter("txtpwd");
         String txtfullname = request.getParameter("txtfullname");
         String txtEmail = request.getParameter("txtEmail");
@@ -118,62 +121,103 @@ public class createuser extends HttpServlet {
         //    statusHOD = 1;
         //}
         //
-        boolean check = true;
-        if (usename.equalsIgnoreCase("") || txtEmail.equalsIgnoreCase("") || txtpwd.equalsIgnoreCase("") || txtfullname.equalsIgnoreCase("") || txtAddress.equalsIgnoreCase("")) {
-            check = false;
-        }
-        else if(usename.length()<6 || txtpwd.length()<6 || !txtEmail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
-            check=false;
-        }
-        CheckUsername checkuser=new CheckUsername();
-        int resultCheck=checkuser.checkUsername(usename, "tbl_user", "username","");
-        if (resultCheck == 1) {
-                check=false;
-            } else if(resultCheck==0){        
-            }else if(resultCheck==2){
-                 check=false;
+        if(userid > 0){
+            String pwd = txtpwdold;
+            if(txtpwd != null && txtpwd.trim().length() > 0){
+                pwd = txtpwd;
             }
-            else{
-                out.println("EX: " + usename);
-                 check=false;
-            }
-        //out.println("User: "+usename+"<br/>Password: "+txtpwd+"<br/>Full name: "+txtfullname+"<br/>Address: "+txtAddress+"<br/>Gender: "+rdoGender+"<br/>Date: "+date+"<br/>Department: "+department+"<br/>HOD: "+statusHOD);
-        if (check == true) {
             Connection cnn = dbconnect.Connect();
-            PreparedStatement pst = null;
-            String sql = "insert into tbl_user(username,password,fullname,address,gender,"
-                    + "birthday,status,departmentID,HOD,Email) values(?,?,?,?,?,?,?,?,?,?) ";
-            try {
-                pst = cnn.prepareStatement(sql);
-                pst.setString(1, usename);
-                pst.setString(2, txtpwd);
-                pst.setString(3, txtfullname);
-                pst.setString(4, txtAddress);
-                pst.setInt(5, Integer.parseInt(rdoGender));
-                pst.setString(6, birthday);
-                pst.setInt(7, 1);
-                pst.setInt(8, Integer.parseInt(department));
-                pst.setInt(9, statusHOD);
-                 pst.setString(10, txtEmail);
-                int row = pst.executeUpdate();
-                if (row > 0) {
-                    out.println("Create successfull!");
-                } else {
-                    out.println("Create fail!");
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(createuser.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
+                PreparedStatement pst = null;
+                String sql = " update tbl_user set password=?,fullname=?,address=?,Email=?,gender=?,birthday=? "
+                        + " where userID=? and password=? ";
                 try {
-                    pst.close();
-                    cnn.close();
+                    pst = cnn.prepareStatement(sql);
+                    
+                    pst.setString(1, pwd);
+                    pst.setString(2, txtfullname);
+                    pst.setString(3, txtAddress);
+                    pst.setString(4, txtEmail);
+                    pst.setInt(5, Integer.parseInt(rdoGender));
+                    pst.setString(6, birthday);
+                    pst.setInt(7, userid);
+                    pst.setString(8, txtpwdold);
+                    
+                    int row = pst.executeUpdate();
+                    if (row > 0) {
+                        out.println("<div class=\"style-result\">Update successfull !!!!</div>");
+                    } else {
+                        out.println("<div class=\"style-result-fail\">Update fail!</div>");
+                        //response.sendError(400, "Update fail!");
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(createuser.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        pst.close();
+                        cnn.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(createuser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            }
         }else{
-            out.println("Create fail!");
+            boolean check = true;
+            if (usename.equalsIgnoreCase("") || txtEmail.equalsIgnoreCase("") || txtpwd.equalsIgnoreCase("") || txtfullname.equalsIgnoreCase("") || txtAddress.equalsIgnoreCase("")) {
+                check = false;
+            }
+            else if(usename.length()<6 || txtpwd.length()<6 || !txtEmail.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")){
+                check=false;
+            }
+            CheckUsername checkuser=new CheckUsername();
+            int resultCheck=checkuser.checkUsername(usename, "tbl_user", "username","");
+            if (resultCheck == 1) {
+                    check=false;
+                } else if(resultCheck==0){        
+                }else if(resultCheck==2){
+                     check=false;
+                }
+                else{
+                    out.println("EX: " + usename);
+                     check=false;
+                }
+            //out.println("User: "+usename+"<br/>Password: "+txtpwd+"<br/>Full name: "+txtfullname+"<br/>Address: "+txtAddress+"<br/>Gender: "+rdoGender+"<br/>Date: "+date+"<br/>Department: "+department+"<br/>HOD: "+statusHOD);
+            if (check == true) {
+                Connection cnn = dbconnect.Connect();
+                PreparedStatement pst = null;
+                String sql = "insert into tbl_user(username,password,fullname,address,gender,"
+                        + "birthday,status,departmentID,HOD,Email) values(?,?,?,?,?,?,?,?,?,?) ";
+                try {
+                    pst = cnn.prepareStatement(sql);
+                    pst.setString(1, usename);
+                    pst.setString(2, txtpwd);
+                    pst.setString(3, txtfullname);
+                    pst.setString(4, txtAddress);
+                    pst.setInt(5, Integer.parseInt(rdoGender));
+                    pst.setString(6, birthday);
+                    pst.setInt(7, 1);
+                    pst.setInt(8, Integer.parseInt(department));
+                    pst.setInt(9, statusHOD);
+                     pst.setString(10, txtEmail);
+                    int row = pst.executeUpdate();
+                    if (row > 0) {
+                        out.println("<div class=\"style-result\">Create successfull!</div>");
+                    } else {
+                        out.println("<div class=\"style-result-fail\">Create fail!</div>");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(createuser.class.getName()).log(Level.SEVERE, null, ex);
+                } finally {
+                    try {
+                        pst.close();
+                        cnn.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(createuser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }else{
+                out.println("<div class=\"style-result-fail\">Create fail!</div>");
+            }
         }
+        
 
     }
    

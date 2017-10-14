@@ -8,6 +8,8 @@
             pagename = "createuser.jsp";
         } else if (opt.equalsIgnoreCase("userDetails")) {
             pagename = "userDetails.jsp";
+        } else if (opt.equalsIgnoreCase("myUserDetail")) {
+            pagename = "myUserDetail.jsp";
         } else if (opt.equalsIgnoreCase("search")) {
             pagename = "indexUser.jsp";
         } else if (opt.equalsIgnoreCase("ManagerSchedule")) {

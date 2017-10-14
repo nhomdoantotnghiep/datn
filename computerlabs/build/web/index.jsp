@@ -134,7 +134,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td width="120px">
-                                                           <!-- <a href="?option=viewinfo" class="btnView"><span style="color: white;">View Request</span></a>-->
+                                                        <a href="?option=myUserDetail" class="btnView"><span style="color: white;">My User</span></a>
                                                         </td>
                                                         <td>  <a href="?option=logout" class="btnOut"><span style="color: white;">LogOut</span></a></td>
                                                     </tr>
@@ -205,6 +205,8 @@
                                         title = "List Complaint";
                                     } else if (opt.equalsIgnoreCase("complaintDetails")) {
                                         title = "Complaint Details";
+                                    } else if (opt.equalsIgnoreCase("myUserDetail")) {
+                                        title = "User Detail";
                                     } else {
                                         title = "Home Page";
                                     }

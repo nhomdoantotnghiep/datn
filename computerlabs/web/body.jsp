@@ -51,6 +51,13 @@
             } else {
                  pagename = "login.jsp";
             }
+        } else if (opt.equalsIgnoreCase("myUserDetail")) {
+            if (session.getAttribute("userID") != null) {
+                pagename = "myUserDetailClient.jsp";
+            } else {
+                pagename = "login.jsp";
+            }
+            
         }
         else {
             pagename = "home.jsp";

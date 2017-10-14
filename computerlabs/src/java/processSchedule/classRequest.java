@@ -22,7 +22,19 @@ public class classRequest {
     private String fullname;
     private String status;
     private int cnt;
-     private int reqID;
+    private int reqID;
+    private int maxSize;
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    
+    
 
     public int getReqID() {
         return reqID;
@@ -120,7 +132,7 @@ public class classRequest {
         this.status = status;
     }
      public classRequest(String username,String className, String courseName, String sendDate,  
-          String roomName,String sName,String startendtime,String datework,String fullname,String restatus,int cnt,int reqID ) {  
+          String roomName,String sName,String startendtime,String datework,String fullname,String restatus,int cnt,int reqID,int maxSize ) {  
          this.username=username;
          this.className=className;
          this.courseName=courseName;
@@ -133,5 +145,6 @@ public class classRequest {
          this.cnt=cnt;
          this.sName=sName;
          this.reqID=reqID;
+         this.maxSize = maxSize;
     }  
 }

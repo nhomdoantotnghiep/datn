@@ -47,8 +47,9 @@
 
                 <tr>
                     <td ><%=dName%>:</td>
-                    <td><textarea placeholder="Please enter complaint of <%=dName %>" rows="2" class="validate[required] text-input" name="row<%=dID%>" style="  width:395px; border:1px solid #d1d1d1;-moz-border-radius: 5px;
-                                       -webkit-border-radius: 5px;" ></textarea></td>
+                    <td>
+                        <textarea placeholder="Please enter complaint of <%=dName %>" rows="2" class="validate[required] text-input" name="row<%=dID%>" style="  width:395px; -moz-border-radius: 5px;-webkit-border-radius: 5px;" ></textarea>
+                    </td>
                 </tr>
                 <%
                                 }

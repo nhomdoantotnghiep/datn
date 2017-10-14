@@ -360,6 +360,7 @@
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Class Name</td>
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Course Name</td>
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Shift Name</td>
+                    <td style="width: 100px;height: 25px;color: white;" align="center" >Number of Student</td>
                     <td style="width: 150px;height: 25px;color: white;" align="center" >Date Work</td>
                     <td style="width: 100px;height: 25px;color: white;" align="center" >Status</td>
                     <td align="center" style="color: white;">Action</td>
@@ -376,6 +377,7 @@
                     <td align="center" ><%=requestSche.getClassName()%></td>
                     <td align="center"><%=requestSche.getCourseName()%></td>
                     <td align="center" ><%=requestSche.getsName()%></td>
+                    <td align="center" ><%=requestSche.getMaxSize()%></td>
                     <td align="center" ><%=requestSche.getDateword()%></td>
                     <td align="center" >
                         <%
@@ -416,6 +418,7 @@
                     <td align="center" class="color-tabletd"><%=requestSche.getClassName()%></td>
                     <td align="center" class="color-tabletd"><%=requestSche.getCourseName()%></td>
                     <td align="center" class="color-tabletd" ><%=requestSche.getsName()%></td>
+                    <td align="center" class="color-tabletd" ><%=requestSche.getMaxSize()%></td>
                     <td align="center" class="color-tabletd" ><%=requestSche.getDateword()%></td>
 
                     <td align="center" class="color-tabletd">
