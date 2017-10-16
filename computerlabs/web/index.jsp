@@ -47,13 +47,7 @@
                 <div class="site-eml1-top-menu" style="background-image: url('img/bg-menu.png')">
                     <div class="site-eml1-content-menu" style="background-image: url('img/menu.png')" >
                         <div class="site-eml1-content-leftmenu">
-                            <div style="width:147px;height:20px;float:left">
-
-                                <input id="TextBox1" class="site-eml1-content-search" name="txtseach" type="textbox" />
-                            </div>
-                            <div style="width:23px;height:20px;float:right;margin-top:13px;">
-                                <a href="#"><img src="img/search.png" width="17px" style="height:17px" /></a>
-                            </div>
+                            
                         </div>
                         <div class="site-eml1-content-rigthmenu">
 

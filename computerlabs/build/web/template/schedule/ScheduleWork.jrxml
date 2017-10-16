@@ -508,7 +508,7 @@
 								<font fontName="Times New Roman" size="14" isBold="true"/>
 								<paragraph leftIndent="10"/>
 							</textElement>
-							<textFieldExpression><![CDATA["Working"]]></textFieldExpression>
+							<textFieldExpression><![CDATA["Duty"]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>
