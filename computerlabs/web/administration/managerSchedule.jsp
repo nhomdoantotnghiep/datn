@@ -1,5 +1,7 @@
 
 
+<%@page import="processSchedule.UserModel"%>
+<%@page import="processSchedule.WorkingShift"%>
 <%@page import="reporting.CusConvertUtil"%>
 <%@page import="java.util.Date"%>
 <%@page import="reporting.ReportConstant"%>
@@ -223,6 +225,17 @@
                 fromRP = document.test.inputdateFrom.value;
 
                 window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP,"_blank");
+            }
+            function deleteDate(dateID){
+                console.log("--dateID--"+dateID);
+                var r = confirm("Delete this date?");
+                if (r == true) {
+                    var getID = dateID;
+                    document.test.deletedateID.value = getID;
+                    
+                } else {
+                    txt = "You pressed Cancel!";
+                }
             }
         </script>
 
@@ -593,8 +606,9 @@
                                 }
                             }
                         %>
-                    <td class="td-show" width="170px" align="center">Date</td>
-                    <td class="td-show" width="140px" align="center">Action</td>
+                    <td class="td-show" width="140px" align="center">Date</td>
+                    <td class="td-show" width="140px" align="center">Duty</td>
+                    <td class="td-show" width="100px" align="center">Action</td>
 
                 </tr>  
 
@@ -622,7 +636,7 @@
                         System.out.println("Date1 is equal to Date2");// 2 ngay now temp cung thoi diem
                         canSet = true;
                     }
-                    out.println("<td style='background:"+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">" + studentDetailsDTO.getKeyword() + "</td>");
+                    out.println("<td style='background:"+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">" + studentDetailsDTO.getKeyword() + "</td>");
                     String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
                     String[] strGetID = studentDetailsDTO.getId().split("/");
                     //for (int j = (strGetStatus.length - 1); j >= 0; j--) {
@@ -632,31 +646,50 @@
                             checkRequest check = new checkRequest();
 
                             if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 2) {
-                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:55px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 0) {
-                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:55px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             } else {
-                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:55px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
                             }
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 0) {
-                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
+                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:55px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 2) {
-                            out.println("<td style='background: "+(canSet ?"#efffc7;":"#f76060;")+"height:30px' align=\"center\"></td>");
+                            out.println("<td style='background: "+(canSet ?"#efffc7;":"#f76060;")+"height:55px' align=\"center\"></td>");
                         }
                     }
-                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">" + studentDetailsDTO.getDateword()+ "</td>");
+                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">" + studentDetailsDTO.getDateword()+ "</td>");
+                    List<WorkingShift> lst = checkRequest.getListWSByDateID(studentDetailsDTO.getDateworkID());
+                    String onDuty = "";
+                    if(lst != null && lst.size() > 0){
+                        for(int um = 0; um < lst.size() ; um ++){
+                            UserModel userModel = checkRequest.getListUserByID(lst.get(um).getUser_id());
+                            if(userModel != null){
+                                if(um == (lst.size() -1)){
+                                    onDuty += userModel.getFullName();
+                                }else{
+                                    onDuty += userModel.getFullName()+"<br/>";
+                                }
+                            }
+                        }
+                    }
+                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px;padding-left:5px' >" + onDuty+ "</td>");
                     outPutRoomID output = new outPutRoomID();
                     if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
-                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\">");   
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">");   
                     if(canSet){
                         out.println( "<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>");
-                        //out.println( "&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
-                        //out.println("&nbsp;&nbsp;<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/delete.png\" width=\"15px\" height=\"15px\" /></a>");
+                        out.println( "&nbsp;&nbsp;<a title='Assign Working' href=\"?options=AssignSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
+                        %>
+                        
+                        &nbsp;&nbsp;<input type="submit" name="delete" style="background: url('../img/delete.png');width: 23px;height: 23px;" onclick="deleteDate(<%=studentDetailsDTO.getDateworkID()%>)" class="button_img" value="" title="Delete" />
+                        <%
+                        
                     }
                         
                          out.println( "</td>");
                     } else {
-                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:30px' align=\"center\"></td>");
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\"></td>");
                     }
                     out.println("</tr>");
                 %>  
@@ -668,6 +701,9 @@
 
 
             </table>
+                <input type='hidden' name='deletedateID' />
+            <br/>
+            <div id='content' ></div>
             <br/>
             <table cellpadding="1px" cellspacing="1px" id="tb" width="950px" align="center"> 
                 <tr > 
@@ -758,7 +794,7 @@
                         <%
                             if (cntsche > 0) {
                         %>
-                        <div id='content' class="style-result"></div>
+                        <!--<div id='content' ></div>-->
                         <%
                             }
                         %>

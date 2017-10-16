@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    
     <servlet>
         <servlet-name>CheckUsername</servlet-name>
         <servlet-class>computerlabs.CheckUsername</servlet-class>
@@ -209,6 +208,10 @@
         <servlet-name>showWorkingShift</servlet-name>
         <servlet-class>processSchedule.showWorkingShift</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>assignSchedule</servlet-name>
+        <servlet-class>processSchedule.assignSchedule</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckUsername</servlet-name>
         <url-pattern>/CheckUsername</url-pattern>
@@ -412,6 +415,10 @@
     <servlet-mapping>
         <servlet-name>showWorkingShift</servlet-name>
         <url-pattern>/showWorkingShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>assignSchedule</servlet-name>
+        <url-pattern>/assignSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

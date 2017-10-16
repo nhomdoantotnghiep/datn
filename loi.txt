@@ -16,6 +16,10 @@ Sinh viên : Có nhiệm vụ đăng ký lịch học
 ***- Làm Đổi thông tin người dùng
 	Admin
 	client	
+	
+***-Time picker cho lựa chọn time ở qản lý shift
+***-Xóa ngày làm việc
+ 	
 - admin khi click vào từng dòng có thể phân công lịch trực.
 	Chuyển đến 1 trang mới, lựa chọn tối đa 6 người trực trong ngày từ group technical staff	
 	người trực ở bên client sẽ thấy lịch trực của mình và danh sách như bên admin, nhưng ko có làm gì dc ngoài xuất lịch trực

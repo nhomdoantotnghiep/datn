@@ -18,6 +18,8 @@
             pagename = "createSchedule.jsp";
         } else if (opt.equalsIgnoreCase("scheDetails")) {
             pagename = "indexScheduleDetails.jsp";
+        } else if (opt.equalsIgnoreCase("AssignSchedule")) {
+            pagename = "AssignSchedule.jsp";
         } else if (opt.equalsIgnoreCase("ManagerShift")) {
             pagename = "managerShiftName.jsp";
         } else if (opt.equalsIgnoreCase("ManagerCategoryDevice")) {

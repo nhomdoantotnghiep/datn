@@ -9,7 +9,9 @@
 
 <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
 <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+<link rel="stylesheet" href="../css/DateTimePicker.min.css" type="text/css"/> 
 <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
+<script src="../js/DateTimePicker.min.js" type="text/javascript"></script> 
 <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
 <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
 <script type="text/javascript">
@@ -27,6 +29,8 @@
                 return false;
             }
         });
+        
+        $("#dtBox").DateTimePicker();
     });
     function lookup(txtName, ID) {
         if (txtName.length < 1) {
@@ -95,10 +99,10 @@
                 </div>
             </td>
             <td align="center" style="background: #e7f5fe;height:30px; ">
-                <input name="starttime" style="width: 80px;"  class="validate[required,custom[time]]" value="<%=startTime%>" type="text"/>
+                <input name="starttime" style="width: 80px;"  class="validate[required,custom[time]] startShift" value="<%=startTime%>" type="text"  data-field="time"/>
             </td>
             <td align="center" style="background: #e7f5fe;height:30px; ">
-                <input name="endtime" style="width: 80px;"  class="validate[required,custom[time]]" value="<%=endTime%>" type="text"/>
+                <input name="endtime" style="width: 80px;"  class="validate[required,custom[time]] endShift" value="<%=endTime%>" type="text"  data-field="time"/>
             </td>
             <%
             } else {
@@ -135,7 +139,7 @@
             %>
             <td align="center" style="background: #e7f5fe;height:30px; ">
                 <input type="submit" class="button_img" style="background: url('../img/edit2.png');width: 23px;height: 23px;" value="" />
-                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="?options=ManagerShift"><img src="../img/back.png" width="23px" height="20px" /></a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a href="?options=ManagerShift"><img src="../img/back.png" width="23px" height="20px" /></a>
             </td>
                 <%
                 } else {
@@ -173,10 +177,10 @@
                 </div>
             </td>
             <td align="center" >
-                <input name="starttime" style="width: 80px;"  class="validate[required,custom[time]]" value="<%=startTime%>" type="text"/>
+                <input name="starttime" style="width: 80px;"  class="validate[required,custom[time]] startShift" value="<%=startTime%>" type="text"  data-field="time"/>
             </td>
             <td align="center">
-                <input name="endtime" style="width: 80px;"  class="validate[required,custom[time]]" value="<%=endTime%>" type="text"/>
+                <input name="endtime" style="width: 80px;"  class="validate[required,custom[time]] endShift" value="<%=endTime%>" type="text"  data-field="time"/>
             </td>
             <%
             } else {
@@ -235,6 +239,7 @@
                 <td align="center" colspan="6"><div id="content"></div></td>
         </tr>
     </table>
+    <div id="dtBox"></div>
 </form>
 <script type="text/javascript">
 

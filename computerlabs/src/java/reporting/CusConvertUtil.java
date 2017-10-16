@@ -22,7 +22,7 @@ public class CusConvertUtil {
 	public static SimpleDateFormat formatDateShort = new SimpleDateFormat("dd/MM/yyyy");
 	public static SimpleDateFormat formatDateShort2 = new SimpleDateFormat("yyyy/MM/dd");
 	public static SimpleDateFormat formatDateFullTime = new SimpleDateFormat("HH:mm dd/MM/yyyy");
-	public static SimpleDateFormat formatDateSendDate = new SimpleDateFormat("YYYY-MM-DD HH:mm:ss");
+	public static SimpleDateFormat formatDateSendDate = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 	public static SimpleDateFormat formatDateFullTime3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	public static DecimalFormat formatNumber = new DecimalFormat("#,##0.00");
 	public static DecimalFormat formatNumber2 = new DecimalFormat("#,##0");
@@ -61,6 +61,15 @@ public class CusConvertUtil {
 	public static String parseDateEEMMDYYYToString(Date date) {
 		try {
 			return formartDateEEMMDYYY.format(date);
+		} catch (Exception es) {
+			
+		}
+		return "";
+	}
+        public static String parseDateToStringOfSendDate(Date data) {
+		try {
+			
+			return formatDateSendDate.format(data);
 		} catch (Exception es) {
 			
 		}

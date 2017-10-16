@@ -33,7 +33,39 @@ public class updateSchedule extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        if (request.getParameter("txtResultShift") != null) {
+        if (request.getParameter("deletedateID") != null) {
+            System.out.println("-updateSchedule-deletedateID-"+request.getParameter("deletedateID"));
+            int deletedateID  =  Integer.parseInt(request.getParameter("deletedateID"));
+            if(deletedateID>0){
+                int canDelete = 0;
+                int[] scheIDarr = checkRequest.checkScheByDateID(deletedateID);
+                
+                int checkWorkingShiftID = checkRequest.checkExistWorkingShift(deletedateID);
+                int temp = checkRequest.checkExistRequest(scheIDarr);
+                if (temp > 0){
+                    canDelete = canDelete + 1;// ko the delete
+                }
+                if(checkWorkingShiftID >0){
+                    canDelete = canDelete + 1;// ko the delete
+                }
+                if(canDelete == 0){
+                    int deleteSche = deleteSche(deletedateID);
+                    int deleteDate = 0;
+                    if(deleteSche > 0){
+                        deleteDate = deleteDateWork(deletedateID);
+                    }
+                    if(deleteDate > 0){
+                        out.println("<div class=\"style-result\">Delete Successfull!</div>");
+                    }else{
+                        out.println("<div class=\"style-result-fail\">Cannot Delete this Date!!</div>");
+                    }
+                }else{
+                    out.println("<div class=\"style-result-fail\">Cannot Delete this Date!</div>");
+                }
+                
+
+            }
+        }else if (request.getParameter("txtResultShift") != null) {
             String[] scheID = request.getParameter("txtResultShift").trim().split("/");
             Connection cnn = null;
             Statement st = null;
@@ -83,8 +115,56 @@ public class updateSchedule extends HttpServlet {
                 out.println("Can not update, because date is not valid!");
             }
         }
+        
     }
-
+    private int deleteSche(int dateID){
+        int out = 0;
+        Connection cnn=null;
+        Statement st=null;
+        String sql="delete from tbl_schedule where dateworkid="+dateID;
+        cnn=dbconnect.Connect();
+        try {
+            st=cnn.createStatement();
+            int row=st.executeUpdate(sql);
+            if(row>0){
+                 out = out + 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(updateSchedule.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                st.close();
+                cnn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(updateSchedule.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return out;
+    }
+    private int deleteDateWork(int dateID){
+        int out = 0;
+        Connection cnn=null;
+        Statement st=null;
+        String sql="delete from tbl_datework where datewordid="+dateID;
+        cnn=dbconnect.Connect();
+        try {
+            st=cnn.createStatement();
+            int row=st.executeUpdate(sql);
+            if(row>0){
+                 out = out + 1;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(updateSchedule.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                st.close();
+                cnn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(updateSchedule.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return out;
+    }
     private void UpdateSchedule(int status, int scheID) {
         Connection cnn = null;
         PreparedStatement pst = null;

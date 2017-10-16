@@ -96,7 +96,7 @@ public class sendRequest extends HttpServlet {
             SimpleDateFormat formater = new SimpleDateFormat("yyyy/MM/dd");
             Date date = new Date();
             if (checkNumberRequestSendOfUser(userID, scheID) == 1) {
-                out.println("Can not sent request. Because you have sent a request earlier.!");
+                out.println("<div class=\"style-result-fail\">Can not sent request. Because you have sent a request earlier.!</div>");
             } else {
                 if(userID>0 && classID >0 && scheID >0){
                 Connection cnn = null;
@@ -112,9 +112,9 @@ public class sendRequest extends HttpServlet {
                     pst.setInt(5, numberStudents);
                     int row = pst.executeUpdate();
                     if (row > 0) {
-                        out.println("Send Request Successfull. Please waiting reply to the administrator!");
+                        out.println("<div class=\"style-result\">Send Request Successfull. Please waiting reply to the administrator!</div>");
                     } else {
-                        out.println("Send Request Fail!");
+                        out.println("<div class=\"style-result-fail\">Send Request Fail!</div>");
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(sendRequest.class.getName()).log(Level.SEVERE, null, ex);
@@ -127,7 +127,7 @@ public class sendRequest extends HttpServlet {
                     }
                 }
             }else{
-                     out.println("Send Request Fail!");
+                     out.println("<div class=\"style-result-fail\">Send Request Fail!</div>");
                 }
             }
         }
