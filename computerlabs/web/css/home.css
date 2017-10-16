@@ -6,7 +6,7 @@
 }
 .main
 {
-    width:100%; min-height:1000px; padding:0px; margin:0px auto;
+    width:100%; min-height:1600px; padding:0px; margin:0px auto;
 }
 .site-elm1
 {
@@ -14,7 +14,7 @@
 }
 .site-elm2
 {
-    width:100%; min-height:500px; padding:0px; margin:0px auto;background:url('../img/bg-eml2.png');
+    width:100%; min-height:800px; padding:0px; margin:0px auto;background:url('../img/bg-eml2.png');
 }
 .site-elm3
 {

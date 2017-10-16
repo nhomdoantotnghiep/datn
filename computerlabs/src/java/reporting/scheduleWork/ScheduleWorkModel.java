@@ -10,9 +10,19 @@ public class ScheduleWorkModel {
     private String labName;
     private String from;
     private String to;
+    private String tStaff;
     private List<ShiftLst> shiftLst;
     private List<ShiftLst> shiftLstTable;
+
+    public String gettStaff() {
+        return tStaff;
+    }
+
+    public void settStaff(String tStaff) {
+        this.tStaff = tStaff;
+    }
             
+    
     public String getLabName() {
         return labName;
     }

@@ -1,5 +1,6 @@
 
 
+<%@page import="java.util.Enumeration"%>
 <%@page import="processSchedule.UserModel"%>
 <%@page import="processSchedule.WorkingShift"%>
 <%@page import="reporting.CusConvertUtil"%>
@@ -38,16 +39,28 @@
     if(request.getAttribute("wuid") != null && request.getAttribute("wuid").toString().trim().length() > 0){
         wuid = Integer.parseInt(request.getAttribute("wuid").toString());
     }
-            
+    int userID = -1;
+//    Enumeration<String> attributeNames = request.getAttributeNames();
+//    while (attributeNames.hasMoreElements()) {
+//        String  attributeName = attributeNames.nextElement();
+//        System.out.println("--attributeName--"+attributeName+"===");
+//    }
+    
+    if(session.getAttribute("userID") != null){
+        userID = Integer.parseInt(session.getAttribute("userID").toString());
+    }
+    System.out.println("--userID--view--ws-"+userID);
 %>
         <link rel="stylesheet" href="css/contentcss.css" />
-        <link rel="stylesheet" href="../css/jquery-ui.min.css" />
-        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-        <script src="../js/jquery-1.8.3.min.js"></script>
-        <script src="../js/jquery-ui.min.js"></script>
-        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
+        <link rel="stylesheet" href="css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="css/cssvalidate/template.css" type="text/css"/> 
+        <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script src="js/script.js" type="text/javascript"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
         <script>
             $(document).ready(function() {
                 $(function() {
@@ -129,7 +142,7 @@
                 v_dateFrom = document.test.txtDateFrom.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
+                    xmlHttpRe.open("GET", "showWSClient?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -173,7 +186,7 @@
                 var getText = c_value;  //Used to prevent caching during ajax call
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
+                    xmlHttpRe.open("GET", "showWSClient?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -217,7 +230,7 @@
                 
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + getShift + "&wuid=" + v_wuid, true);// chú ý
+                    xmlHttpRe.open("GET", "showWSClient?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + getShift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -239,12 +252,12 @@
             }
             function Export()
             {
-                var typeRP = <%=String.valueOf(ReportConstant.TYPE_WORKINGSHIFT) %>;
+                var typeRP = <%=String.valueOf(ReportConstant.TYPE_TIMETABLE_WORKINGSHIFT) %>;
                 var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
                 var fromRP = "<%=inputdateFrom %>";
                 var toRP = "<%=inputdateTo %>";
                 var labRP = 1;
-                var wuidRP = 0;
+                var wuidRP = -1;
                 for (var i = 0; i < document.test.roomname.length; i++)
 
                 {
@@ -265,7 +278,7 @@
                 toRP = document.test.inputdateTo.value;
                 fromRP = document.test.inputdateFrom.value;
 
-                window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP + "&wuidRP=" + wuidRP,"_blank");
+                window.open("ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP + "&wuidRP=" + wuidRP,"_blank");
             }
             function deleteDate(dateID){
                 console.log("--dateID--"+dateID);
@@ -340,13 +353,17 @@
                             %>
                         </select>
                         <select name="wuid" style="height: 25px;">
-                            <option  value="0">--All--</option>
+                            <!--<option  value="0">--All--</option>-->
                             <option  value="-1">--No Techinical Staff--</option>
                             <%
                                 Connection cnn3 = null;
                                 Statement st3 = null;
                                 ResultSet rs3 = null;
-                                String sql3 = "select * from tbl_user where status=1 and departmentid = 3 order by userid asc";
+                                String sql3 = "select * from tbl_user where status=1 and departmentid = 3 ";
+                                if(userID > 0){
+                                    sql3 +=  " and userid="+userID+" ";
+                                }
+                                       
                                 cnn3 = dbconnect.Connect();
                                 try {
                                     st3 = cnn3.createStatement();
@@ -354,7 +371,7 @@
                                     while (rs3.next()) {
                                         
                                         int userid = rs3.getInt("userid");
-                                        if (wuid == userid) {
+                                        if (userID == userid) {
                             %>           
                             <option selected="selected" value="<%=userid%>"><%=rs3.getString("fullname")%></option>
                             <%
@@ -682,7 +699,7 @@
                         %>
                     <td class="td-show" width="140px" align="center">Date</td>
                     <td class="td-show" width="140px" align="center">Duty</td>
-                    <td class="td-show" width="100px" align="center">Action</td>
+                    <!--<td class="td-show" width="100px" align="center">Action</td>-->
 
                 </tr>  
 
@@ -720,14 +737,14 @@
                             checkRequest check = new checkRequest();
 
                             if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 2) {
-                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"../img/available.png\" /></td>");
+                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"img/available.png\" /></td>");
                             } else if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 0) {
-                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\"  src=\"../img/available.png\" /></td>");
+                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\"  src=\"img/available.png\" /></td>");
                             } else {
-                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:55px' align=\"center\"><img src=\"../img/available.png\" title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" /></td>");
+                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:55px' align=\"center\"><img src=\"img/available.png\" title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" /></td>");
                             }
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 0) {
-                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"../img/not-available.png\" /></td>");
+                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"img/not-available.png\" /></td>");
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 2) {
                             out.println("<td style='background: "+(canSet ?"#efffc7;":"#f76060;")+"height:55px' align=\"center\"></td>");
                         }
@@ -750,10 +767,10 @@
                     out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px;padding-left:5px' >" + onDuty+ "</td>");
                     outPutRoomID output = new outPutRoomID();
                     if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
-                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">");   
+                       // out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">");   
                     if(canSet){
                         //out.println( "<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>");
-                        out.println( "&nbsp;&nbsp;<a title='Assign Working' href=\"?options=AssignSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
+                        //out.println( "&nbsp;&nbsp;<a title='Assign Working' href=\"?options=AssignSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
                         %>
                         
                         <!--&nbsp;&nbsp;<input type="submit" name="delete" style="background: url('../img/delete.png');width: 23px;height: 23px;" onclick="deleteDate(<%=studentDetailsDTO.getDateworkID()%>)" class="button_img" value="" title="Delete" />-->
@@ -761,9 +778,9 @@
                         
                     }
                         
-                         out.println( "</td>");
+                         //out.println( "</td>");
                     } else {
-                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\"></td>");
+                        //out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\"></td>");
                     }
                     out.println("</tr>");
                 %>  
@@ -886,19 +903,19 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <img src="../img/expried.png" />
+                        <img src="img/expried.png" />
                     </td>
                     <td colspan="2">
-                        <img src="../img/khonglamviec.png" />
+                        <img src="img/khonglamviec.png" />
                     </td>
                     <td colspan="2">
-                        <img src="../img/chuachon.png" />
+                        <img src="img/chuachon.png" />
                     </td>   
                     <td colspan="2">
-                        <img src="../img/dangcho.png" />
+                        <img src="img/dangcho.png" />
                     </td>  
                     <td colspan="2">
-                        <img src="../img/daduyet.png" />
+                        <img src="img/daduyet.png" />
                     </td>           
                 </tr>
                 <tr>
@@ -919,25 +936,5 @@
                     </td>  
                 </tr>
         </table>
-        <script type="text/javascript">
-
-            var form = $('#test');
-            $('#content').hide();//chu y
-            form.submit(function() {
-
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize(),
-                    success: function(data) {
-                        var result = data;
-
-                        $('#content').show().html(result).fadeOut(3000, function() {
-                            window.location.href = "?options=ManagerWorkingShift";
-                        });
-                    }
-                });
-
-                return false;
-            }); </script>
+        
  

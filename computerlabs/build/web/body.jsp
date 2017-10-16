@@ -7,10 +7,12 @@
         } else if (opt.equalsIgnoreCase("news")) {
             pagename = "news.jsp";
         } else if (opt.equalsIgnoreCase("timetable")) {
-            if (session.getAttribute("Instructors") == null && session.getAttribute("Students") == null) {
+            if (session.getAttribute("Instructors") == null && session.getAttribute("Students") == null && session.getAttribute("TechnicalStaff") == null) {
                 pagename = "login.jsp";
-            } else if (session.getAttribute("Instructors") != null || session.getAttribute("Students") != null) {
+            } else if (session.getAttribute("Instructors") != null || session.getAttribute("Students") != null ) {
                 pagename = "indexSchedule.jsp";
+            }else if(session.getAttribute("TechnicalStaff") != null){
+                pagename = "indexWorkingShift.jsp";
             }
         } else if (opt.equalsIgnoreCase("sendRequest")) {
             if (session.getAttribute("Instructors") == null && session.getAttribute("Students") == null) {

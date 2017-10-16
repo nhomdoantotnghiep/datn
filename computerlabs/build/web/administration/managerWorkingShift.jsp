@@ -1,5 +1,10 @@
 
 
+<%@page import="processSchedule.UserModel"%>
+<%@page import="processSchedule.WorkingShift"%>
+<%@page import="reporting.CusConvertUtil"%>
+<%@page import="java.util.Date"%>
+<%@page import="reporting.ReportConstant"%>
 <%@page import="processSchedule.totalRequestByScheID"%>
 <%@page import="processSchedule.outPutRoomID"%>
 <%@page import="processSchedule.checkRequest"%>
@@ -12,12 +17,29 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%> 
 <%@page import="java.util.List"%>  
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
-<html>  
-    <head>  
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-        <title>Manager Working Shift</title>  
+<%
+    int shiftType = 1;
+    if (request.getParameter("shiftType") != null) {
+        shiftType = Integer.parseInt(request.getParameter("shiftType"));
+    }
+    int checked = 1;
+    if (request.getParameter("roomid") != null) {
+        checked = Integer.parseInt(request.getParameter("roomid"));
+    }    
+    String inputdateFrom = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateFrom = String.valueOf(request.getAttribute("inputdateFrom"));
+    }
+    String inputdateTo = "";
+    if(request.getAttribute("inputdateFrom") != null){
+        inputdateTo = String.valueOf(request.getAttribute("inputdateTo"));
+    }
+    int wuid = 0;
+    if(request.getAttribute("wuid") != null && request.getAttribute("wuid").toString().trim().length() > 0){
+        wuid = Integer.parseInt(request.getAttribute("wuid").toString());
+    }
+            
+%>
         <link rel="stylesheet" href="css/contentcss.css" />
         <link rel="stylesheet" href="../css/jquery-ui.min.css" />
         <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
@@ -26,18 +48,18 @@
         <script src="../js/jquery-ui.min.js"></script>
         <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
         <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-       <script>
-           $(document).ready(function(){
+        <script>
+            $(document).ready(function() {
                 $(function() {
                     $("#txtDateFrom").datepicker({
                         dateFormat: "yy/mm/dd"
-                      });
+                    });
                     $("#txtDateTo").datepicker({
                         dateFormat: "yy/mm/dd"
-                      });  
+                    });
                 });
                 $("#test").validationEngine();
-                
+
             });
             function BASIC_SelectItem()
             {
@@ -75,8 +97,10 @@
                 new setXMLHttpRe();
                 var getText = pagenumber;  //Used to prevent caching during ajax call
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
+                var v_wuid = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
 
                 {
@@ -85,11 +109,27 @@
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
                     }
                 }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.wuid.length; i++)
+
+                {
+                    if (document.test.wuid[i].selected)
+                    {
+                        v_wuid += (v_wuid ? '/' : '') + document.test.wuid[i].value;
+                    }
+                }
                 v_dateTo = document.test.txtDateTo.value;
                 v_dateFrom = document.test.txtDateFrom.value;
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + getText + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -99,14 +139,32 @@
                 var c_value = "";
                 c_value = document.test.go.value;
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
+                var v_wuid = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
 
                 {
                     if (document.test.roomname[i].selected)
                     {
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.wuid.length; i++)
+
+                {
+                    if (document.test.wuid[i].selected)
+                    {
+                        v_wuid += (v_wuid ? '/' : '') + document.test.wuid[i].value;
                     }
                 }
                 v_dateTo = document.test.txtDateTo.value;
@@ -115,7 +173,7 @@
                 var getText = c_value;  //Used to prevent caching during ajax call
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?pageNumber=" + c_value + "&roomid=" + v_room + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + v_shift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
@@ -123,8 +181,10 @@
             function Search()
             {
                 var v_room = "";
+                var v_shift = "";
                 var v_dateTo = "";
                 var v_dateFrom = "";
+                var v_wuid = "";
                 for (var i = 0; i < document.test.roomname.length; i++)
 
                 {
@@ -133,31 +193,95 @@
                         v_room += (v_room ? '/' : '') + document.test.roomname[i].value;
                     }
                 }
+                for (var i = 0; i < document.test.shiftType.length; i++)
+
+                {
+                    if (document.test.shiftType[i].selected)
+                    {
+                        v_shift += (v_shift ? '/' : '') + document.test.shiftType[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.wuid.length; i++)
+
+                {
+                    if (document.test.wuid[i].selected)
+                    {
+                        v_wuid += (v_wuid ? '/' : '') + document.test.wuid[i].value;
+                    }
+                }
                 v_dateTo = document.test.txtDateTo.value;
                 v_dateFrom = document.test.txtDateFrom.value;
                 new setXMLHttpRe();
                 var getText = v_room;  //Used to prevent caching during ajax call
+                var getShift = v_shift;
+                
                 if (xmlHttpRe) {
 
-                    xmlHttpRe.open("GET", "../showWorkingShift?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
+                    xmlHttpRe.open("GET", "../showWorkingShift?roomid=" + getText + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom + "&shiftType=" + getShift + "&wuid=" + v_wuid, true);// chú ý
                     xmlHttpRe.onreadystatechange = handleResponse;
                     xmlHttpRe.send(null);
                 }
             }
             function handleResponse() {
+                var parser      = new DOMParser ();
+                
                 if (xmlHttpRe.readyState === 4) {
                     if (xmlHttpRe.status === 200) {
-                        document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText; //Update the HTML Form element
+                        
+                        //document.getElementById("fcuk").innerHTML = xmlHttpRe.responseText.getElementById("fcuk"); //Update the HTML Form element
+                        var responseDoc = parser.parseFromString (xmlHttpRe.responseText, "text/html");
+                        document.getElementById("fcuk").innerHTML = responseDoc.getElementById("fcuk").innerHTML;
                     }
                     else {
                         alert("Không kết nối được với Server");
                     }
                 }
             }
+            function Export()
+            {
+                var typeRP = <%=String.valueOf(ReportConstant.TYPE_WORKINGSHIFT) %>;
+                var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+                var fromRP = "<%=inputdateFrom %>";
+                var toRP = "<%=inputdateTo %>";
+                var labRP = 1;
+                var wuidRP = 0;
+                for (var i = 0; i < document.test.roomname.length; i++)
+
+                {
+                    if (document.test.roomname[i].selected)
+                    {
+                        labRP = document.test.roomname[i].value;
+                    }
+                }
+                for (var i = 0; i < document.test.wuid.length; i++)
+
+                {
+                    if (document.test.wuid[i].selected)
+                    {
+                        wuidRP = document.test.wuid[i].value;
+                    }
+                }
+                
+                toRP = document.test.inputdateTo.value;
+                fromRP = document.test.inputdateFrom.value;
+
+                window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&fromRP=" + fromRP + "&toRP=" + toRP + "&labRP=" + labRP + "&wuidRP=" + wuidRP,"_blank");
+            }
+            function deleteDate(dateID){
+                console.log("--dateID--"+dateID);
+                var r = confirm("Delete this date?");
+                if (r == true) {
+                    var getID = dateID;
+                    document.test.deletedateID.value = getID;
+                    
+                } else {
+                    txt = "You pressed Cancel!";
+                }
+            }
         </script>
-        
-    </head>  
-    <body>  
+
+    
+    
 
 
         <%!
@@ -172,11 +296,18 @@
         %>  
 
         <form action="../updateSchedule" name="test" id="test" method="post">
-            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
-                <tr >
+            <table cellpadding="1px" cellspacing="1px" width="950px" align="center"> 
+                <tr>
 
                     <td style="height: 50px;" colspan="9" align="right" >
-                        <select name="roomname" style="width: 150px;height: 25px;">
+                                              
+                        <select name="shiftType" style="height: 25px;">
+
+                            <option value="1" <%=shiftType == 1 ? "selected" : ""%> >Morning Shift</option>
+                            <option value="2" <%=shiftType == 2 ? "selected" : ""%> >Outgoing Shift</option>
+                            <option value="3" <%=shiftType == 3 ? "selected" : ""%> >Night Shift</option>
+                        </select>
+                        <select name="roomname" style="height: 25px;">
                             <%
                                 Connection cnn = null;
                                 Statement st = null;
@@ -187,10 +318,7 @@
                                     st = cnn.createStatement();
                                     rs = st.executeQuery(sql);
                                     while (rs.next()) {
-                                        int checked = 1;
-                                        if (request.getParameter("roomid") != null) {
-                                            checked = Integer.parseInt(request.getParameter("roomid"));
-                                        }
+                                        
                                         int roomID = rs.getInt("roomID");
                                         if (checked == roomID) {
                             %>           
@@ -211,23 +339,57 @@
                                 }
                             %>
                         </select>
+                        <select name="wuid" style="height: 25px;">
+                            <option  value="0">--All--</option>
+                            <option  value="-1">--No Techinical Staff--</option>
+                            <%
+                                Connection cnn3 = null;
+                                Statement st3 = null;
+                                ResultSet rs3 = null;
+                                String sql3 = "select * from tbl_user where status=1 and departmentid = 3 order by userid asc";
+                                cnn3 = dbconnect.Connect();
+                                try {
+                                    st3 = cnn3.createStatement();
+                                    rs3 = st3.executeQuery(sql3);
+                                    while (rs3.next()) {
+                                        
+                                        int userid = rs3.getInt("userid");
+                                        if (wuid == userid) {
+                            %>           
+                            <option selected="selected" value="<%=userid%>"><%=rs3.getString("fullname")%></option>
+                            <%
+                            } else {
+                            %>
+                            <option value="<%=userid%>"><%=rs3.getString("fullname")%></option>
+                            <%
+                                        }
+                                    }
+                                } catch (Exception ex) {
 
-
-                        <input type="text" name="txtDateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
-                        <input type="text" name="txtDateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                                } finally {
+                                    rs3.close();
+                                    st3.close();
+                                    cnn3.close();
+                                }
+                            %>
+                        </select>
+                        <input type="text" name="inputdateFrom" value="<%=request.getAttribute("inputdateFrom") == null ? "" : request.getAttribute("inputdateFrom")%>" id="txtDateFrom" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date From)" style="width: 200px;height: 20px;" />
+                        <input type="text" name="inputdateTo" value="<%=request.getAttribute("inputdateTo") == null ? "" : request.getAttribute("inputdateTo")%>" id="txtDateTo" class="validate[custom[date]]" placeholder="YYYY/MM/DD (Date To)" style="width: 200px; height: 20px;" />
+                        
                         <input type="button" value="Search" class="button_example" onclick= "Search();" />
+                        &nbsp;
+                        <input type="button" value="Export Schedule" class="button_example" onclick= "Export();" />
                     </td>
-
                 </tr> 
+            </table>
+            <table cellpadding="1px" cellspacing="1px" id="fcuk" width="950px" align="center"> 
                 <tr> 
                     <td align="center" colspan="3">
-                        <a class="button_example" href="?options=CreateSchedule">Create Schedule</a>
+                        <!--<a class="button_example" href="?options=CreateSchedule">Create Schedule</a>-->
                     </td>
                     <td colspan="6" align="right">  
-                        <!--<form method="get" action="NewServlet">  -->
                         <table align="right">  
                             <tr> 
-
                                 <%--Fist--%>
                                 <td>
                                     <div id="container" style="margin-bottom:20px">
@@ -304,8 +466,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -337,8 +497,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -370,8 +528,6 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
 
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
@@ -399,10 +555,7 @@
                                 <td width="27px">
                                     <div id="container" style="margin-bottom:20px">
                                         <div class="pagination">
-
-<!--<a href="NewServlet?pageNumber=<%=pageNumbers.get(i)%>"><%=pageNumbers.get(i)%></a>-->
                                             <%
-
                                                 if (pageSelected == Integer.parseInt(pageNumbers.get(i).toString())) {
                                             %>
                                             <li class="actived" onclick="javascript:show(<%=pageNumbers.get(i)%>);">
@@ -500,12 +653,12 @@
                 </tr>  
 
                 <tr bgcolor="#78bbe3" >
-                    <td class="td-show" width="100px" height="50px" align="center">Shift Name / Date</td>
+                    <td class="td-show" width="100px" height="50px" align="center">Shift Name/<br />Date</td>
                     <%
                         Connection cnn2 = null;
                         Statement st2 = null;
                         ResultSet rs2 = null;
-                        String sql2 = "select * from tbl_shiftname where shiftID!=7";
+                        String sql2 = "select * from tbl_shiftname where status = 1 and shiftType=" + shiftType + "  ";
                         cnn2 = dbconnect.Connect();
                         try {
                             st2 = cnn2.createStatement();
@@ -527,8 +680,9 @@
                                 }
                             }
                         %>
-                    <td class="td-show" width="170px" align="center">Date</td>
-                    <td class="td-show" width="140px" align="center">Action</td>
+                    <td class="td-show" width="140px" align="center">Date</td>
+                    <td class="td-show" width="140px" align="center">Duty</td>
+                    <td class="td-show" width="100px" align="center">Action</td>
 
                 </tr>  
 
@@ -540,37 +694,76 @@
                 %>  
 
                 <%
-                    classSchedule studentDetailsDTO = (classSchedule) list
-                            .get(i);
-                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getKeyword()
-                            + "</td>");
+                    classSchedule studentDetailsDTO = (classSchedule) list.get(i);
+                    Date now = new Date();
+                    String timeNowStr = CusConvertUtil.parseDateToString2(now);
+                    Date timeNow = CusConvertUtil.parseStringToDate2(timeNowStr);
+                    Date dateTemp = CusConvertUtil.parseStringToDateEEMMDYYY(studentDetailsDTO.getDateword());
+                    boolean canSet = true;
+                    if (timeNow.compareTo(dateTemp) > 0) {
+                        System.out.println("Date1 is after Date2");// ngay now 11 sau ngay temp 10
+                        canSet = false;
+                    } else if (timeNow.compareTo(dateTemp) < 0) {
+                        System.out.println("Date1 is before Date2");// ngay now 8 truoc ngay temp 11
+                        canSet = true;
+                    } else if (timeNow.compareTo(dateTemp) == 0) {
+                        System.out.println("Date1 is equal to Date2");// 2 ngay now temp cung thoi diem
+                        canSet = true;
+                    }
+                    out.println("<td style='background:"+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">" + studentDetailsDTO.getKeyword() + "</td>");
                     String[] strGetStatus = studentDetailsDTO.getStatus().split("/");
                     String[] strGetID = studentDetailsDTO.getId().split("/");
-                    for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+                    //for (int j = (strGetStatus.length - 1); j >= 0; j--) {
+                    for (int j = 0; j <= (strGetStatus.length - 1); j++) {
                         totalRequestByScheID totalRq = new totalRequestByScheID();
                         if (Integer.parseInt(strGetStatus[j].trim()) == 1) {
                             checkRequest check = new checkRequest();
 
                             if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 2) {
-                                out.println("<td style='background: #bbff84;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#bbff84;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"../img/available.png\" /></td>");
                             } else if (check.checkStatusRequest(Integer.parseInt(strGetID[j])) == 0) {
-                                out.println("<td style='background: #fffdc1;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#fffdc1;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\"  src=\"../img/available.png\" /></td>");
                             } else {
-                                out.println("<td style='background: #ececec;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/available.png\" /></a></td>");
+                                out.println("<td style='background: "+(canSet ?"#ececec;":"#f76060;")+"height:55px' align=\"center\"><img src=\"../img/available.png\" title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" /></td>");
                             }
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 0) {
-                            out.println("<td style='background: #ffe6e6;height:30px' align=\"center\"><a title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" href=\"?options=scheDetails&sid=" + strGetID[j] + "\"><img src=\"../img/not-available.png\" /></a></td>");
+                            out.println("<td style='background: "+(canSet ?"#ffe6e6;":"#f76060;")+"height:55px' align=\"center\"><img title=\"Total Request: " + totalRq.total(Integer.parseInt(strGetID[j])) + "\" src=\"../img/not-available.png\" /></td>");
                         } else if (Integer.parseInt(strGetStatus[j].trim()) == 2) {
-                            out.println("<td style='background: #efffc7;height:30px' align=\"center\"></td>");
+                            out.println("<td style='background: "+(canSet ?"#efffc7;":"#f76060;")+"height:55px' align=\"center\"></td>");
                         }
                     }
-                    out.println("<td style='background: #dfefff;height:30px' align=\"center\">" + studentDetailsDTO.getDateword()
-                            + "</td>");
+                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">" + studentDetailsDTO.getDateword()+ "</td>");
+                    List<WorkingShift> lst = checkRequest.getListWSByDateID(studentDetailsDTO.getDateworkID());
+                    String onDuty = "";
+                    if(lst != null && lst.size() > 0){
+                        for(int um = 0; um < lst.size() ; um ++){
+                            UserModel userModel = checkRequest.getListUserByID(lst.get(um).getUser_id());
+                            if(userModel != null){
+                                if(um == (lst.size() -1)){
+                                    onDuty += userModel.getFullName();
+                                }else{
+                                    onDuty += userModel.getFullName()+"<br/>";
+                                }
+                            }
+                        }
+                    }
+                    out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px;padding-left:5px' >" + onDuty+ "</td>");
                     outPutRoomID output = new outPutRoomID();
                     if (Integer.parseInt(strGetStatus[0].trim()) != 2) {
-                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"><a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a></td>");
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\">");   
+                    if(canSet){
+                        //out.println( "<a title=" + studentDetailsDTO.getDateworkID() + " href=\"?options=ManagerSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "&roomID=" + output.outPutRoom(Integer.parseInt(strGetID[0].toString())) + "\"><img src=\"../img/edit.png\" width=\"15px\" height=\"15px\" /></a>");
+                        out.println( "&nbsp;&nbsp;<a title='Assign Working' href=\"?options=AssignSchedule&dateID=" + studentDetailsDTO.getDateworkID() + "\"><img src=\"../img/assign.png\" width=\"15px\" height=\"15px\" /></a>");
+                        %>
+                        
+                        <!--&nbsp;&nbsp;<input type="submit" name="delete" style="background: url('../img/delete.png');width: 23px;height: 23px;" onclick="deleteDate(<%=studentDetailsDTO.getDateworkID()%>)" class="button_img" value="" title="Delete" />-->
+                        <%
+                        
+                    }
+                        
+                         out.println( "</td>");
                     } else {
-                        out.println("<td style='background: #dfefff;height:30px' align=\"center\"></td>");
+                        out.println("<td style='background: "+(canSet ?"#dfefff;":"#f76060;")+"height:55px' align=\"center\"></td>");
                     }
                     out.println("</tr>");
                 %>  
@@ -581,7 +774,11 @@
                 %>  
 
 
-            </table> <br/>
+            </table>
+                <input type='hidden' name='deletedateID' />
+            <br/>
+            <div id='content' ></div>
+            <br/>
             <table cellpadding="1px" cellspacing="1px" id="tb" width="950px" align="center"> 
                 <tr > 
                     <td align="center">
@@ -591,9 +788,12 @@
                             ResultSet rs1 = null;
                             int dateID = 0;
                             int roomID = 0;
+                            String whereSQL = "";
                             if (request.getParameter("dateID") != null) {
                                 try {
                                     dateID = Integer.parseInt(request.getParameter("dateID"));
+                                    whereSQL += " AND dateworkID=" + dateID + " ";
+
                                 } catch (Exception ex) {
 
                                 }
@@ -601,6 +801,7 @@
                             if (request.getParameter("roomID") != null) {
                                 try {
                                     roomID = Integer.parseInt(request.getParameter("roomID"));
+                                    whereSQL += " AND roomID=" + roomID + " ";
                                 } catch (Exception ex) {
 
                                 }
@@ -608,7 +809,7 @@
                             int cntsche = 0;
                             SimpleDateFormat formart = new SimpleDateFormat("EE, MMM dd,yyyy");
                             String sql1 = "select s.scheduleID as scheduleID,shift.shiftname as shiftname,shift.starttime as starttime,shift.endtime as endtime ,s.status "
-                                    + " as scheStatus ,d.dateword as dateword from tbl_schedule as s inner join tbl_shiftname as shift on s.shiftID=shift.shiftID inner join tbl_datework as d on s.dateworkID=d.datewordID where dateworkID=" + dateID + " and roomID=" + roomID;
+                                    + " as scheStatus ,d.dateword as dateword from tbl_schedule as s inner join tbl_shiftname as shift on s.shiftID=shift.shiftID inner join tbl_datework as d on s.dateworkID=d.datewordID where 1=1 " + whereSQL;
                             if (roomID > 0 && dateID > 0) {
                                 cnn1 = dbconnect.Connect();
 
@@ -667,7 +868,7 @@
                         <%
                             if (cntsche > 0) {
                         %>
-                        <div id='content' class="style-result"></div>
+                        <!--<div id='content' ></div>-->
                         <%
                             }
                         %>
@@ -677,40 +878,47 @@
                     <td colspan="9"><input type="text" name="txtResultShift"  size="5" id="txtResultShift" style="visibility: hidden;"  /></td>
                 </tr>
                 <tr>
-                    <tr>
+            </table>
+        </form>
+        <table cellpadding="1px" cellspacing="1px"  width="950px" align="center">   
+            <tr>
                     <td>Note:</td>
                 </tr>
                 <tr>
                     <td colspan="2">
+                        <img src="../img/expried.png" />
+                    </td>
+                    <td colspan="2">
                         <img src="../img/khonglamviec.png" />
                     </td>
                     <td colspan="2">
-                    <img src="../img/chuachon.png" />
+                        <img src="../img/chuachon.png" />
                     </td>   
-                     <td colspan="2">
-                    <img src="../img/dangcho.png" />
+                    <td colspan="2">
+                        <img src="../img/dangcho.png" />
                     </td>  
-                     <td colspan="3">
-                    <img src="../img/daduyet.png" />
+                    <td colspan="2">
+                        <img src="../img/daduyet.png" />
                     </td>           
                 </tr>
                 <tr>
+                     <td  colspan="2">
+                        &nbsp;&nbsp;&nbsp;Expried Date
+                    </td>
                     <td  colspan="2">
                         &nbsp;&nbsp;&nbsp;No working
                     </td>
                     <td colspan="2">
-                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty
                     </td>   
-                     <td colspan="2">
-                    Waiting approve
+                    <td colspan="2">
+                        Waiting approve
                     </td>  
-                     <td colspan="3">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
+                    <td colspan="2">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
                     </td>  
                 </tr>
-                </tr>
-            </table>
-        </form>
+        </table>
         <script type="text/javascript">
 
             var form = $('#test');
@@ -725,12 +933,11 @@
                         var result = data;
 
                         $('#content').show().html(result).fadeOut(3000, function() {
-                            window.location.href = "?options=ManagerSchedule";
+                            window.location.href = "?options=ManagerWorkingShift";
                         });
                     }
                 });
 
                 return false;
             }); </script>
-    </body>  
-</html>  
+ 

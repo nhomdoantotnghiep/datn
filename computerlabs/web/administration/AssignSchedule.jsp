@@ -63,7 +63,7 @@
                     success: function(data) {
                         var result = data;
                         $('#content').show().html(result).fadeOut(4000, function() {
-                            window.location.href = "?options=ManagerSchedule";
+                            window.location.href = "?options=ManagerWorkingShift";
                         });
                     }
                 });

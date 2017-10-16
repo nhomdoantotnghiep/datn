@@ -1,6 +1,7 @@
 
-package reporting.scheduleWork;
+package reporting.workingShift;
 
+import reporting.scheduleWork.*;
 import reporting.timeTable.*;
 import ScheduleClient.showScheClient;
 import computerlabs.dbconnect;
@@ -23,7 +24,7 @@ import processSchedule.totalRequestByScheID;
 
 
 
-public class ScheduleWorkExport {
+public class WorkingShiftkExport {
         
 	public static ScheduleWorkModel getModel(HashMap<String, Object> hashMap){
             String type = (String)hashMap.get("type");
@@ -31,20 +32,33 @@ public class ScheduleWorkExport {
             String from = (String)hashMap.get("from");
             String to = (String)hashMap.get("to");
             String lab = (String)hashMap.get("lab");
+            String wuid = (String)hashMap.get("wuid");
             System.out.println("TimeTableExport-getModel-type:"+type);
             System.out.println("duoiFile:"+duoiFile);
             System.out.println("from:"+from);
             System.out.println("to:"+to);
             System.out.println("lab:"+lab);
+            System.out.println("lab:"+lab);
             
             ScheduleWorkModel result = new ScheduleWorkModel();
             int roomid = lab != null ? Integer.parseInt(lab) : 1;
             String labName = lab != null ? getRoomNameById(lab) : "";
+            String tStaff = "--All--";
 //            String from = "";
 //            String to = "";
             List<ScheduleWorkModel.ShiftLst> shiftLst = null;
             List<ScheduleWorkModel.ShiftLst> shiftLstTable = null;
-            
+            int wuidInt = Integer.parseInt(wuid);
+            UserModel userModelCheck= null;
+            if(wuidInt > 0){
+                userModelCheck = checkRequest.getListUserByID(wuidInt);
+            }
+            if(wuidInt == -1){
+                tStaff = "--No Technical Staff--";
+            }
+            if(userModelCheck != null){
+                tStaff = userModelCheck.getFullName();
+            }
             shiftLst = new ArrayList<ScheduleWorkModel.ShiftLst>();
             shiftLst = getListShift();
             if(shiftLst != null){
@@ -53,7 +67,7 @@ public class ScheduleWorkExport {
                 System.out.println("-shiftLst-NULL");
             }
             
-            List lst = fillList(roomid, to, from);
+            List lst = fillList(roomid, to, from,wuidInt);
             
             shiftLstTable = new ArrayList<ScheduleWorkModel.ShiftLst>();
             if(lst != null && lst.size() > 0){
@@ -200,7 +214,7 @@ public class ScheduleWorkExport {
                     
                 }
             }
-            
+            result.settStaff(tStaff);
             result.setLabName(labName);
             result.setFrom(from);
             result.setTo(to);
@@ -224,7 +238,7 @@ public class ScheduleWorkExport {
                     return "";
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(ScheduleWorkExport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(WorkingShiftkExport.class.getName()).log(Level.SEVERE, null, ex);
                 return "";
             }finally{
                try {
@@ -232,11 +246,11 @@ public class ScheduleWorkExport {
                    st.close();
                    cnn.close();
                } catch (SQLException ex) {
-                   Logger.getLogger(ScheduleWorkExport.class.getName()).log(Level.SEVERE, null, ex);
+                   Logger.getLogger(WorkingShiftkExport.class.getName()).log(Level.SEVERE, null, ex);
                }
            }
         }
-	private static List fillList(int roomid,String inputdateTo,String inputdateFrom) {
+	private static List fillList(int roomid,String inputdateTo,String inputdateFrom,int wuid) {
             List list = new ArrayList();
             Connection cnn = null;
             Statement st = null;
@@ -291,8 +305,23 @@ public class ScheduleWorkExport {
                     status += rs.getString("status") + "/";
                     dateworkID = rs.getInt("sdateworkID");
                     int totalShift=cntShiftShow();
+                    int hasWS = 1;
+                    if(wuid > 0){
+                        hasWS = checkRequest.checkExistWorkingShift(dateworkID,wuid);
+                    }
+                    if(wuid == -1){// no tech
+                        hasWS = checkRequest.checkExistWorkingShift(dateworkID,0);
+                        if(hasWS > 0){// ngay hom day co tech
+                            hasWS = 0;
+                        }else{
+                            hasWS = 1;
+                        }
+                        //hasWS = 0;
+                    }
                     if (count % totalShift == 0) {
-                        list.add(new classSchedule(ID, shiftname, roomName, datework, daysweek, status,dateworkID));
+                        if(hasWS > 0){
+                            list.add(new classSchedule(ID, shiftname, roomName, datework, daysweek, status,dateworkID));
+                        }
                         ID = "";
                         shiftname = "";
                         status = "";
@@ -303,7 +332,7 @@ public class ScheduleWorkExport {
 
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(ScheduleWorkExport.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(WorkingShiftkExport.class.getName()).log(Level.SEVERE, null, ex);
             }
             return list;
         }

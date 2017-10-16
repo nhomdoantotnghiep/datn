@@ -65,15 +65,15 @@ public class assignSchedule extends HttpServlet {
         if (txtResultUser != null && txtResultUser.trim().length() > 0) {
             String[] userIDarr = txtResultUser.split("/");
             if (userIDarr != null && userIDarr.length > 0) {
-                int temp = deleteWorkingShift(dateID);
-                if (temp > 0) {//delete het
-                    for (String user : userIDarr) {
-                        int temp2 = createWorkingShift(user, dateID);
-                        if(temp2 > 0){
-                            count = count + 1;
-                        }
+                int temp = deleteWorkingShift(dateID);// xoa het sau do them moi
+                //if (temp > 0) {//delete het
+                for (String user : userIDarr) {
+                    int temp2 = createWorkingShift(user, dateID);
+                    if(temp2 > 0){
+                        count = count + 1;
                     }
                 }
+                //}
             }
         }
         if (count > 0) {

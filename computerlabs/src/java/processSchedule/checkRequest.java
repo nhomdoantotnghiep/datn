@@ -108,7 +108,17 @@ public class checkRequest {
         Statement st = null;
         ResultSet rs = null;
         int out = 0;
-        String sql = "select * from tbl_workingshift where date_ID=" + dateId + " and user_id=" + uid;
+        String sql = "select * from tbl_workingshift where 1=1 ";
+        if(dateId > 0){
+            sql += " and date_ID=" + dateId +" ";
+        }
+        if(uid > 0){
+            sql += " and user_id=" + uid+" ";
+        }
+//        if(uid == -1){
+//            sql += " and user_id=" + uid+" ";
+//        }
+                
         cnn = dbconnect.Connect();
         try {
             st = cnn.createStatement();

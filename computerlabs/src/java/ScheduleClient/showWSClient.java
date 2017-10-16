@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package processSchedule;
+package ScheduleClient;
 
 import computerlabs.NewServlet;
 import computerlabs.classUser;
@@ -26,12 +26,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import processSchedule.checkRequest;
+import processSchedule.classSchedule;
 
 /**
  *
  * @author User
  */
-public class showWorkingShift extends HttpServlet {
+public class showWSClient extends HttpServlet {
 
     static final long serialVersionUID = 1L;
     int offset;
@@ -43,7 +45,8 @@ public class showWorkingShift extends HttpServlet {
 
         int maxEntriesPerPage = 6;
         int page = 1;
-
+        
+        
         String pageNumberValue = request.getParameter("pageNumber");
         String inputdateTo = "";
         if (request.getParameter("inputdateTo") != null) {
@@ -79,14 +82,33 @@ public class showWorkingShift extends HttpServlet {
                 shiftType = Integer.parseInt(request.getParameter("shiftType"));
             }
         }
-        int wuid = 0;
+//        int wuid = -1;
+//        if (request.getAttribute("userID") != null) {
+//            if (!(request.getAttribute("userID").toString().equalsIgnoreCase(""))) {
+//                wuid = Integer.parseInt(request.getAttribute("userID").toString());
+//            } else {
+//                wuid = -1;
+//            }
+//        }
+        int userID = 0;
+        int wuid = -1;
+        HttpSession session=request.getSession();
+        if(session.getAttribute("userID")!=null){
+            userID=Integer.parseInt(session.getAttribute("userID").toString().trim());
+            
+        }
         if (request.getParameter("wuid") != null) {
             if (request.getParameter("wuid").equalsIgnoreCase("")) {
-                wuid = 0;
+                wuid = -1;
             } else {
                 wuid = Integer.parseInt(request.getParameter("wuid"));
             }
+        }else{
+            if(userID > 0){
+                wuid = userID;
+            }
         }
+        System.out.println("--wuid--"+wuid);
         if (pageNumberValue != null) {
             try {
                 page = Integer.parseInt(pageNumberValue);
@@ -97,13 +119,16 @@ public class showWorkingShift extends HttpServlet {
         }
         int offset = maxEntriesPerPage * (page - 1);
         TestList(offset, maxEntriesPerPage, roomid, inputdateTo, inputdateFrom,shiftType,wuid);
-
+        
         HttpSession httpSession = request.getSession();
+        
+        System.out.println("---userID---"+userID+"--WS");
         httpSession.setAttribute("pages", getPages());
+        httpSession.setAttribute("userID", userID);
         httpSession.setAttribute("Schedule", getListByOffsetAndLength());
 
         RequestDispatcher dispatcher = request
-                .getRequestDispatcher("/administration/managerWorkingShift.jsp");  //link
+                .getRequestDispatcher("/WorkingShift.jsp");  //link
         dispatcher.forward(request, response);
     }
 
@@ -200,7 +225,7 @@ public class showWorkingShift extends HttpServlet {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(showSchedule.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showWSClient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -230,7 +255,7 @@ public class showWorkingShift extends HttpServlet {
                 return 0;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(showSchedule.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(showWSClient.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         } finally {
             try {
@@ -238,7 +263,7 @@ public class showWorkingShift extends HttpServlet {
                 st.close();
                 cnn.close();
             } catch (SQLException ex) {
-                Logger.getLogger(showSchedule.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(showWSClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

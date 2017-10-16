@@ -53,6 +53,7 @@ public class checklogin extends HttpServlet {
                         int userID = rs.getInt("userID");
                         int department = rs.getInt("departmentID");
                         HttpSession session = request.getSession();
+                        session.setAttribute("userID", userID);
                         if (department == 1) {
                           
                             session.setAttribute("useradmin", user);
@@ -67,7 +68,7 @@ public class checklogin extends HttpServlet {
                             session.setAttribute("Students", user);
                             response.sendRedirect("/computerlabs/?option=timetable");
                         }
-                        session.setAttribute("userID", userID);
+                        
                     } else {
                        // out.println("Username or password is not valid.");
                         request.setAttribute("loginfail", "Username or password is not valid.");

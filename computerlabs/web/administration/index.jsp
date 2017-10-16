@@ -66,12 +66,18 @@
                             </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
-                                    <div class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails")|| ops.equalsIgnoreCase("AssignSchedule")? bgSelected : bgNotSelect %>">
-                                        <a class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails")|| ops.equalsIgnoreCase("AssignSchedule") ? txtSelected : txtNotSelect %>" href="?options=ManagerSchedule">Manager Schedule Work</a>
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails")? bgSelected : bgNotSelect %>">
+                                        <a class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails") ? txtSelected : txtNotSelect %>" href="?options=ManagerSchedule">Manager Schedule Work</a>
                                     </div>
                                 </td>
                             </tr>
-                            
+                            <tr>
+                                <td valign="top" class="bg-title-td">
+                                    <div class="<%=ops.equalsIgnoreCase("ManagerWorkingShift") || ops.equalsIgnoreCase("AssignSchedule")? bgSelected : bgNotSelect %>">
+                                        <a class="<%=ops.equalsIgnoreCase("ManagerWorkingShift") || ops.equalsIgnoreCase("AssignSchedule") ? txtSelected : txtNotSelect %>" href="?options=ManagerWorkingShift">Manager Working Shift</a>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerLab") ? bgSelected : bgNotSelect %>">

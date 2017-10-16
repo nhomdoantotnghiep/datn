@@ -9,6 +9,7 @@ import reporting.scheduleWork.ScheduleWorkExport;
 import reporting.scheduleWork.ScheduleWorkModel;
 import reporting.timeTable.TimeTableExport;
 import reporting.timeTable.TimeTableModel;
+import reporting.workingShift.WorkingShiftkExport;
 
 public class ReportBusinessUtils {
 
@@ -42,6 +43,7 @@ public class ReportBusinessUtils {
         String from = resourceRequest.getParameter("fromRP");
         String to = resourceRequest.getParameter("toRP");
         String lab = resourceRequest.getParameter("labRP");
+        String wuid = resourceRequest.getParameter("wuidRP");
         try {
             if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_TIME_TABLE))) {
                 HashMap<String, Object> input = new HashMap<String, Object>();
@@ -71,6 +73,38 @@ public class ReportBusinessUtils {
                 JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
                 parameters = new HashMap<String, Object>();
                 ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_SCHEDULE, ReportConstant.GIAY_SCHEDULEWORK_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
+
+            }
+            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_WORKINGSHIFT))) {
+                HashMap<String, Object> input = new HashMap<String, Object>();
+                input.put("type", type);
+                input.put("duoiFile", duoiFile);
+                input.put("from",from);
+                input.put("to", to);
+                input.put("lab", lab);
+                input.put("wuid", wuid);
+                String tenFile_Export = ReportConstant.GIAY_WORKINGSHIFT_EXPORT + "_" + currentTimeFull;
+
+                ScheduleWorkModel objectReport = WorkingShiftkExport.getModel(input);
+                JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
+                parameters = new HashMap<String, Object>();
+                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_SCHEDULE, ReportConstant.GIAY_WORKINGSHIFT_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
+
+            }
+            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_TIMETABLE_WORKINGSHIFT))) {
+                HashMap<String, Object> input = new HashMap<String, Object>();
+                input.put("type", type);
+                input.put("duoiFile", duoiFile);
+                input.put("from",from);
+                input.put("to", to);
+                input.put("lab", lab);
+                input.put("wuid", wuid);
+                String tenFile_Export = ReportConstant.GIAY_TIMETABLE_WORKINGSHIFT_EXPORT + "_" + currentTimeFull;
+
+                ScheduleWorkModel objectReport = WorkingShiftkExport.getModel(input);
+                JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
+                parameters = new HashMap<String, Object>();
+                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_TIMETABLE, ReportConstant.GIAY_TIMETABLE_WORKINGSHIFT_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
 
             }
             /*if(Validator.isNotNull(maTinh)
