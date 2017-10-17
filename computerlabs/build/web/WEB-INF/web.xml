@@ -216,6 +216,10 @@
         <servlet-name>showWSClient</servlet-name>
         <servlet-class>ScheduleClient.showWSClient</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>showScheGuest</servlet-name>
+        <servlet-class>ScheduleClient.showScheGuest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CheckUsername</servlet-name>
         <url-pattern>/CheckUsername</url-pattern>
@@ -427,6 +431,10 @@
     <servlet-mapping>
         <servlet-name>showWSClient</servlet-name>
         <url-pattern>/showWSClient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showScheGuest</servlet-name>
+        <url-pattern>/showScheGuest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
