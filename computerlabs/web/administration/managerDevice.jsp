@@ -34,6 +34,7 @@
             if (confirm("I want deleted?") == true) {
                 document.ajaxform.ID.value = getID;
                 document.ajaxform.act.value = getACT;
+                myDelete();
             } else {
                 //window.location.href = "?options=ManagerAccessory";
             }
@@ -131,6 +132,32 @@
 
 </script>
 <script>
+    function myDelete() {
+
+       
+
+        var form = $('#ajaxform');
+       
+        console.log("---4---");
+        $('#ajaxform').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '../deleteDe',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        window.location.href = "?options=ManagerDevice";
+                    });
+                }
+            });
+
+            //return false;
+        }); 
+
+
+    }
     function mySubmit() {
 
         var vali = jQuery("#ajaxform").validationEngine('validate');
@@ -494,8 +521,8 @@
             <td class="td-show" width="50px" align="center">ID</td>
             <td class="td-show" width="200px" align="center">Device name</td>
             <td class="td-show" width="200px" align="center">Category</td>
-            <td class="td-show" width="150px" align="center">Warranty to</td>
             <td class="td-show" width="150px" align="center">Warranty From</td>
+            <td class="td-show" width="150px" align="center">Warranty to</td>
             <td class="td-show" width="70px" align="center">Status</td>
             <td class="td-show" width="120px" align="center" colspan="2" >Action</td>
         </tr>  
@@ -514,9 +541,9 @@
                             + "</td>");
                     out.println("<td style='height:30px' align=\"center\">" + deviceDTO.getCateName()
                             + "</td>");
-                    out.println("<td style='height:30px' align=\"center\">" + deviceDTO.getwTo()
-                            + "</td>");
                     out.println("<td style='height:30px' align=\"center\">" + deviceDTO.getwFrom()
+                            + "</td>");
+                    out.println("<td style='height:30px' align=\"center\">" + deviceDTO.getwTo()
                             + "</td>");
                     out.println("<td style='height:30px' align=\"center\">" + deviceDTO.getStatus()
                             + "</td>");
@@ -564,7 +591,7 @@
     </table> 
 </form>
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
     var form = $('#ajaxform');
     $('#content').hide();//chu y
@@ -587,4 +614,5 @@
 
         return false;
     }); </script>
+-->
 

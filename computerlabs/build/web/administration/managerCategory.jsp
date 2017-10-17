@@ -22,6 +22,32 @@
 
 
 <script type="text/javascript">
+    function myDelete() {
+
+        
+
+        var form = $('#ajaxform');
+        
+        console.log("---4---");
+        $('#ajaxform').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '../processCate',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        window.location.href = "?options=ManagerCategoryDevice";
+                    });
+                }
+            });
+
+            //return false;
+        }); 
+        
+
+    }
     function mySubmit() {
 
         var vali = jQuery("#ajaxform").validationEngine('validate');
@@ -124,6 +150,7 @@
             if (confirm("I want deleted?") == true) {
                 document.ajaxform.ID.value = getID;
                 document.ajaxform.act.value = getACT;
+                myDelete();
             } else {
                 //window.location.href = "?options=ManagerTypeAccessory";
             }

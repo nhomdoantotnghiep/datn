@@ -232,14 +232,37 @@
                 if (r == true) {
                     var getID = dateID;
                     document.test.deletedateID.value = getID;
-                    
+                    //myDelete();
                 } else {
                     var txt = "You pressed Cancel!";
                 }
             }
             
         </script>
+
 <script>
+    function myDelete(){
+        var form = $('#test');
+        
+        console.log("---4---");
+        $('#test').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: 'sendRequest',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        window.location.href = "?option=viewRequest";
+                    });
+                }
+            });
+
+            //return false;
+        }); 
+        
+    }
     function mySubmit() {
         
         var vali = jQuery("#test").validationEngine('validate');

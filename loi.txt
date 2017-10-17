@@ -27,7 +27,7 @@ Sinh viên : Có nhiệm vụ đăng ký lịch học
 ///- Giáo viên cũng có thể nhìn thấy danh sách phản hồi mình đã gửi
 ///- làm remember me
 
-- Sửa lỗi delete ở các trang ajax
+***- Sửa lỗi delete ở các trang ajax
 - Sửa edit device
 - Thêm báo cáo phần Device
 - Thêm báo cáo phần phản hồi

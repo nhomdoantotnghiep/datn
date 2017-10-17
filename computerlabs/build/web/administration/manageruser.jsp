@@ -51,7 +51,28 @@
         }
 
     }
+    function myDelete(){
+        var form = $('#test');
+        
+        console.log("---4---");
+        $('#test').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '../updateStatusAccount',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        //window.location.href = "?option=viewRequest";
+                    });
+                }
+            });
 
+            //return false;
+        }); 
+
+    }
     jQuery(document).ready(function() {
         $('#content').hide();//chu y
 // binds form submission and fields to the validation engine 
@@ -112,15 +133,19 @@
         }
     }
     function deleteUser(userID)
-    {
+    {   
+        
+        //myDelete();
         new setXMLHttpRe();
         var getText = userID;  //Used to prevent caching during ajax call
         if (xmlHttpRe) {
 
             xmlHttpRe.open("GET", "../showUser?userID=" + getText, true);// chú ý
             xmlHttpRe.onreadystatechange = handleResponse;
+            //$('#content').hide().fadeOut(4000);
             xmlHttpRe.send(null);
         }
+        
     }
     function Search()
     {

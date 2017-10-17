@@ -82,6 +82,7 @@
             if (confirm("I want deleted?") == true) {
                 document.test.ID.value = getID;
                 document.test.act.value = getACT;
+                myDelete();
             } else {
                 window.location.href = "?options=ManagerTypeAccessory";
             }
@@ -172,6 +173,28 @@
 
 </script>
 <script>
+    function myDelete(){
+        var form = $('#test');
+
+        console.log("---4---");
+        $('#test').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '../processType',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        window.location.href = "?options=ManagerTypeAccessory";
+                    });
+                }
+            });
+
+            //return false;
+        }); 
+        
+    }
     function mySubmit() {
 
         var vali = jQuery("#test").validationEngine('validate');

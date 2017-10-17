@@ -22,6 +22,28 @@
 <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
 <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script>
 <script>
+    function myDelete(){
+        var form = $('#ajaxform');
+
+        console.log("---4---");
+        $('#ajaxform').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '../processAccess',
+                data: form.serialize(),
+                success: function(data) {
+                    var result = data;
+                    $('#content').show().html(result).fadeOut(4000, function() {
+                        window.location.href = "?options=ManagerAccessory";
+                    });
+                }
+            });
+
+            //return false;
+        }); 
+        
+    }
     function mySubmit() {
 
         var vali = jQuery("#ajaxform").validationEngine('validate');
@@ -120,6 +142,7 @@
             if (confirm("I want deleted?") == true) {
                 document.ajaxform.ID.value = getID;
                 document.ajaxform.act.value = getACT;
+                myDelete();
             } else {
                 //window.location.href = "?options=ManagerAccessory";
             }
