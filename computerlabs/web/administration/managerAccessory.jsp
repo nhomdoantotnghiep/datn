@@ -114,18 +114,18 @@
     {
         var getID = id;
         var getACT = act;
-        //document.test.ID.value = getID;
-        //document.test.act.value = getACT;
+        //document.ajaxform.ID.value = getID;
+        //document.ajaxform.act.value = getACT;
         if (act == 'delete') {
             if (confirm("I want deleted?") == true) {
-                document.test.ID.value = getID;
-                document.test.act.value = getACT;
+                document.ajaxform.ID.value = getID;
+                document.ajaxform.act.value = getACT;
             } else {
                 //window.location.href = "?options=ManagerAccessory";
             }
         } else {
-            document.test.ID.value = getID;
-            document.test.act.value = getACT;
+            document.ajaxform.ID.value = getID;
+            document.ajaxform.act.value = getACT;
             mySubmit();
         }
         
@@ -156,7 +156,7 @@
         var v_accessName = "";
         var str = "&typeName=" + typeAce;
         var strStatus = "&status=" + status;
-        v_accessName = document.test.accessName.value;
+        v_accessName = document.ajaxform.accessName.value;
         if (xmlHttpRe) {
 
             xmlHttpRe.open("GET", "../showAccess?pageNumber=" + getText + str + strStatus + "&accessName=" + v_accessName, true);// chú ý
@@ -168,14 +168,14 @@
     {
         var c_value = "";
 
-        c_value = document.test.go.value;
+        c_value = document.ajaxform.go.value;
         new setXMLHttpRe();
         var getText = c_value;  //Used to prevent caching during ajax call
         var typeAce = typeAccess;
         var str = "&typeName=" + typeAce;
         var strStatus = "&status=" + status;
         var v_accessName = "";
-        v_accessName = document.test.accessName.value;
+        v_accessName = document.ajaxform.accessName.value;
         if (xmlHttpRe) {
 
             xmlHttpRe.open("GET", "../showAccess?pageNumber=" + c_value + str + strStatus + "&accessName=" + v_accessName, true);// chú ý
@@ -188,9 +188,9 @@
         var v_accessName = "";
         var v_status = "";
         var v_typeName = "";
-        v_accessName = document.test.accessName.value;
-        v_status = document.test.status.value;
-        v_typeName = document.test.typeName.value;
+        v_accessName = document.ajaxform.accessName.value;
+        v_status = document.ajaxform.status.value;
+        v_typeName = document.ajaxform.typeName.value;
         new setXMLHttpRe();
         if (xmlHttpRe) {
 
@@ -514,7 +514,8 @@
             <td class="row-td-backgroud-select" align="center">
 
                 <input name="accessNameUp" id="accessNameUp" onkeyup="lookup(this.value,<%=accessDetails.getAccessID()%>);" class="validate[required,minSize[3]] text-input" value="<%=accessDetails.getAccessName()%>" type="text"/>
-                <div style="width: 50px;">
+                <br/>
+                <div style="">
                     <div style="display: none;" id="autoSuggestionsList"></div>
                     <div style="display: none;" id="error"></div>
 
@@ -799,7 +800,7 @@
                             <%
                                 String visibly = "";
                                 if (request.getParameter("actCreate") == null) {
-                                    visibly = "visibility: hidden;";
+                                    visibly = "display:none;";
                                 }
                             %>
                             <div class="site-input-div" style="<%=visibly%>">
@@ -811,11 +812,7 @@
                             </div>
                         </td>
                         <td>
-                            <div style="width: 30px;<%=visibly%>">
-                                <div style="display: none;" id="autoSuggestionsList"></div>
-                                <div style="display: none;" id="error"></div>
-
-                            </div>
+                            
                         </td>
                         <td align="center" colspan="2">
                             <select name="typeNameCreate" style="width: 120px;height: 26px;<%=visibly%>">
@@ -853,7 +850,27 @@
                                 <option value="0">Hide</option>
                             </select>
                         </td>
-                        <td><input style="<%=visibly%>" title="Create" type="submit"  name="delete" onclick="BASIC_SelectItem('create', 0)" class="button_example" height="20px" value="Create" /></td>
+                        <td>
+                            <input style="<%=visibly%>" title="Create" type="submit"  name="delete" onclick="BASIC_SelectItem('create', 0)" class="button_example" height="20px" value="Create" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="<%=visibly%>">
+                                <div style="display: none;" id="autoSuggestionsList"></div>
+                                <div style="display: none;" id="error"></div>
+
+                            </div>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -869,7 +886,7 @@
 
 <!--<script type="text/javascript">
 
-    var form = $('#test');
+    var form = $('#ajaxform');
     $('#content').hide();//chu y
     form.submit(function() {
 

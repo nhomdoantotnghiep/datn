@@ -72,10 +72,43 @@
             }
 
         </script>
-        <script>jQuery(document).ready(function() {
-                // binds form submission and fields to the validation engine 
-                jQuery("#test").validationEngine();
-            });</script>
+  <script>
+    function mySubmit() {
+        
+        var vali = jQuery("#test").validationEngine('validate');
+        
+        var form = $('#test');
+        if (vali === true) {
+            console.log("---4---");
+            $('#test').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: '../processLab',
+                    data: form.serialize(),
+                    success: function(data) {
+                        var result = data;
+                        $('#content').show().html(result).fadeOut(4000, function() {
+                             window.location.href = "?options=ManagerLab";
+                        });
+                    }
+                });
+                
+                //return false;
+            }); 
+        } else {
+            
+        }
+
+    }
+
+    jQuery(document).ready(function() {
+        $('#content').hide();//chu y
+        // binds form submission and fields to the validation engine 
+        jQuery("#test").validationEngine();
+
+    });
+</script>
         <script>
             function BASIC_SelectItem(act, id)
             {
@@ -91,6 +124,7 @@
                 } else {
                     document.test.ID.value = getID;
                     document.test.act.value = getACT;
+                    mySubmit();
                 }
             }
 
@@ -187,7 +221,7 @@
             List pageNumbers = (List) session.getAttribute("pages");
         %>  
 
-        <form action="../processLab" name="test" id="test" method="post">
+        <form  name="test" id="test" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0" width="850px" align="center">  
                 <tr >
 
@@ -743,7 +777,7 @@
             </table> 
         </form>
    
-<script type="text/javascript">
+<!--<script type="text/javascript">
 
     var form = $('#test');
     $('#content').hide();//chu y
@@ -766,3 +800,4 @@
 
         return false;
     }); </script>
+-->

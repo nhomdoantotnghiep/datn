@@ -139,7 +139,7 @@
 
     $(document).ready(function() {
         //called when key is pressed in textbox
-        $("#txtuser").keypress(function(e)
+        $("#txtName").keypress(function(e)
         {
             $("#error").hide();
             $("#autoSuggestionsList").hide();
@@ -217,11 +217,20 @@
                                 </div>   
                             </div>
                         </td>
-                        <td><div style="width: 20px;">
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="">
                                 <div style="display: none;" id="autoSuggestionsList"></div>
                                 <div style="display: none;" id="error"></div>
 
-                            </div></td>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
                     </tr>
                 </table>
 
@@ -232,12 +241,104 @@
 
 
 
+
+        <tr>
+            <td>Warranty From:</td>
+            <td>
+                <select name="monthFrom" style="width: 70px;height: 30px">
+                    <%
+                        Calendar calen = Calendar.getInstance();
+                        for (int i = 1; i <= 12; i++) {
+                            if (request.getParameter("monthFrom") != null) {
+                                int mFrom = Integer.parseInt(request.getParameter("monthFrom").toString().trim());
+                                if (i == mFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                        }
+                    } else {
+                        if (i == monthFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                                }
+                            }
+                        }
+                    %>
+                </select>
+                <select name="dayFrom" style="width: 70px;height: 30px">
+                    <%
+                        for (int i = 1; i <= 31; i++) {
+                            if (request.getParameter("dayFrom") != null) {
+                                int dFrom = Integer.parseInt(request.getParameter("dayFrom").toString().trim());
+                                if (i == dFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                        }
+                    } else {
+                        if (i == dayFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                                }
+                            }
+                        }
+                    %>
+                </select>
+                <select name="yearFrom" style="width: 100px;height: 30px">
+                    <%
+                        int year = calen.get(Calendar.YEAR) + 100;
+                        for (int i = year; i >= calen.get(Calendar.YEAR); i--) {
+                            if (request.getParameter("yearFrom") != null) {
+                                int yFrom = Integer.parseInt(request.getParameter("yearFrom").toString().trim());
+                                if (i == yFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                        }
+                    } else {
+                        if (i == yearFrom) {
+                    %>
+                    <option selected="selected" value="<%=i%>"><%=i%></option>
+                    <%
+                    } else {
+                    %>
+                    <option value="<%=i%>"><%=i%></option>
+                    <%
+                                }
+                            }
+                        }
+                    %>
+                </select>
+
+            </td>
+        </tr>
         <tr>
             <td>Warranty To:</td>
             <td>
                 <select name="monthTo" style="width: 70px;height: 30px">
                     <%
-                        Calendar calen = Calendar.getInstance();
                         for (int i = 1; i <= 12; i++) {
                             if (request.getParameter("monthTo") != null) {
                                 int monTo = Integer.parseInt(request.getParameter("monthTo").toString().trim());
@@ -295,7 +396,6 @@
                 </select>
                 <select name="yearTo" style="width: 100px;height: 30px">
                     <%
-                        int year = calen.get(Calendar.YEAR) + 100;
                         for (int i = year; i >= calen.get(Calendar.YEAR); i--) {
                             if (request.getParameter("yearTo") != null) {
                                 int yTo = Integer.parseInt(request.getParameter("yearTo").toString().trim());
@@ -310,96 +410,6 @@
                         }
                     } else {
                         if (i == yearTo) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                                }
-                            }
-                        }
-                    %>
-                </select>
-
-            </td>
-        </tr>
-        <tr>
-            <td>Warranty From:</td>
-            <td>
-                <select name="monthFrom" style="width: 70px;height: 30px">
-                    <%
-                        for (int i = 1; i <= 12; i++) {
-                            if (request.getParameter("monthFrom") != null) {
-                                int mFrom = Integer.parseInt(request.getParameter("monthFrom").toString().trim());
-                                if (i == mFrom) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                        }
-                    } else {
-                        if (i == monthFrom) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                                }
-                            }
-                        }
-                    %>
-                </select>
-                <select name="dayFrom" style="width: 70px;height: 30px">
-                    <%
-                        for (int i = 1; i <= 31; i++) {
-                            if (request.getParameter("dayFrom") != null) {
-                                int dFrom = Integer.parseInt(request.getParameter("dayFrom").toString().trim());
-                                if (i == dFrom) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                        }
-                    } else {
-                        if (i == dayFrom) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                                }
-                            }
-                        }
-                    %>
-                </select>
-                <select name="yearFrom" style="width: 100px;height: 30px">
-                    <%
-                        for (int i = year; i >= calen.get(Calendar.YEAR); i--) {
-                            if (request.getParameter("yearFrom") != null) {
-                                int yFrom = Integer.parseInt(request.getParameter("yearFrom").toString().trim());
-                                if (i == yFrom) {
-                    %>
-                    <option selected="selected" value="<%=i%>"><%=i%></option>
-                    <%
-                    } else {
-                    %>
-                    <option value="<%=i%>"><%=i%></option>
-                    <%
-                        }
-                    } else {
-                        if (i == yearFrom) {
                     %>
                     <option selected="selected" value="<%=i%>"><%=i%></option>
                     <%
@@ -550,7 +560,7 @@
                         ResultSet rs2 = null;
                         String sql2 = "select * from tbl_type_accessory ";
                         cnn2 = dbconnect.Connect();
-                                
+
                         try {
                             st2 = cnn2.createStatement();
                             rs2 = st2.executeQuery(sql2);
@@ -561,7 +571,7 @@
                                 if (check.checkExit("tbl_accessory", "typeID", type) > 0) {
                                     if (request.getParameter("typeid") != null) {
                                         if (type == Integer.parseInt(request.getParameter("typeid").toString().trim())) {
-                                                   
+
                     %>
 
                     <option selected="selected" value="<%=type%>"><%=typeName%></option>
@@ -606,7 +616,7 @@
                     Connection cnn3 = null;
                     Statement st3 = null;
                     ResultSet rs3 = null;
-                    String cSQl="";
+                    String cSQl = "";
                     String sql3 = "select * from tbl_accessory where status=1";
                     int typeID = 0;
                     if (request.getParameter("typeid") != null) {
@@ -626,7 +636,7 @@
                                     int accessID = rs3.getInt("accessID");
                                     String accessName = rs3.getString("accessName");
                                     showAccessEditFrom showAcc = new showAccessEditFrom();
-                                    cSQl=showAcc.showAccess(dID);
+                                    cSQl = showAcc.showAccess(dID);
                                     String[] accSelect = showAcc.showAccess(dID).split("/");
                                     if (request.getParameter("listcheck") != null) {
                                         if (!request.getParameter("listcheck").equalsIgnoreCase("")) {
@@ -741,24 +751,23 @@
 
                             int cnt = 0;
                             int vitri = 0;
-                            boolean check1=false;
+                            boolean check1 = false;
                             String[] listNo = request.getParameter("listNo").split("/");
-                                
+
                             for (String mStrings : (List<String>) mVec) {
-                                String[] ms=mStrings.split("/");
-                               str=mStrings;
+                                String[] ms = mStrings.split("/");
+                                str = mStrings;
                                 for (int k = 0; k < listNo.length; k++) {
-                                     int dem1=0;
+                                    int dem1 = 0;
                                     for (int m = 0; m < ms.length; m++) {
-                                        if(listNo[k].equals(ms[m])){
-                                            dem1=dem1+1;
+                                        if (listNo[k].equals(ms[m])) {
+                                            dem1 = dem1 + 1;
                                         }
                                     }
-                                    if(dem1>1){
-                                        str = str.replace(listNo[k], "0")+"/"+listNo[k];
+                                    if (dem1 > 1) {
+                                        str = str.replace(listNo[k], "0") + "/" + listNo[k];
                                     }
                                 }
-                                    
 
                             }
                             //
@@ -784,11 +793,11 @@
         <tr>
 
             <td colspan="2">
-                <input type="text" style="visibility: hidden;" placeholder="gan" value="" id="txtResultAccess" name="txtResultAccess" />
-                <input type="text" style="visibility: hidden;"  placeholder="tam" value="<%=str %>" id="txtList" name="txtList" />
-                <input type="text" style="visibility: hidden;" value="<%=request.getParameter("id") == null ? "" : request.getParameter("id")%>" id="deviceID" name="deviceID" />
-                <input type="text" style="visibility: hidden;" placeholder="txtNoCheck" value="" id="txtNoCheck" name="txtNoCheck" />
-                <input type="text"  style="visibility: hidden;" placeholder="txtListNo" value="<%=request.getParameter("listNo") == null ? "" : request.getParameter("listNo")%>" id="txtListNo" name="txtListNo" />
+                <input type="hidden"   value="" id="txtResultAccess" name="txtResultAccess" />
+                <input type="hidden"    value="<%=str%>" id="txtList" name="txtList" />
+                <input type="hidden"  value="<%=request.getParameter("id") == null ? "" : request.getParameter("id")%>" id="deviceID" name="deviceID" />
+                <input type="hidden"   value="" id="txtNoCheck" name="txtNoCheck" />
+                <input type="hidden"   value="<%=request.getParameter("listNo") == null ? "" : request.getParameter("listNo")%>" id="txtListNo" name="txtListNo" />
             </td>
 
         </tr>
@@ -812,7 +821,7 @@
 </form>
 
 
-
+<!--
 <script type="text/javascript">
 
     var form = $('#ajaxform');
@@ -834,3 +843,4 @@
 
         return false;
     }); </script>
+-->

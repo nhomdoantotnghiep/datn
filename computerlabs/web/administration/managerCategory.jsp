@@ -118,18 +118,18 @@
     {
         var getID = id;
         var getACT = act;
-        //document.test.ID.value = getID;
-        //document.test.act.value = getACT;
+        //document.ajaxform.ID.value = getID;
+        //document.ajaxform.act.value = getACT;
         if (act == 'delete') {
             if (confirm("I want deleted?") == true) {
-                document.test.ID.value = getID;
-                document.test.act.value = getACT;
+                document.ajaxform.ID.value = getID;
+                document.ajaxform.act.value = getACT;
             } else {
                 //window.location.href = "?options=ManagerTypeAccessory";
             }
         } else {
-            document.test.ID.value = getID;
-            document.test.act.value = getACT;
+            document.ajaxform.ID.value = getID;
+            document.ajaxform.act.value = getACT;
             mySubmit();
         }
     }
@@ -160,7 +160,7 @@
         var getText = pagenumber;  //Used to prevent caching during ajax call
         var strStatus = "&status=" + status;
         var cateName = "";
-        cateName = document.test.cateName.value;
+        cateName = document.ajaxform.cateName.value;
         if (xmlHttpRe) {
 
             xmlHttpRe.open("GET", "../showCate?pageNumber=" + getText + strStatus + "&cateName" + cateName, true);// chú ý
@@ -171,7 +171,7 @@
     function goPage(status)
     {
         var c_value = "";
-        c_value = document.test.go.value;
+        c_value = document.ajaxform.go.value;
         new setXMLHttpRe();
         var getText = c_value;  //Used to prevent caching during ajax call
         var strStatus = "&status=" + status;
@@ -186,8 +186,8 @@
     {
         var v_cateName = "";
         var v_status = "";
-        v_cateName = document.test.cateName.value;
-        v_status = document.test.status.value;
+        v_cateName = document.ajaxform.cateName.value;
+        v_status = document.ajaxform.status.value;
         new setXMLHttpRe();
         if (xmlHttpRe) {
 
@@ -665,7 +665,7 @@
                             <%
                                 String visibly = "";
                                 if (request.getParameter("actCreate") == null) {
-                                    visibly = "visibility: hidden;";
+                                    visibly = "display:none;";
                                 }
                             %>
                             <div class="site-input-div" style="<%=visibly%>">
@@ -705,7 +705,7 @@
 
 <!--<script type="text/javascript">
 
-    var form = $('#test');
+    var form = $('#ajaxform');
     $('#content').hide();//chu y
     form.submit(function() {
 

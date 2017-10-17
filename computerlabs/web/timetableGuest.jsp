@@ -668,9 +668,7 @@
         <td colspan="2">
             <img src="img/chuachon.png" />
         </td>   
-        <td colspan="2">
-            <img src="img/dangcho.png" />
-        </td>  
+         
         <td colspan="2">
             <img src="img/daduyet.png" />
         </td>           
@@ -682,9 +680,7 @@
         <td colspan="2">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empty
         </td>   
-        <td colspan="2">
-            Waiting approve
-        </td>  
+          
         <td colspan="2">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Approved
         </td>  

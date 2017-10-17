@@ -19,7 +19,7 @@
         <script type="text/javascript">
             jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
-                jQuery("#test").validationEngine();
+                //jQuery("#ajaxform").validationEngine();
                 $("#txtDateFrom").datepicker({
                     dateFormat: "yy/mm/dd"
                 });
@@ -29,10 +29,14 @@
             });
             function BASIC_SelectItem(act, id)
             {
+                
                 var getID = id;
                 var getACT = act;
-                document.test.ID.value = getID;
-                document.test.act.value = getACT;
+                document.ajaxform.ID.value = getID;
+                document.ajaxform.act.value = getACT;
+                if(act == 'update' ){
+                    mySubmit();
+                }
             }
 
 
@@ -60,8 +64,8 @@
                 var strStatus = "&status=" + status;
                 var v_dateTo = "";
                 var v_dateFrom = "";
-                v_dateTo = document.test.txtDateTo.value;
-                v_dateFrom = document.test.txtDateFrom.value;
+                v_dateTo = document.ajaxform.txtDateTo.value;
+                v_dateFrom = document.ajaxform.txtDateFrom.value;
                 if (xmlHttpRe) {
 
                     xmlHttpRe.open("GET", "../showComplaint?pageNumber=" + getText + strStatus + "&inputdateTo=" + v_dateTo + "&inputdateFrom=" + v_dateFrom, true);// chú ý
@@ -72,11 +76,11 @@
             function goPage(status)
             {
                 var c_value = "";
-                c_value = document.test.go.value;
+                c_value = document.ajaxform.go.value;
                 var v_dateTo = "";
                 var v_dateFrom = "";
-                v_dateTo = document.test.txtDateTo.value;
-                v_dateFrom = document.test.txtDateFrom.value;
+                v_dateTo = document.ajaxform.txtDateTo.value;
+                v_dateFrom = document.ajaxform.txtDateFrom.value;
                 new setXMLHttpRe();
                 var getText = c_value;  //Used to prevent caching during ajax call
                 var strStatus = "&status=" + status;
@@ -90,11 +94,11 @@
             function Search()
             {
                 var v_status = "";
-                v_status = document.test.status.value;
+                v_status = document.ajaxform.status.value;
                 var v_dateTo = "";
                 var v_dateFrom = "";
-                v_dateTo = document.test.txtDateTo.value;
-                v_dateFrom = document.test.txtDateFrom.value;
+                v_dateTo = document.ajaxform.txtDateTo.value;
+                v_dateFrom = document.ajaxform.txtDateFrom.value;
                 new setXMLHttpRe();
                 if (xmlHttpRe) {
 
@@ -118,7 +122,43 @@
             }
 
         </script>
-    
+<script>
+    function mySubmit() {
+        
+        var vali = jQuery("#ajaxform").validationEngine('validate');
+        
+        var form = $('#ajaxform');
+        if (vali === true) {
+            console.log("---4---");
+            $('#ajaxform').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: '../updateUserProcess',
+                    data: form.serialize(),
+                    success: function(data) {
+                        var result = data;
+                        $('#content').show().html(result).fadeOut(4000, function() {
+                            window.location.href = "?options=ManagerComplaint";
+                        });
+                    }
+                });
+                
+                //return false;
+            }); 
+        } else {
+            
+        }
+
+    }
+
+    jQuery(document).ready(function() {
+        $('#content').hide();//chu y
+        // binds form submission and fields to the validation engine 
+        jQuery("#ajaxform").validationEngine();
+
+    });
+</script>    
 
 
         <%!
@@ -132,7 +172,7 @@
             List pageNumbers = (List) session.getAttribute("pages");
         %>  
 
-        <form action="../updateUserProcess" name="test" id="test" method="post">
+        <form  name="ajaxform" id="ajaxform" method="post">
             <table cellpadding="1px" cellspacing="1px" border="0" width="950px" align="center">  
                 <tr >
 
@@ -620,8 +660,8 @@
 
                 <tr>
                     <td colspan="4" align="center">
-                        <input type="text" name="ID" id="ID" style="visibility: hidden"  />
-                        <input type="text" name="act" id="act" style="visibility: hidden"  />
+                        <input type="hidden" name="ID" id="ID"   />
+                        <input type="hidden" name="act" id="act"   />
                     </td>
 
                 </tr>
@@ -633,27 +673,4 @@
                 </tr>
             </table> 
         </form>
-    
-<script type="text/javascript">
-
-    var form = $('#test');
-    $('#content').hide();//chu y
-    form.submit(function() {
-
-
-
-        $.ajax({
-            type: form.attr('method'),
-            url: form.attr('action'),
-            data: form.serialize(),
-            success: function(data) {
-                var result = data;
-                $('#content').show().html(result).fadeOut(3000, function() {
-                    window.location.href = "?options=ManagerComplaint";
-                });
-
-            }
-        });
-
-        return false;
-    }); </script>
+   

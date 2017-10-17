@@ -22,10 +22,42 @@
         <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
         <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
         <script>
-            jQuery(document).ready(function() {
-                // binds form submission and fields to the validation engine 
-                jQuery("#ajaxform").validationEngine();
-            });</script>
+    function mySubmit() {
+        
+        var vali = jQuery("#ajaxform").validationEngine('validate');
+        
+        var form = $('#ajaxform');
+        if (vali === true) {
+            console.log("---4---");
+            $('#ajaxform').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: '../createuser',
+                    data: form.serialize(),
+                    success: function(data) {
+                        var result = data;
+                        $('#content').show().html(result).fadeOut(4000, function() {
+                            window.location.href = "?options=manageruser";
+                        });
+                    }
+                });
+                
+                //return false;
+            }); 
+        } else {
+            
+        }
+
+    }
+
+    jQuery(document).ready(function() {
+        $('#content').hide();//chu y
+        // binds form submission and fields to the validation engine 
+        jQuery("#ajaxform").validationEngine();
+
+    });
+</script>
          <script>
             function BASIC_SelectItem()
             {
@@ -50,7 +82,7 @@
         
             <%--check username--%>
             
-        <form id="ajaxform" name="ajaxform" action='../createuser' method='post'>
+        <form id="ajaxform" name="ajaxform"  method='post'>
             <%
                     Connection cnn1 = null;
                     Statement st1 = null;
@@ -271,13 +303,13 @@
                 </tr>
                 <tr>
 
-                    <td colspan="2"><input type="submit" value="Update" class="button_example"  />
+                    <td colspan="2"><input type="submit" value="Update" class="button_example" onclick="mySubmit()"  />
                 </tr>
             </table>
         </form>
 
 
-
+<!--
         <script type="text/javascript">
 
             var form = $('#ajaxform');
@@ -298,3 +330,4 @@
 
                 return false;
             }); </script>
+-->

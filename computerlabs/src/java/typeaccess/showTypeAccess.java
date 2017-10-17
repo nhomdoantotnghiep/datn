@@ -39,7 +39,7 @@ public class showTypeAccess extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
 
-        int maxEntriesPerPage = 7;
+        int maxEntriesPerPage = 10;
         int page = 1;
 
         String pageNumberValue = request.getParameter("pageNumber");

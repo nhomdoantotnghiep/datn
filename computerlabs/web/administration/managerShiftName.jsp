@@ -25,7 +25,7 @@
             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57) && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122))
             {
                 //display error message
-                $("#error").html("No Special Characters.Only number & alphabets").show();
+                $("#error").html("<br/>No Special Characters.Only number & alphabets").show();
                 return false;
             }
         });
@@ -43,12 +43,45 @@
     }
 
 </script>
-<script>jQuery(document).ready(function() {
+<script>
+    function mySubmit() {
+        
+        var vali = jQuery("#test").validationEngine('validate');
+        
+        var form = $('#test');
+        if (vali === true) {
+            console.log("---4---");
+            $('#test').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: '../updateShift',
+                    data: form.serialize(),
+                    success: function(data) {
+                        var result = data;
+                        $('#content').show().html(result).fadeOut(4000, function() {
+                            window.location.href = "?options=ManagerShift";
+                        });
+                    }
+                });
+                
+                //return false;
+            }); 
+        } else {
+            
+        }
+
+    }
+
+    jQuery(document).ready(function() {
+        $('#content').hide();//chu y
         // binds form submission and fields to the validation engine 
         jQuery("#test").validationEngine();
-    });</script>
+
+    });
+</script>
     <%--check username--%>
-<form action="../updateShift" name="test" id="test" method="post">
+<form  name="test" id="test" method="post">
     <table cellpadding="1px" cellspacing="1px" id="fcuk" width="800px" align="center"> 
         <tr bgcolor="#78bbe3">
             <td style="width: 70px;color: white;" align="center">ID</td>
@@ -92,7 +125,7 @@
             %>
             <td align="center" style="background: #e7f5fe;height:30px; ">
                 <input name="shiftName" id="shiftName" style="width: 50px;" onkeyup="lookup(this.value,<%=ID%>);" class="validate[required,minSize[1]] text-input" value="<%=sName%>" type="text"/>
-                <div style="width: 50px;">
+                <div style="">
                     <div style="display: none;" id="autoSuggestionsList"></div>
                     <div style="display: none;" id="error"></div>
 
@@ -138,7 +171,7 @@
                     if (Integer.parseInt(request.getParameter("shiftID").toString().trim()) == ID) {
             %>
             <td align="center" style="background: #e7f5fe;height:30px; ">
-                <input type="submit" class="button_img" style="background: url('../img/edit2.png');width: 23px;height: 23px;" value="" />
+                <input type="submit" class="button_img" style="background: url('../img/edit2.png');width: 23px;height: 23px;" value="" onclick="mySubmit()" />
                 &nbsp;&nbsp;&nbsp;&nbsp;<a href="?options=ManagerShift"><img src="../img/back.png" width="23px" height="20px" /></a>
             </td>
                 <%
@@ -170,7 +203,7 @@
             %>
             <td align="center">
                 <input name="shiftName" id="shiftName" style="width: 50px;"  onkeyup="lookup(this.value,<%=ID%>);" class="validate[required,minSize[1]] text-input" value="<%=sName%>" type="text"/>
-                <div style="width: 50px;">
+                <div style="">
                     <div style="display: none;" id="autoSuggestionsList"></div>
                     <div style="display: none;" id="error"></div>
 
@@ -216,7 +249,7 @@
                     if (Integer.parseInt(request.getParameter("shiftID").toString().trim()) == ID) {
             %>
             <td align="center">
-                <input type="submit" class="button_img" style="background: url('../img/edit2.png');width: 23px;height: 23px;" value=""/>
+                <input type="submit" class="button_img" style="background: url('../img/edit2.png');width: 23px;height: 23px;" value="" onclick="mySubmit()"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;<a href="?options=ManagerShift"><img src="../img/back.png" width="23px" height="20px" /></a>
             </td>
                 <%
@@ -235,12 +268,15 @@
             }
         %>
             <tr>
-                <td><input type="text" name="sID" style="visibility: hidden;" value="<%=request.getParameter("shiftID")==null?"":request.getParameter("shiftID") %>"  /></td>
+                <td>
+                    <input type="hidden" name="sID"  value="<%=request.getParameter("shiftID")==null?"":request.getParameter("shiftID") %>"  />
+                </td>
                 <td align="center" colspan="6"><div id="content"></div></td>
         </tr>
     </table>
     <div id="dtBox"></div>
 </form>
+<!--
 <script type="text/javascript">
 
     var form = $('#test');
@@ -260,3 +296,4 @@
 
         return false;
     }); </script>
+-->

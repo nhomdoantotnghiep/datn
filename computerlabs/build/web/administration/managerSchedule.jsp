@@ -53,7 +53,7 @@
                         dateFormat: "yy/mm/dd"
                     });
                 });
-                $("#test").validationEngine();
+                
 
             });
             function BASIC_SelectItem()
@@ -234,11 +234,48 @@
                     document.test.deletedateID.value = getID;
                     
                 } else {
-                    txt = "You pressed Cancel!";
+                    var txt = "You pressed Cancel!";
                 }
             }
+            
         </script>
+<script>
+    function mySubmit() {
+        
+        var vali = jQuery("#test").validationEngine('validate');
+        
+        var form = $('#test');
+        if (vali === true) {
+            console.log("---4---");
+            $('#test').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'post',
+                    url: 'sendRequest',
+                    data: form.serialize(),
+                    success: function(data) {
+                        var result = data;
+                        $('#content').show().html(result).fadeOut(4000, function() {
+                            window.location.href = "?option=viewRequest";
+                        });
+                    }
+                });
+                
+                //return false;
+            }); 
+        } else {
+            
+        }
 
+    }
+
+    jQuery(document).ready(function() {
+        $('#content').hide();//chu y
+        // binds form submission and fields to the validation engine 
+        jQuery("#test").validationEngine();
+
+    });
+</script>
     
     
 
