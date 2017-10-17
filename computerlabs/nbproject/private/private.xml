@@ -3,20 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/scheDetailsClient.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/myUserDetailClient.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/timetable.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/computerlabs/checklogin.java</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/administration/manageruser.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/administration/myUserDetail.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/administration/index.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/computerlabs/createuser.java</file>
+            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/home.jsp</file>
             <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/body.jsp</file>
             <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/indexSchedule.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/administration/body.jsp</file>
+            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/timetableGuest.jsp</file>
             <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/index.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/web/administration/managerlab.jsp</file>
-            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/computerlabs/updateStatusAccount.java</file>
+            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/ScheduleClient/showScheClient.java</file>
+            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/ScheduleClient/showScheGuest.java</file>
+            <file>file:/D:/hochanh/ky5/doantotnghiep/workplace/datn/computerlabs/src/java/processSchedule/assignSchedule.java</file>
         </group>
     </open-files>
 </project-private>

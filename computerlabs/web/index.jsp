@@ -240,7 +240,7 @@
         <script src="js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
         <script>jQuery(document).ready(function() {
                 // binds form submission and fields to the validation engine 
-                jQuery("#test").validationEngine();
+                //jQuery("#test").validationEngine();
             });</script>
     </body>
 </html>

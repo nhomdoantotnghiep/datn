@@ -61,11 +61,14 @@ public class assignSchedule extends HttpServlet {
         System.out.println("-chkUser-" + chkUser + "--");
         System.out.println("-dateID-" + dateID + "--");
         int count = 0;
-
+        if(dateID != null && dateID.trim().length() > 0){
+            deleteWorkingShift(dateID);// xoa het sau do them moi
+        }
+        
         if (txtResultUser != null && txtResultUser.trim().length() > 0) {
             String[] userIDarr = txtResultUser.split("/");
             if (userIDarr != null && userIDarr.length > 0) {
-                int temp = deleteWorkingShift(dateID);// xoa het sau do them moi
+                
                 //if (temp > 0) {//delete het
                 for (String user : userIDarr) {
                     int temp2 = createWorkingShift(user, dateID);
@@ -75,6 +78,8 @@ public class assignSchedule extends HttpServlet {
                 }
                 //}
             }
+        }else{
+            count = 1;// da xoa het assign
         }
         if (count > 0) {
             out.println("<div class=\"style-result\">Assign successfull !!!!</div>");

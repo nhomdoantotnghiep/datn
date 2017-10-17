@@ -48,40 +48,14 @@
         }
 
     }
-    function ajaxValidationCallback(status, form, json, options) {
-//                    if (window.console) 
-//                    console.log(status);
 
-        if (status === true) {
-            //alert("the form is valid!");
-            // uncomment these lines to submit the form to form.action
-            // form.validationEngine('detach');
-            // form.submit();
-            // or you may use AJAX again to submit the data
-            form.submit(function() {
-
-                $.ajax({
-                    type: 'post',
-                    url: 'sendRequest',
-                    data: form.serialize(),
-                    success: function(data) {
-                        var result = data;
-                        $('#content').show().html(result).fadeOut(3000, function() {
-                            window.location.href = "?option=viewRequest";
-                        });
-                    }
-                });
-
-                return false;
-            }); 
-        }
-    }
     jQuery(document).ready(function() {
         $('#content').hide();//chu y
         // binds form submission and fields to the validation engine 
         jQuery("#ajaxform").validationEngine();
 
-    });</script>
+    });
+</script>
 
 
 <%
@@ -221,9 +195,3 @@
         </tr>
     </table>
 </form>
-
-
-
-<script type="text/javascript">
-
-</script>

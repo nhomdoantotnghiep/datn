@@ -23,6 +23,13 @@
 
 
 
+
+
+        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
+        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
+        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
+        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
+        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
         <SCRIPT type='text/javascript' >//mai sua
             //this function determines how changing the value of the dropdown will affect the content of the textboxes
             function DeviceInfo() {
@@ -76,6 +83,7 @@
                     }
                 }
                 document.ajaxform.txtResultAccess.value = c_value;
+                mySubmit();
             }
 
 
@@ -83,7 +91,7 @@
         </script>
 
 
-        <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
                 //called when key is pressed in textbox
@@ -110,22 +118,45 @@
                 }
             }
 
-        </script>
+            function mySubmit() {
 
-        <link rel="stylesheet" href="../css/cssvalidate/validationEngine.jquery.css" type="text/css"/> 
-        <link rel="stylesheet" href="../css/cssvalidate/template.css" type="text/css"/> 
-        <script src="../js/jsvalidate/jquery-1.8.2.min.js" type="text/javascript"></script> 
-        <script src="../js/jsvalidate/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8"></script> 
-        <script src="../js/jsvalidate/jquery.validationEngine.js" type="text/javascript" charset="utf-8"></script> 
-        <script>jQuery(document).ready(function() {
+                var vali = jQuery("#ajaxform").validationEngine('validate');
+
+                var form = $('#ajaxform');
+                if (vali === true) {
+                    console.log("---4---");
+                    $('#ajaxform').submit(function(e) {
+                        e.preventDefault();
+                        $.ajax({
+                            type: 'post',
+                            url: '../createdevice',
+                            data: form.serialize(),
+                            success: function(data) {
+                                var result = data;
+                                $('#content').show().html(result).fadeOut(4000, function() {
+                                    window.location.href = "?options=ManagerDevice";
+                                });
+                            }
+                        });
+
+                        //return false;
+                    }); 
+                } else {
+
+                }
+
+            }
+
+            jQuery(document).ready(function() {
+                $('#content').hide();//chu y
                 // binds form submission and fields to the validation engine 
                 jQuery("#ajaxform").validationEngine();
+
             });</script>
-            <%--check username--%>
 
     </head>
     <body>
-        <form id='ajaxform' name='ajaxform' action='../createdevice' method='post'>
+        <form id='ajaxform' name='ajaxform' method='post'>
             <table width="500px" border="0" align="center" cellpadding="7px" cellspacing="0">
 
                 <tr>
@@ -409,9 +440,9 @@
                                     while (rs1.next()) {
                                         int rID = rs1.getInt("roomID");
                                         String rName = rs1.getString("roomName");
-                                         if (request.getParameter("roomID") != null) {
-                                        int roomSel = Integer.parseInt(request.getParameter("roomID").toString().trim());
-                                        if (roomSel == rID) {
+                                        if (request.getParameter("roomID") != null) {
+                                            int roomSel = Integer.parseInt(request.getParameter("roomID").toString().trim());
+                                            if (roomSel == rID) {
                             %>
 
                             <option selected="selected" value="<%=rID%>"><%=rName%></option>
@@ -423,14 +454,14 @@
                             <option value="<%=rID%>"><%=rName%></option>
 
                             <%
-                                        }
-                                    }else{
-                                             %>
+                                }
+                            } else {
+                            %>
 
                             <option value="<%=rID%>"><%=rName%></option>
 
                             <%
-                                         }
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     out.print(ex.getMessage());
@@ -583,26 +614,6 @@
 
 
 
-        <script type="text/javascript">
 
-            var form = $('#ajaxform');
-            $('#content').hide();//chu y
-            form.submit(function() {
-
-                $.ajax({
-                    type: form.attr('method'),
-                    url: form.attr('action'),
-                    data: form.serialize(),
-                    success: function(data) {
-                        var result = data;
-                        $('#content').show().html(result).fadeOut(4000,function() {
-                            window.location.href = "?options=ManagerDevice";
-                        });
-
-                    }
-                });
-
-                return false;
-            }); </script>
     </body>
 </html>
