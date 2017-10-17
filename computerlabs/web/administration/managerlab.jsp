@@ -137,7 +137,7 @@
         var getID = id;
         var getACT = act;
         if (act == 'delete') {
-            if (confirm("I want deleted?") == true) {
+            if (confirm("Delete this lab?") == true) {
                 document.test.ID.value = getID;
                 document.test.act.value = getACT;
                 myDelete();

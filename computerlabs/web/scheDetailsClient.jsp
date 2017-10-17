@@ -28,7 +28,7 @@
             });
             function BASIC_SelectItem(id)
             {
-                if (confirm("I want deleted?")== true) {
+                if (confirm("Delete this request?")== true) {
                 var getID = id;
                 document.ajaxform.ID.value = getID;
                 }else{

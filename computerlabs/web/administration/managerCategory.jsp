@@ -147,7 +147,7 @@
         //document.ajaxform.ID.value = getID;
         //document.ajaxform.act.value = getACT;
         if (act == 'delete') {
-            if (confirm("I want deleted?") == true) {
+            if (confirm("Delete this Category?") == true) {
                 document.ajaxform.ID.value = getID;
                 document.ajaxform.act.value = getACT;
                 myDelete();

@@ -77,7 +77,7 @@
         var getID = id;
         var getACT = act;
         if (act == 'delete') {
-            if (confirm("I want deleted?") == true) {
+            if (confirm("Delete this class?") == true) {
                 document.ajaxform.ID.value = getID;
                 document.ajaxform.act.value = getACT;
                 myDelete();
