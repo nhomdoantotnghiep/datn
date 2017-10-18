@@ -573,9 +573,9 @@
                             + "</td>");
                     out.println("<td " + color + " style='height:30px' align=\"center\">" + deviceDTO.getCateName()
                             + "</td>");
-                    out.println("<td " + color + " style='height:30px' align=\"center\">" + deviceDTO.getwTo()
-                            + "</td>");
                     out.println("<td " + color + " style='height:30px' align=\"center\">" + deviceDTO.getwFrom()
+                            + "</td>");
+                    out.println("<td " + color + " style='height:30px' align=\"center\">" + deviceDTO.getwTo()
                             + "</td>");
                     out.println("<td " + color + " style='height:30px' align=\"center\">" + deviceDTO.getStatus()
                             + "</td>");
