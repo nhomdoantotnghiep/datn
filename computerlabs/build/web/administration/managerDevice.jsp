@@ -1,6 +1,7 @@
 
 
 
+<%@page import="reporting.ReportConstant"%>
 <%@page import="device.checkExits"%>
 <%@page import="device.classDevice"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -193,6 +194,15 @@
         jQuery("#ajaxform").validationEngine();
 
     });
+    
+    function Export()
+    {
+        var typeRP = <%=String.valueOf(ReportConstant.TYPE_DEVICE_STATISTIC) %>;
+        var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+        var labRP = document.ajaxform.roomID.value;
+
+        window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP + "&labRP=" + labRP,"_blank");
+    }
 </script>
 
 
@@ -347,7 +357,11 @@
                 </select>
             </td>
             <td style="height: 30px" >
-                <input type="button" onclick="Search();" value="Search"/>
+                <input type="button" class="button_example" onclick="Search();" value="Search"/>
+                <!--
+                &nbsp;&nbsp;&nbsp;
+                <input type="button" value="Export Report" class="button_example" onclick= "Export();" />
+                -->
             </td>
             <td style="height: 30px;" colspan="3"></td>
         </tr>  

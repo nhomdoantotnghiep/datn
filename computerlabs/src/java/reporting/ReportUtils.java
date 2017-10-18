@@ -39,6 +39,7 @@ public class ReportUtils {
 
     public static final String FOLDER_TIMETABLE = "timetable";
     public static final String FOLDER_SCHEDULE = "schedule";
+    public static final String FOLDER_DEVICE = "device";
     
 
     public static String getTemplateReportFilePath(HttpServletRequest request, String reportOrexport, String fileName) {

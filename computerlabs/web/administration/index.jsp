@@ -57,13 +57,13 @@
                             </tr>
                         </table>
                         <table class="left-menu">
-                            <tr>
+                            <!--<tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="bg-title2 ">
                                         <div class="text-title">Report Infomation</div>               
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                             <tr>
                                 <td valign="top" class="bg-title-td">
                                     <div class="<%=ops.equalsIgnoreCase("ManagerSchedule") || ops.equalsIgnoreCase("CreateSchedule") || ops.equalsIgnoreCase("scheDetails")? bgSelected : bgNotSelect %>">

@@ -82,7 +82,7 @@
 
     $(document).ready(function() {
         //called when key is pressed in textbox
-        $("#accessNameUp").keypress(function(e)
+        $("#accessNameUp1").keypress(function(e)
         {
             $("#error").hide();
             $("#autoSuggestionsList").hide();
@@ -108,7 +108,7 @@
 
     $(document).ready(function() {
         //called when key is pressed in textbox
-        $("#namecreate").keypress(function(e)
+        $("#namecreate1").keypress(function(e)
         {
             $("#error").hide();
             $("#autoSuggestionsList").hide();
@@ -673,7 +673,8 @@
             <td style="height:30px" align="center"  class="row-td-backgroud-select">
 
                 <input name="accessNameUp" id="accessNameUp" onkeyup="lookup(this.value,<%=accessDetails.getAccessID()%>);" class="validate[required,minSize[3]] text-input" value="<%=accessDetails.getAccessName()%>" type="text"/>
-                <div style="width: 50px;">
+                <br/>
+                <div >
                     <div style="display: none;" id="autoSuggestionsList"></div>
                     <div style="display: none;" id="error"></div>
 

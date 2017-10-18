@@ -19,7 +19,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         //called when key is pressed in textbox
-        $("#typeNameUp").keypress(function(e)
+        $("#typeNameUp1").keypress(function(e)
         {
             $("#error").hide();
             $("#autoSuggestionsList").hide();
@@ -48,7 +48,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         //called when key is pressed in textbox
-        $("#namecreate").keypress(function(e)
+        $("#namecreate1").keypress(function(e)
         {
             $("#error").hide();
             $("#autoSuggestionsList").hide();
