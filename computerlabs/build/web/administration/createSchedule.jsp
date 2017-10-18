@@ -86,11 +86,11 @@
 
 
 <form id='ajaxform' name='ajaxform'  method='post'>
-    <table width="650px" border="0" align="center" cellpadding="0" cellspacing="0"> 
-        <tr><td><br/></td></tr>
+    <table width="650px" border="1px" align="center" cellpadding="0" cellspacing="0"> 
+
         <tr>
-            <td class="td-left">Lab Room:</td>
-            <td>
+            <td class="td-left" style="background:#78bbe3;border-top: 1px white">Lab Room:</td>
+            <td style="background:#dfefff;border-top: 1px white">
 
                 <%
                     Connection cnn = null;
@@ -98,13 +98,20 @@
                     ResultSet rs = null;
                     String sql = "select * from tbl_labroom where status=1";
                     cnn = dbconnect.Connect();
+                    int splitLab = 0;
                     try {
                         st = cnn.createStatement();
                         rs = st.executeQuery(sql);
                         while (rs.next()) {
+                            splitLab = splitLab + 1;
                 %>
-                <input name="chkRoom" type="checkbox" value="<%=rs.getInt("roomID")%>"/> &nbsp;<%=rs.getString("roomName")%> <br />
+                <input name="chkRoom" type="checkbox" value="<%=rs.getInt("roomID")%>"/> &nbsp;<%=rs.getString("roomName")%> 
                 <%
+                    if (splitLab % 2 == 0) {
+                %>
+                <br />
+                <%
+                            }
                         }
                     } catch (Exception ex) {
                         out.print(ex.getMessage());
@@ -123,25 +130,34 @@
             </td>
         </tr>
         <tr>
-            <td class="td-left">Shift Name:</td>
-            <td>
+            <td class="td-left" style="background:#78bbe3;border-top: 1px white">Shift Name:</td>
+            <td style="background:#dfefff;border-top: 1px white">
                 <%
                     Connection cnn1 = null;
                     Statement st1 = null;
                     ResultSet rs1 = null;
                     String sql1 = "select * from tbl_shiftname where status=1";
                     cnn1 = dbconnect.Connect();
+                    int splitShift = 0;
                     try {
                         st1 = cnn1.createStatement();
                         rs1 = st1.executeQuery(sql1);
                         while (rs1.next()) {
+                            splitShift = splitShift + 1;
                             int shiftID = rs1.getInt("shiftID");
                             String starttime = rs1.getTime("starttime").toString();
                             String endtime = rs1.getTime("endtime").toString();
                             String shiftname = rs1.getString("shiftname");
                 %>
-                <input name="chkShift" type="checkbox" value="<%=shiftID%>" title="<%=starttime.substring(0, 5)%> - <%=endtime.substring(0, 5)%> " /> &nbsp;<%=shiftname%> <br />
+                <input name="chkShift" type="checkbox" value="<%=shiftID%>" title="<%=starttime.substring(0, 5)%> - <%=endtime.substring(0, 5)%> " /> &nbsp;<%=shiftname%> &nbsp;&nbsp;
                 <%
+                    if (splitShift % 2 == 0) {
+                %>
+                <br />
+
+                <%
+                            }
+
                         }
                     } catch (Exception ex) {
                         out.print(ex.getMessage());
@@ -159,11 +175,16 @@
             </td>
         </tr>
         <tr>
-            <td class="td-left">Number Days:</td>
-            <td>
+            <td class="td-left" style="background:#78bbe3;">Number Days:</td>
+            <td style="background:#dfefff;">
                 <input name="txtNumber" type="text" value="6" size="30" class="validate[required,custom[integer]] text-input" /> days
             </td>
         </tr>
+
+
+    </table>
+
+    <table width="650px" border="0px" align="center" cellpadding="0" cellspacing="0">
         <tr>
             <td class="td-left"> </td>
             <td><input type="submit" value="    Create    " class="button_example" onclick="BASIC_SelectItem();" />&nbsp;&nbsp;&nbsp;&nbsp;<input class="button_example" value="    Reset   " type="reset"/>
