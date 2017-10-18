@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="text" id="listDe" name="listDe" style="visibility: hidden;" value="<%=request.getParameter("listDevice") == null ? "" : request.getParameter("listDevice")%>" />
+                        <input type="hidden" id="listDe" name="listDe"  value="<%=request.getParameter("listDevice") == null ? "" : request.getParameter("listDevice")%>" />
                     </td>
                 </tr>
             </table>

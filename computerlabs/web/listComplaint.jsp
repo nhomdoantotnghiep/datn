@@ -568,8 +568,8 @@
 
                 <tr>
                     <td colspan="4" align="center">
-                        <input type="text" name="ID" id="ID" style="visibility: hidden"  />
-                        <input type="text" name="act" id="act" style="visibility: hidden"  />
+                        <input type="hidden" name="ID" id="ID"  />
+                        <input type="hidden" name="act" id="act"  />
                     </td>
 
                 </tr>

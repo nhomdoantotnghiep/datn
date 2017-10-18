@@ -892,7 +892,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="9"><input type="text" name="txtResultShift"  size="5" id="txtResultShift" style="visibility: hidden;"  /></td>
+                    <td colspan="9"><input type="hidden" name="txtResultShift"  size="5" id="txtResultShift"  /></td>
                 </tr>
                 <tr>
             </table>

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import reporting.complaint.ComplaintExport;
+import reporting.complaint.ComplaintModel;
 import reporting.device.DeviceExport;
 import reporting.device.DeviceModel;
 import reporting.scheduleWork.ScheduleWorkExport;
@@ -124,6 +126,22 @@ public class ReportBusinessUtils {
                 JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
                 parameters = new HashMap<String, Object>();
                 ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_DEVICE, ReportConstant.GIAY_DEVICE_STATISTIC_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
+            }
+            if (type.trim().equalsIgnoreCase(String.valueOf(ReportConstant.TYPE_COMPLAINT_STATISTIC))) {
+                HashMap<String, Object> input = new HashMap<String, Object>();
+                input.put("type", type);
+                input.put("duoiFile", duoiFile);
+                
+                System.out.println("--TYPE_COMPLAINT_STATISTIC--type-"+type);
+                System.out.println("-duoiFile-"+duoiFile);
+                
+                String tenFile_Export = ReportConstant.GIAY_COMPLAINT_STATISTIC_EXPORT + "_" + currentTimeFull;
+                
+                
+                ComplaintModel objectReport = ComplaintExport.getModel(input);
+                JRBeanCollectionDataSource dataSource = ObjectExportToReportUtils.exportBieuMau(objectReport);
+                parameters = new HashMap<String, Object>();
+                ReportUtils.exportFunctionResourceURL(realPath, ReportUtils.FOLDER_DEVICE, ReportConstant.GIAY_COMPLAINT_STATISTIC_TEMP, tenFile_Export, dataSource, parameters, duoiFile, resourceResponse);
             }
             /*if(Validator.isNotNull(maTinh)
              && Validator.isNotNull(namBaoCao) 

@@ -712,8 +712,8 @@
 
         <tr>
             <td colspan="8" align="center">
-                <input type="text" name="ID" id="ID" style="visibility: hidden"  />
-                <input type="text" name="act" id="act" style="visibility: hidden"  />
+                <input type="hidden" name="ID" id="ID"  />
+                <input type="hidden" name="act" id="act"  />
             </td>
 
         </tr>
@@ -731,7 +731,7 @@
                             <%
                                 String visibly = "";
                                 if (request.getParameter("actCreate") == null) {
-                                    visibly = "visibility: hidden;";
+                                    visibly = "display:none;";
                                 }
                             %>
                             <div class="site-input-div" style="<%=visibly%>">

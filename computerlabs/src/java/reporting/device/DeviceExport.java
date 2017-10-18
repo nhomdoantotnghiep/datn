@@ -83,7 +83,7 @@ public class DeviceExport {
         return result;
     }
 
-    public static List<DeviceDBModel> getListRP(int lid) {
+    private static List<DeviceDBModel> getListRP(int lid) {
         List<DeviceDBModel> lst = new ArrayList<DeviceDBModel>();
 
         Connection cnn = null;
@@ -133,7 +133,7 @@ public class DeviceExport {
 
         return lst;
     }
-    public static classLabroom getLabById(int lid){
+    private static classLabroom getLabById(int lid){
         classLabroom model = null;
         Connection cnn = null;
         Statement st = null;

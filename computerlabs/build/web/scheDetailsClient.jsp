@@ -459,7 +459,7 @@
                     }
 
                 %> 
-                <tr><td colspan="7" align="center"><input type="text" name="ID" id="ID" style="visibility: hidden;"  /><div id='content'></div></td></tr>
+                <tr><td colspan="7" align="center"><input type="hidden" name="ID" id="ID"  /><div id='content'></div></td></tr>
             </table>
         </form>
         <script type="text/javascript">

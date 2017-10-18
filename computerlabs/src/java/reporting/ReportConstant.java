@@ -21,6 +21,7 @@ public class ReportConstant {
         public static final int TYPE_WORKINGSHIFT = 3;
         public static final int TYPE_TIMETABLE_WORKINGSHIFT = 4;
         public static final int TYPE_DEVICE_STATISTIC = 5;
+        public static final int TYPE_COMPLAINT_STATISTIC = 6;
 	
 	/* ten file jrxml va ten file se duoc export*/
 	public static final String TEN_FILE_DEFAULT = "default";//100
@@ -39,4 +40,7 @@ public class ReportConstant {
         
         public static final String GIAY_DEVICE_STATISTIC_TEMP = "DeviceStatistic.jrxml"; 
 	public static final String GIAY_DEVICE_STATISTIC_EXPORT = "DeviceStatistic" ;
+        
+        public static final String GIAY_COMPLAINT_STATISTIC_TEMP = "ComplaintStatistic.jrxml"; 
+	public static final String GIAY_COMPLAINT_STATISTIC_EXPORT = "ComplaintStatistic" ;
 }

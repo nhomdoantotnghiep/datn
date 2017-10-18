@@ -1,4 +1,5 @@
 
+<%@page import="reporting.ReportConstant"%>
 <%@page import="complaint.classComplaint"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="computerlabs.dbconnect"%>
@@ -158,6 +159,14 @@
         jQuery("#ajaxform").validationEngine();
 
     });
+    function Export()
+    {
+        var typeRP = <%=String.valueOf(ReportConstant.TYPE_COMPLAINT_STATISTIC) %>;
+        var duoiFileRP = "<%=ReportConstant.DUOI_XLS %>";
+       
+
+        window.open("../ShowReport?typeRP=" + typeRP + "&duoiFileRP=" + duoiFileRP ,"_blank");
+    }
 </script>    
 
 
@@ -222,6 +231,8 @@
                             %>
                         </select>
                         <input type="button" class="button_example" onclick="Search(<%=pageSelected%>);" value="Search"/>
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="button" value="Export Report" class="button_example" onclick= "Export();" />
                     </td>
                 </tr>  
             </table>
