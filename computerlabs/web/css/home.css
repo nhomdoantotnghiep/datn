@@ -183,3 +183,14 @@ border:1px solid #67bcd1; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
      mc-auto-number-format: '{b}Note: {/b}';
     width: 300px;
 }
+.style-result-fail{
+    color: white;
+     border: solid 1px red;
+     background-color: #f76060;
+     -moz-border-radius: 6px;
+     -webkit-border-radius: 6px;
+     border-radius: 6px;
+     padding: 7px 20px;
+     mc-auto-number-format: '{b}Note: {/b}';
+    width: 300px;
+}

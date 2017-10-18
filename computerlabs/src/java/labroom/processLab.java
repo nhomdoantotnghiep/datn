@@ -44,12 +44,12 @@ public class processLab extends HttpServlet {
         }
         if (act.equalsIgnoreCase("delete")) {
             if (checkExits(id,"tbl_schedule") == 1 || checkExits(id,"tbl_device") == 1) {
-                out.println("<div class=\"style-result\">Can not delete Lab Room. Update status hide!</div>");
+                out.println("<div class=\"style-result-fail\">Can not delete Lab Room. Update status hide!</div>");
             } else {
                 if (deleteLab(id) == 1) {
                     out.println("<div class=\"style-result\">Delete successfull!</div>");
                 } else {
-                    out.println("<div class=\"style-result\">Delete fail!</div>");
+                    out.println("<div class=\"style-result-fail\">Delete fail!</div>");
                 }
             }
         } else if (act.equalsIgnoreCase("update")) {
@@ -79,10 +79,10 @@ public class processLab extends HttpServlet {
                 if (updateInfo(id, roomNameUp,width,length,status,maxSize) == 1) {
                     out.println("<div class=\"style-result\">Update successfull!</div>");
                 } else {
-                    out.println("<div class=\"style-result\">Update fail!</div>");
+                    out.println("<div class=\"style-result-fail\">Update fail!</div>");
                 }
             } else if (result == 1) {
-                out.println("<div class=\"style-result\">Room Name is not valid!</div>");
+                out.println("<div class=\"style-result-fail\">Room Name is not valid!</div>");
             }
 
         } else if (act.equalsIgnoreCase("create")) { // chua xu ly
@@ -112,10 +112,10 @@ public class processLab extends HttpServlet {
                 if (createLab(roomNameCreate, status,width,length,maxSize) == 1) {
                     out.println("<div class=\"style-result\">Create successfull!</div>");
                 } else {
-                    out.println("<div class=\"style-result\">Create fail!</div>");
+                    out.println("<div class=\"style-result-fail\">Create fail!</div>");
                 }
             } else if (result == 1) {
-                out.println("<div class=\"style-result\">Room Name is not valid!</div>");
+                out.println("<div class=\"style-result-fail\">Room Name is not valid!</div>");
             }
 
         }
