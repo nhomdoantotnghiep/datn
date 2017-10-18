@@ -125,10 +125,10 @@
 <script>
     function mySubmit() {
         
-        var vali = jQuery("#ajaxform").validationEngine('validate');
+        //var vali = jQuery("#ajaxform").validationEngine('validate');
         
         var form = $('#ajaxform');
-        if (vali === true) {
+        //if (vali === true) {
             console.log("---4---");
             $('#ajaxform').submit(function(e) {
                 e.preventDefault();
@@ -146,9 +146,9 @@
                 
                 //return false;
             }); 
-        } else {
-            
-        }
+//        } else {
+//            
+//        }
 
     }
 
