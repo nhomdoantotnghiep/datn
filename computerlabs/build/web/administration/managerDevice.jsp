@@ -358,10 +358,10 @@
             </td>
             <td style="height: 30px" >
                 <input type="button" class="button_example" onclick="Search();" value="Search"/>
-                <!--
+                
                 &nbsp;&nbsp;&nbsp;
                 <input type="button" value="Export Report" class="button_example" onclick= "Export();" />
-                -->
+                
             </td>
             <td style="height: 30px;" colspan="3"></td>
         </tr>  

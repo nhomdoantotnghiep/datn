@@ -37,7 +37,7 @@
                     success: function(data) {
                         var result = data;
                         $('#content').show().html(result).fadeOut(4000, function() {
-                            window.location.href = "?option=viewRequest";
+                            window.location.href = "?options=manageruser";
                         });
                     }
                 });
@@ -108,9 +108,10 @@
 <%--check username--%>
 
 <form id='ajaxform' name='ajaxform'  method='post'>
+    <input type="hidden" name="userIDU" value="0"/>
     <table width="500px" border="0" align="center" cellpadding="7px" cellspacing="0">
         <tr>
-            <td align="center"><div id='content' class="style-result"></div></td>
+            <td align="center"><div id='content' ></div></td>
         </tr>
         <tr>
             <td>
@@ -123,11 +124,16 @@
                 </div>
             </td>
             <td align="left">
-                <div style="width: 50px;">
-                    <div style="display: none;" id="autoSuggestionsList"></div>
-                    <div style="display: none;" id="error"></div>
-
-                </div></td>
+                <div style="display: none;" id="autoSuggestionsList"></div>
+                
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div >
+                    <div style="display: none;" id="error"></div>    
+                </div>
+            </td>
         </tr>
         <tr>
 
@@ -228,7 +234,7 @@
                         }
                     %>
                 </select>
-
+                &nbsp;(mm/dd/yyy)
             </td>
         </tr>
         <tr>

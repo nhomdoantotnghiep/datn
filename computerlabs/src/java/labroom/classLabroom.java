@@ -86,4 +86,8 @@ public class classLabroom {
         this.datecreate=datecreate;
         this.maxSize = maxSize;
     }
+
+    public classLabroom() {
+    }
+    
 }
